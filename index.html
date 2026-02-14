@@ -77,14 +77,13 @@
         }
 
         /* ---- Texto con efecto typewriter ---- */
-        /* 🔄 CAMBIO: Sombras cambiadas de ROSA a MORADO */
         #texto-animado {
             color: #fff;
             font-size: clamp(1.8rem, 5vw, 4rem);
             text-shadow: 
-                0 0 10px rgba(155, 89, 182, 0.8),    /* 🔄 CAMBIO: morado */
-                0 0 20px rgba(155, 89, 182, 0.6),    /* 🔄 CAMBIO: morado */
-                0 0 40px rgba(155, 89, 182, 0.4),    /* 🔄 CAMBIO: morado */
+                0 0 10px rgba(155, 89, 182, 0.8),
+                0 0 20px rgba(155, 89, 182, 0.6),
+                0 0 40px rgba(155, 89, 182, 0.4),
                 2px 2px 4px rgba(0, 0, 0, 0.8);
             letter-spacing: 3px;
             line-height: 1.4;
@@ -94,12 +93,11 @@
         }
 
         /* ---- Cursor parpadeante ---- */
-        /* 🔄 CAMBIO: Color del cursor de rosa a morado */
         #cursor {
             display: inline-block;
             width: 3px;
             height: 1em;
-            background-color: #9b59b6;    /* 🔄 CAMBIO: morado */
+            background-color: #9b59b6;
             margin-left: 4px;
             vertical-align: text-bottom;
             animation: parpadeo 0.6s infinite;
@@ -157,26 +155,24 @@
         }
 
         /* ---- Imagen del GIF (gato) ---- */
-        /* 🔄 CAMBIO: Bordes y sombras de rosa a morado */
         #gif-gato {
             max-width: 80vw;
             max-height: 60vh;
             border-radius: 20px;
             box-shadow: 
-                0 0 30px rgba(155, 89, 182, 0.6),    /* 🔄 CAMBIO: morado */
-                0 0 60px rgba(155, 89, 182, 0.3);    /* 🔄 CAMBIO: morado */
-            border: 3px solid rgba(155, 89, 182, 0.5); /* 🔄 CAMBIO: morado */
+                0 0 30px rgba(155, 89, 182, 0.6),
+                0 0 60px rgba(155, 89, 182, 0.3);
+            border: 3px solid rgba(155, 89, 182, 0.5);
         }
 
         /* ---- Texto debajo del GIF ---- */
-        /* 🔄 CAMBIO: Color de texto y sombras a morado */
         #texto-final {
-            color: #9b59b6;                              /* 🔄 CAMBIO: morado */
+            color: #9b59b6;
             font-size: clamp(1.2rem, 3vw, 2.5rem);
             margin-top: 20px;
             text-shadow: 
-                0 0 10px rgba(155, 89, 182, 0.8),    /* 🔄 CAMBIO: morado */
-                0 0 20px rgba(155, 89, 182, 0.5);    /* 🔄 CAMBIO: morado */
+                0 0 10px rgba(155, 89, 182, 0.8),
+                0 0 20px rgba(155, 89, 182, 0.5);
             opacity: 0;
             transition: opacity 1s ease-in-out 0.5s;
         }
@@ -213,15 +209,16 @@
 
         /* ============================================= */
         /* BOTÓN DE INICIO                                */
-        /* 🔄 CAMBIO: Colores del botón a morado          */
-        /* ============================================= -->
+        /* Colores del botón en morado                    */
+        /* ============================================= */
+        /* ⬆️⬆️⬆️ AQUÍ ESTABA EL ERROR: se cerraba con --> en vez de con */ */
         #boton-inicio {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 100;
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);  /* 🔄 CAMBIO: morado */
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
             color: white;
             border: none;
             padding: 20px 50px;
@@ -230,8 +227,8 @@
             cursor: pointer;
             font-family: 'Georgia', serif;
             box-shadow: 
-                0 0 20px rgba(155, 89, 182, 0.6),    /* 🔄 CAMBIO: morado */
-                0 0 40px rgba(155, 89, 182, 0.3);    /* 🔄 CAMBIO: morado */
+                0 0 20px rgba(155, 89, 182, 0.6),
+                0 0 40px rgba(155, 89, 182, 0.3);
             transition: all 0.3s ease;
             animation: pulsar-boton 2s ease-in-out infinite;
         }
@@ -239,11 +236,10 @@
         #boton-inicio:hover {
             transform: translate(-50%, -50%) scale(1.1);
             box-shadow: 
-                0 0 30px rgba(155, 89, 182, 0.8),    /* 🔄 CAMBIO: morado */
-                0 0 60px rgba(155, 89, 182, 0.5);    /* 🔄 CAMBIO: morado */
+                0 0 30px rgba(155, 89, 182, 0.8),
+                0 0 60px rgba(155, 89, 182, 0.5);
         }
 
-        /* 🔄 CAMBIO: Animación del botón en morado */
         @keyframes pulsar-boton {
             0%, 100% { box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); }
             50% { box-shadow: 0 0 40px rgba(155, 89, 182, 0.9), 0 0 80px rgba(155, 89, 182, 0.4); }
@@ -251,13 +247,12 @@
 
         /* ============================================= */
         /* PARTÍCULAS DE BRILLO DECORATIVAS              */
-        /* 🔄 CAMBIO: Color de partículas a morado        */
         /* ============================================= */
         .particula {
             position: fixed;
             width: 4px;
             height: 4px;
-            background: #9b59b6;    /* 🔄 CAMBIO: morado */
+            background: #9b59b6;
             border-radius: 50%;
             pointer-events: none;
             z-index: 15;
@@ -293,7 +288,6 @@
 
     <!-- ============================================= -->
     <!-- BOTÓN DE INICIO                                -->
-    <!-- 🔄 CAMBIO: Emojis cambiados a corazones morados -->
     <!-- ============================================= -->
     <button id="boton-inicio">💜 Toca para comenzar 💜</button>
 
@@ -320,7 +314,6 @@
         </video>
         <div id="contenedor-gif">
             <img id="gif-gato" src="imagen uno.jpeg" alt="Gatito con flor">
-            <!-- 🔄 CAMBIO: Emojis cambiados a corazones morados -->
             <div id="texto-final">💜 Te quiero mucho, Noris 💜</div>
         </div>
     </div>
@@ -339,25 +332,9 @@
         <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- ============================================= -->
-    <!-- 🫧 NUEVO: AUDIO DE BURBUJA EXPLOTANDO           -->
-    <!-- Este sonido se reproduce cada vez que aparece   -->
-    <!-- el segundo gato (gato con flor)                 -->
-    <!-- Duración del audio: ~2 segundos                 -->
-    <!--                                                 -->
-    <!-- Puedes descargar este sonido gratis de:          -->
-    <!--   https://pixabay.com/sound-effects/             -->
-    <!--     (busca "bubble pop" o "bubble burst")        -->
-    <!--   https://freesound.org                          -->
-    <!--     (busca "bubble pop")                         -->
-    <!-- ============================================= -->
-    <!-- 🔽🔽🔽 CAMBIA AQUÍ LA RUTA DEL AUDIO DE BURBUJA 🔽🔽🔽 -->
+    <!-- 🫧 Audio de burbuja explotando -->
     <audio id="audio-burbuja" preload="auto">
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
-        <!-- Si tu audio es .wav: -->
-        <!-- <source src="burbuja.wav" type="audio/wav"> -->
-        <!-- Si tu audio es .ogg: -->
-        <!-- <source src="burbuja.ogg" type="audio/ogg"> -->
     </audio>
 
     <!-- ============================================= -->
@@ -368,13 +345,13 @@
         // CONFIGURACIÓN PRINCIPAL
         // ============================================= 
 
-        const MENSAJE = "Feliz 14 de Febrero\nNoris 💜";  // 🔄 CAMBIO: emoji morado
+        const MENSAJE = "Feliz 14 de Febrero\nNoris 💜";
         const DURACION_VIDEO = 13000;
         const ESPERA_INICIO_TEXTO = 1500;
         const TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
         const VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
 
-        // 🖼️ Imágenes del gato
+        // Imágenes del gato
         const IMAGEN_GATO_1 = "imagen uno.jpeg";
         const IMAGEN_GATO_2 = "iamgen 2.jpeg";
         const VELOCIDAD_GIF = 600;
@@ -394,10 +371,6 @@
         const textoFinal = document.getElementById('texto-final');
         const audioPrincipal = document.getElementById('audio-principal');
         const audioTypewriter = document.getElementById('audio-typewriter');
-
-        // ============================================= 
-        // 🫧 NUEVO: Referencia al audio de burbuja
-        // ============================================= 
         const audioBurbuja = document.getElementById('audio-burbuja');
 
         // Variables de control
@@ -504,8 +477,8 @@
 
         // ============================================= 
         // GIF MANUAL: Alterna entre las 2 imágenes
-        // 🫧 NUEVO: Reproduce sonido de burbuja cada vez
-        //    que aparece el segundo gato (gato con flor)
+        // Reproduce sonido de burbuja cuando aparece
+        // el segundo gato (gato con flor)
         // ============================================= 
         function iniciarGifManual() {
             intervaloGif = setInterval(() => {
@@ -514,50 +487,34 @@
                     gifGato.src = IMAGEN_GATO_2;
                     imagenActual = 2;
 
-                    // ============================================= 
-                    // 🫧 NUEVO: Reproducir sonido de burbuja
-                    // Cada vez que aparece el gato con flor (imagen 2)
-                    // se reproduce el efecto de burbuja explotando.
-                    // Se reinicia el audio desde el inicio para que
-                    // suene completo cada vez aunque la alternancia
-                    // sea más rápida que la duración del audio (2s)
-                    // ============================================= 
+                    // Reproducir sonido de burbuja
                     reproducirBurbuja();
 
                 } else {
                     // Cambiar a imagen 1 (gato sin nada)
                     gifGato.src = IMAGEN_GATO_1;
                     imagenActual = 1;
-                    // NO se reproduce burbuja cuando aparece el gato sin flor
                 }
             }, VELOCIDAD_GIF);
         }
 
         // ============================================= 
-        // 🫧 NUEVA FUNCIÓN: Reproduce el sonido de burbuja
-        // Reinicia el audio desde el segundo 0 cada vez
-        // para que siempre se escuche desde el inicio.
-        // Volumen al 60% para no tapar el audio principal
+        // Reproduce el sonido de burbuja
+        // Clona el audio para permitir superposición
         // ============================================= 
         function reproducirBurbuja() {
-            // Clonar el audio para permitir que suene
-            // aunque la reproducción anterior no haya terminado.
-            // Esto evita que se corte el sonido anterior y
-            // permite que se superpongan si es necesario
             const burbujaClone = audioBurbuja.cloneNode();
-            burbujaClone.volume = 0.6;  // 60% de volumen
+            burbujaClone.volume = 0.6;
             burbujaClone.play().catch(e => console.log('Error burbuja:', e));
 
-            // Eliminar el clon del DOM después de 3 segundos
-            // para no llenar la memoria con elementos de audio
+            // Eliminar el clon después de 3 segundos
             setTimeout(() => {
                 burbujaClone.remove();
             }, 3000);
         }
 
         // ============================================= 
-        // CORAZONES FLOTANTES DECORATIVOS
-        // 🔄 CAMBIO: Todos los corazones ahora son MORADOS
+        // CORAZONES FLOTANTES - Todos MORADOS 💜
         // ============================================= 
         function iniciarCorazones() {
             setInterval(() => {
@@ -569,14 +526,7 @@
             const corazon = document.createElement('div');
             corazon.classList.add('corazon');
 
-            // ============================================= 
-            // 🔄 CAMBIO: Array de emojis ahora solo tiene
-            //    corazones y elementos MORADOS
-            //    💜 = corazón morado
-            //    🟣 = círculo morado
-            //    ☮️ = variedad visual
-            //    💟 = corazón decorativo
-            // ============================================= 
+            // Solo corazones y elementos morados
             corazon.innerHTML = ['💜', '💜', '💜', '🟣', '💜', '💜'][Math.floor(Math.random() * 6)];
 
             corazon.style.left = Math.random() * 100 + 'vw';
