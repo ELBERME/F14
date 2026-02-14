@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noris 💜</title>
 
-    <!-- Google Font elegante y minimalista -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- RESET GENERAL --- */
         * {
             margin: 0;
             padding: 0;
@@ -24,9 +22,6 @@
             font-family: 'Georgia', 'Times New Roman', serif;
         }
 
-        /* ============================================= */
-        /* FASE 1: VIDEO DE FONDO                        */
-        /* ============================================= */
         #fase-video {
             position: fixed;
             top: 0;
@@ -59,9 +54,6 @@
             z-index: 2;
         }
 
-        /* ============================================= */
-        /* TEXTO TYPEWRITER FASE 1                       */
-        /* ============================================= */
         #contenedor-texto {
             position: absolute;
             top: 50%;
@@ -103,9 +95,6 @@
             50% { opacity: 0; }
         }
 
-        /* ============================================= */
-        /* FASE 2: VIDEO BORROSO + GATO                  */
-        /* ============================================= */
         #fase-gif {
             position: fixed;
             top: 0;
@@ -147,24 +136,109 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
+        /* Marco brillante del gif del gato */
+        #marco-gif {
+            position: relative;
+            display: inline-block;
+            border-radius: 24px;
+            cursor: pointer;
+            animation: zoom-gato 3s ease-in-out infinite;
+        }
+
+        @keyframes zoom-gato {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        /* Borde brillante animado pastel morado */
+        #marco-gif::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 26px;
+            background: linear-gradient(
+                45deg,
+                #d8b4fe,
+                #c084fc,
+                #a855f7,
+                #e9d5ff,
+                #c4b5fd,
+                #a78bfa,
+                #d8b4fe
+            );
+            background-size: 300% 300%;
+            animation: borde-brillo 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes borde-brillo {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Resplandor trasero */
+        #marco-gif::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 30px;
+            background: transparent;
+            box-shadow:
+                0 0 20px rgba(216, 180, 254, 0.4),
+                0 0 40px rgba(192, 132, 252, 0.3),
+                0 0 60px rgba(168, 85, 247, 0.2),
+                0 0 80px rgba(216, 180, 254, 0.15);
+            animation: resplandor-trasero 2.5s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes resplandor-trasero {
+            0%, 100% {
+                box-shadow:
+                    0 0 20px rgba(216, 180, 254, 0.3),
+                    0 0 40px rgba(192, 132, 252, 0.2),
+                    0 0 60px rgba(168, 85, 247, 0.1);
+            }
+            50% {
+                box-shadow:
+                    0 0 30px rgba(216, 180, 254, 0.6),
+                    0 0 60px rgba(192, 132, 252, 0.4),
+                    0 0 90px rgba(168, 85, 247, 0.3),
+                    0 0 120px rgba(233, 213, 255, 0.2);
+            }
+        }
+
         #gif-gato {
             max-width: 80vw;
-            max-height: 60vh;
+            max-height: 55vh;
             border-radius: 20px;
-            box-shadow:
-                0 0 30px rgba(155, 89, 182, 0.6),
-                0 0 60px rgba(155, 89, 182, 0.3);
-            border: 3px solid rgba(155, 89, 182, 0.5);
-            cursor: pointer;
+            display: block;
+            border: none;
+            box-shadow: none;
+        }
+
+        #texto-toca-gato {
+            color: rgba(216, 180, 254, 0.7);
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            margin-top: 18px;
+            animation: parpadeo-suave 2s ease-in-out infinite;
+            letter-spacing: 1px;
         }
 
         #texto-final {
-            color: #9b59b6;
+            color: #c084fc;
             font-size: clamp(1.2rem, 3vw, 2.5rem);
             margin-top: 20px;
             text-shadow:
-                0 0 10px rgba(155, 89, 182, 0.8),
-                0 0 20px rgba(155, 89, 182, 0.5);
+                0 0 10px rgba(192, 132, 252, 0.8),
+                0 0 20px rgba(192, 132, 252, 0.5);
             opacity: 0;
             transition: opacity 1s ease-in-out 0.5s;
         }
@@ -173,9 +247,6 @@
             opacity: 1;
         }
 
-        /* ============================================= */
-        /* CORAZONES FLOTANTES                           */
-        /* ============================================= */
         .corazon {
             position: fixed;
             z-index: 20;
@@ -186,22 +257,11 @@
         }
 
         @keyframes flotar-corazon {
-            0% {
-                opacity: 0;
-                transform: translateY(0) scale(0.5);
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) scale(1.2);
-            }
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            20% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100vh) scale(1.2); }
         }
 
-        /* ============================================= */
-        /* BOTON DE INICIO                                */
-        /* ============================================= */
         #boton-inicio {
             position: fixed;
             top: 50%;
@@ -235,9 +295,6 @@
             50% { box-shadow: 0 0 40px rgba(155, 89, 182, 0.9), 0 0 80px rgba(155, 89, 182, 0.4); }
         }
 
-        /* ============================================= */
-        /* PARTICULAS                                    */
-        /* ============================================= */
         .particula {
             position: fixed;
             width: 4px;
@@ -249,15 +306,11 @@
             opacity: 0;
         }
 
-        /* ============================================= */
-        /* FASE 3: MENSAJES SECRETOS                     */
-        /* ============================================= */
+        /* Fase 3: Mensajes secretos */
         #fase-mensajes {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 50;
             display: none;
             opacity: 0;
@@ -265,14 +318,11 @@
             background: rgba(0, 0, 0, 0.9);
         }
 
-        #fase-mensajes.visible {
-            opacity: 1;
-        }
+        #fase-mensajes.visible { opacity: 1; }
 
         #contenedor-mensaje-secreto {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             width: 85%;
@@ -293,14 +343,11 @@
             white-space: pre-wrap;
         }
 
-        #mensaje-secreto-texto.visible {
-            opacity: 1;
-        }
+        #mensaje-secreto-texto.visible { opacity: 1; }
 
         #mensaje-secreto-texto.texto-largo {
             font-size: clamp(1rem, 2.8vw, 1.6rem);
             line-height: 1.8;
-            font-style: italic;
         }
 
         #mensaje-secreto-texto.texto-teamo {
@@ -313,12 +360,72 @@
                 0 0 80px rgba(155, 89, 182, 0.6),
                 0 0 120px rgba(155, 89, 182, 0.4);
             animation: latido-teamo 1.5s ease-in-out infinite;
-            cursor: pointer;
         }
 
         @keyframes latido-teamo {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Corazon interactivo que late y brilla */
+        #corazon-teamo {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            animation: latido-corazon 1.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(216, 180, 254, 0.8));
+            font-size: 1em;
+        }
+
+        @keyframes latido-corazon {
+            0% {
+                transform: scale(1);
+                filter:
+                    drop-shadow(0 0 5px rgba(216, 180, 254, 0.4))
+                    drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
+            }
+            15% {
+                transform: scale(1.25);
+                filter:
+                    drop-shadow(0 0 15px rgba(216, 180, 254, 0.9))
+                    drop-shadow(0 0 30px rgba(192, 132, 252, 0.6))
+                    drop-shadow(0 0 50px rgba(168, 85, 247, 0.3));
+            }
+            30% {
+                transform: scale(1);
+                filter:
+                    drop-shadow(0 0 5px rgba(216, 180, 254, 0.4))
+                    drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
+            }
+            45% {
+                transform: scale(1.18);
+                filter:
+                    drop-shadow(0 0 12px rgba(216, 180, 254, 0.8))
+                    drop-shadow(0 0 25px rgba(192, 132, 252, 0.5))
+                    drop-shadow(0 0 40px rgba(233, 213, 255, 0.3));
+            }
+            60%, 100% {
+                transform: scale(1);
+                filter:
+                    drop-shadow(0 0 5px rgba(216, 180, 254, 0.4))
+                    drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
+            }
+        }
+
+        #pista-corazon {
+            display: block;
+            color: rgba(216, 180, 254, 0.5);
+            font-size: clamp(0.7rem, 1.8vw, 0.95rem);
+            font-weight: 300;
+            font-style: italic;
+            margin-top: 25px;
+            animation: parpadeo-pista 2.5s ease-in-out infinite;
+            letter-spacing: 1px;
+        }
+
+        @keyframes parpadeo-pista {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
         }
 
         #cursor-mensaje {
@@ -331,14 +438,33 @@
             animation: parpadeo 0.6s infinite;
         }
 
+        /* Indicador toca para continuar - MAS EVIDENTE */
         #indicador-toca {
             position: absolute;
-            bottom: 10%;
+            bottom: 8%;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(155, 89, 182, 0.6);
-            font-size: clamp(0.8rem, 2vw, 1rem);
-            animation: parpadeo-suave 2s ease-in-out infinite;
+            color: rgba(216, 180, 254, 0.8);
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            letter-spacing: 2px;
+            padding: 12px 30px;
+            border: 1px solid rgba(216, 180, 254, 0.3);
+            border-radius: 30px;
+            background: rgba(155, 89, 182, 0.1);
+            animation: indicador-pulso 2s ease-in-out infinite;
+        }
+
+        @keyframes indicador-pulso {
+            0%, 100% {
+                opacity: 0.6;
+                border-color: rgba(216, 180, 254, 0.2);
+                background: rgba(155, 89, 182, 0.05);
+            }
+            50% {
+                opacity: 1;
+                border-color: rgba(216, 180, 254, 0.5);
+                background: rgba(155, 89, 182, 0.15);
+            }
         }
 
         @keyframes parpadeo-suave {
@@ -346,16 +472,11 @@
             50% { opacity: 1; }
         }
 
-        /* ============================================= */
-        /* FASE 4: EASTER EGG - CAPA OCULTA              */
-        /* Tipografia elegante, minimalista, espaciosa    */
-        /* ============================================= */
+        /* Fase 4: Easter egg */
         #fase-easter {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 60;
             display: none;
             opacity: 0;
@@ -365,15 +486,11 @@
             overflow-y: auto;
         }
 
-        #fase-easter.visible {
-            opacity: 1;
-        }
+        #fase-easter.visible { opacity: 1; }
 
-        /* Contenedor central del easter egg */
         #easter-contenido {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             width: 85%;
@@ -381,7 +498,6 @@
             padding: 40px 20px;
         }
 
-        /* Texto principal del easter egg */
         #easter-texto {
             color: #e0e0e0;
             font-size: clamp(1.6rem, 4vw, 3rem);
@@ -392,19 +508,8 @@
             transition: opacity 0.8s ease-in-out;
         }
 
-        #easter-texto.visible {
-            opacity: 1;
-        }
+        #easter-texto.visible { opacity: 1; }
 
-        /* Estilo para texto largo en el easter egg */
-        #easter-texto.easter-largo {
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            line-height: 2;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-
-        /* Cursor typewriter del easter egg */
         .cursor-easter {
             display: inline-block;
             width: 2px;
@@ -415,7 +520,6 @@
             animation: parpadeo 0.6s infinite;
         }
 
-        /* Contenedor de opciones Luz / Sombras */
         #easter-opciones {
             display: none;
             opacity: 0;
@@ -423,11 +527,8 @@
             margin-top: 60px;
         }
 
-        #easter-opciones.visible {
-            opacity: 1;
-        }
+        #easter-opciones.visible { opacity: 1; }
 
-        /* Palabras flotantes Luz y Sombras */
         .opcion-flotante {
             display: inline-block;
             color: rgba(224, 224, 224, 0.7);
@@ -463,11 +564,8 @@
             opacity: 1;
         }
 
-        .opcion-flotante:hover::after {
-            width: 80%;
-        }
+        .opcion-flotante:hover::after { width: 80%; }
 
-        /* Linea separadora entre opciones */
         .separador-opciones {
             display: inline-block;
             color: rgba(155, 89, 182, 0.3);
@@ -476,15 +574,28 @@
             vertical-align: middle;
         }
 
-        /* ============================================= */
-        /* FASE 5: FINAL LUZ O SOMBRAS                   */
-        /* ============================================= */
+        /* Indicador easter - MAS EVIDENTE */
+        #easter-indicador {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(216, 180, 254, 0.8);
+            font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            letter-spacing: 2px;
+            padding: 10px 28px;
+            border: 1px solid rgba(216, 180, 254, 0.3);
+            border-radius: 30px;
+            background: rgba(155, 89, 182, 0.08);
+            animation: indicador-pulso 2s ease-in-out infinite;
+        }
+
+        /* Fase 5: Final */
         #fase-final {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 70;
             display: none;
             opacity: 0;
@@ -493,16 +604,12 @@
             overflow-y: auto;
         }
 
-        #fase-final.visible {
-            opacity: 1;
-        }
+        #fase-final.visible { opacity: 1; }
 
-        /* Fondo calido para Luz */
         #fase-final.fondo-luz {
             background: linear-gradient(160deg, #1a1008 0%, #2a1a0a 30%, #1f150a 60%, #0f0a05 100%);
         }
 
-        /* Fondo frio para Sombras */
         #fase-final.fondo-sombras {
             background: linear-gradient(160deg, #080c14 0%, #0a1020 30%, #0c1428 60%, #060a12 100%);
         }
@@ -518,7 +625,6 @@
             text-align: center;
         }
 
-        /* Texto principal del final */
         .final-texto {
             color: #e0e0e0;
             font-size: clamp(1.1rem, 2.8vw, 1.5rem);
@@ -531,18 +637,14 @@
             margin-bottom: 35px;
         }
 
-        .final-texto.visible {
-            opacity: 1;
-        }
+        .final-texto.visible { opacity: 1; }
 
-        /* Texto para el final Luz (mas grande) */
         .final-texto.texto-luz-principal {
             font-size: clamp(1.3rem, 3.5vw, 2rem);
             font-style: italic;
             line-height: 1.8;
         }
 
-        /* Linea pequena final */
         .final-linea-pequena {
             color: rgba(155, 89, 182, 0.5);
             font-size: clamp(0.8rem, 2vw, 1rem);
@@ -554,75 +656,32 @@
             margin-top: 40px;
         }
 
-        .final-linea-pequena.visible {
-            opacity: 1;
-        }
+        .final-linea-pequena.visible { opacity: 1; }
 
-        /* Indicador de toca para easter egg */
-        #easter-indicador {
-            position: absolute;
-            bottom: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(155, 89, 182, 0.4);
-            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
-            font-family: 'Cormorant Garamond', 'Georgia', serif;
-            letter-spacing: 2px;
-            animation: parpadeo-suave 2s ease-in-out infinite;
-        }
-
-        /* ============================================= */
-        /* MEDIA QUERIES                                 */
-        /* ============================================= */
         @media (max-width: 768px) {
-            #gif-gato {
-                max-width: 90vw;
-                max-height: 50vh;
-            }
-            #contenedor-texto {
-                width: 95%;
-            }
-            #boton-inicio {
-                padding: 15px 35px;
-            }
-            #contenedor-mensaje-secreto {
-                width: 90%;
-            }
-            .opcion-flotante {
-                margin: 10px 15px;
-                display: block;
-            }
-            .separador-opciones {
-                display: block;
-                margin: 5px 0;
-            }
-            #easter-contenido {
-                width: 90%;
-            }
+            #gif-gato { max-width: 85vw; max-height: 45vh; }
+            #contenedor-texto { width: 95%; }
+            #boton-inicio { padding: 15px 35px; }
+            #contenedor-mensaje-secreto { width: 90%; }
+            .opcion-flotante { margin: 10px 15px; display: block; }
+            .separador-opciones { display: block; margin: 5px 0; }
+            #easter-contenido { width: 90%; }
         }
 
         @media (max-width: 480px) {
-            #gif-gato {
-                max-width: 95vw;
-                max-height: 45vh;
-                border-radius: 15px;
-            }
-            #contenedor-mensaje-secreto {
-                width: 93%;
-            }
-            #easter-contenido {
-                width: 93%;
-                padding: 30px 15px;
-            }
+            #gif-gato { max-width: 90vw; max-height: 40vh; border-radius: 15px; }
+            #contenedor-mensaje-secreto { width: 93%; }
+            #easter-contenido { width: 93%; padding: 30px 15px; }
+            #marco-gif { border-radius: 18px; }
+            #marco-gif::before { border-radius: 20px; }
+            #marco-gif::after { border-radius: 22px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BOTON DE INICIO -->
     <button id="boton-inicio">💜 Toca para comenzar 💜</button>
 
-    <!-- FASE 1: VIDEO + TEXTO ANIMADO -->
     <div id="fase-video">
         <video id="video-fondo" muted playsinline>
             <source src="video.mp4" type="video/mp4">
@@ -634,29 +693,26 @@
         </div>
     </div>
 
-    <!-- FASE 2: VIDEO BORROSO + GIF DEL GATO -->
     <div id="fase-gif">
         <video id="video-borroso" loop muted playsinline>
             <source src="video.mp4" type="video/mp4">
         </video>
         <div id="contenedor-gif">
-            <img id="gif-gato" src="imagen uno.jpeg" alt="Gatito con flor">
+            <div id="marco-gif">
+                <img id="gif-gato" src="imagen uno.jpeg" alt="Gatito con flor">
+            </div>
+            <div id="texto-toca-gato">&#10024; toca al gatito &#10024;</div>
             <div id="texto-final">💜 Te quiero mucho, Noris 💜</div>
         </div>
     </div>
 
-    <!-- FASE 3: MENSAJES SECRETOS -->
     <div id="fase-mensajes">
         <div id="contenedor-mensaje-secreto">
             <div id="mensaje-secreto-texto"></div>
         </div>
-        <div id="indicador-toca">toca para continuar</div>
+        <div id="indicador-toca">&#10024; toca para continuar &#10024;</div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- FASE 4: EASTER EGG                             -->
-    <!-- Se activa al tocar el TE AMO                   -->
-    <!-- ============================================= -->
     <div id="fase-easter">
         <div id="easter-contenido">
             <div id="easter-texto"></div>
@@ -666,92 +722,64 @@
                 <span class="opcion-flotante" id="opcion-sombras">sombras</span>
             </div>
         </div>
-        <div id="easter-indicador">toca para continuar</div>
+        <div id="easter-indicador">&#10024; toca para continuar &#10024;</div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- FASE 5: FINAL (LUZ O SOMBRAS)                  -->
-    <!-- ============================================= -->
     <div id="fase-final">
         <div id="final-contenido"></div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- AUDIOS                                         -->
-    <!-- ============================================= -->
+    <!-- AUDIOS -->
     <audio id="audio-principal" preload="auto">
         <source src="video audio.mpeg" type="audio/mpeg">
     </audio>
-
     <audio id="audio-typewriter" preload="auto" loop>
         <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
     </audio>
-
     <audio id="audio-burbuja" preload="auto" loop>
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
-
     <audio id="audio-burbuja-corto" preload="auto">
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
 
     <!-- ============================================= -->
-    <!-- AUDIO DE FONDO PARA EL EASTER EGG              -->
-    <!-- AQUI COLOCA TU CANCION DE FONDO                -->
-    <!-- Esta cancion sonara durante toda la fase del    -->
-    <!-- easter egg (fase 4 y fase 5) sin importar      -->
-    <!-- si elige Luz o Sombras                          -->
-    <!-- Cambia "cancion-easter.mp3" por tu archivo      -->
+    <!-- CANCION DE FONDO PARA EL EASTER EGG            -->
+    <!-- CAMBIA "cancion-easter.mp3" POR TU ARCHIVO     -->
     <!-- ============================================= -->
     <audio id="audio-easter-fondo" preload="auto" loop>
-        <!-- CAMBIA AQUI LA RUTA DE TU CANCION -->
         <source src="cancion-easter.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // ============================================= 
-        // CONFIGURACION PRINCIPAL
-        // ============================================= 
         var MENSAJE = "Feliz 14 de Febrero\nNoris 💜";
         var DURACION_VIDEO = 13000;
         var ESPERA_INICIO_TEXTO = 1500;
         var TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
         var VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
-
         var IMAGEN_GATO_1 = "imagen uno.jpeg";
         var IMAGEN_GATO_2 = "iamgen 2.jpeg";
         var VELOCIDAD_GIF = 600;
-
         var VELOCIDAD_MENSAJE_TYPEWRITER = 55;
+        var VELOCIDAD_EASTER_TYPEWRITER = 50;
 
-        // ============================================= 
-        // MENSAJES SECRETOS (Fase 3)
-        // ============================================= 
         var MENSAJES_SECRETOS = [
-            { texto: "Ya veo... andas de curiosa 👀", tipo: "normal" },
-            { texto: "Eso me gusta de ti", tipo: "normal" },
-            { texto: "Toma esto... 🎁", tipo: "normal" },
+            { texto: "Ya veo... \uD83D\uDC40", tipo: "normal" },
+            { texto: "Andas por aqui otra vez  \uD83D\uDE0F\uD83D\uDC9C", tipo: "normal" },
+            { texto: "Toma esto... \uD83C\uDF81", tipo: "normal" },
             {
-                texto: "En algun lugar de estas finitas palabras organizadas, esta este texto. Texto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable. Texto el cual se escribio con el unico fin de recordarte que...",
+                texto: "En algun lugar de estas infinitas palabras organizadas, esta este texto. Texto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable. Texto el cual se escribio con el unico fin de recordarte que...",
                 tipo: "typewriter"
             },
-            { texto: "TE AMO 💜", tipo: "teamo" }
+            { texto: "TE AMO", tipo: "teamo" }
         ];
 
-        // ============================================= 
-        // MENSAJES DEL EASTER EGG (Fase 4)
-        // Los textos que aparecen antes de las opciones
-        // ============================================= 
         var EASTER_MENSAJES = [
-            "¿Mas?",
-            "¿Aun quieres mas?",
-            "¿Algo mas?"
+            "\u00BFMas?",
+            "\u00BFAun quieres mas?",
+            "\u00BFAlgo mas?"
         ];
 
-        // ============================================= 
-        // TEXTOS FINALES - SOMBRAS (divididos en partes)
-        // Cada parte aparece por separado para no saturar
-        // ============================================= 
         var SOMBRAS_PARTES = [
             "Hace un tiempo llegue a la conclusion de que el ser humano es insaciable; nunca esta completamente satisfecho.",
             "Por eso, a veces fuerza las cosas con la esperanza de llenar ese vacio.",
@@ -760,12 +788,6 @@
             "Es ironico: se puede perder todo por el simple deseo de tener un poco mas."
         ];
 
-        // Velocidad del typewriter en el easter egg
-        var VELOCIDAD_EASTER_TYPEWRITER = 50;
-
-        // ============================================= 
-        // REFERENCIAS A ELEMENTOS
-        // ============================================= 
         var botonInicio = document.getElementById('boton-inicio');
         var faseVideo = document.getElementById('fase-video');
         var faseGif = document.getElementById('fase-gif');
@@ -777,6 +799,7 @@
         var textoAnimado = document.getElementById('texto-animado');
         var cursorElemento = document.getElementById('cursor');
         var contenedorGif = document.getElementById('contenedor-gif');
+        var marcoGif = document.getElementById('marco-gif');
         var gifGato = document.getElementById('gif-gato');
         var textoFinal = document.getElementById('texto-final');
         var audioPrincipal = document.getElementById('audio-principal');
@@ -793,57 +816,40 @@
         var opcionSombras = document.getElementById('opcion-sombras');
         var finalContenido = document.getElementById('final-contenido');
 
-        // Variables de control generales
         var indiceLetra = 0;
         var intervaloTexto = null;
         var intervaloGif = null;
         var imagenActual = 1;
         var transicionEjecutada = false;
-
-        // Variables mensajes secretos
         var indiceMensaje = 0;
         var mensajesActivados = false;
         var puedeAvanzar = false;
         var typewriterMensajeIntervalo = null;
         var typewriterMensajeTerminado = false;
-
-        // Variables easter egg
         var easterActivado = false;
         var easterIndice = 0;
         var easterPuedeAvanzar = false;
         var easterTypewriterIntervalo = null;
         var easterTypewriterTerminado = false;
-        var easterFaseActual = "mensajes"; // "mensajes", "opciones", "finalizado"
+        var easterFaseActual = "mensajes";
 
-        // ============================================= 
-        // FUNCION: Reproducir burbuja corta
-        // ============================================= 
         function reproducirBurbujaCorta() {
             audioBurbujaCorto.currentTime = 0;
             audioBurbujaCorto.volume = 0.7;
-            audioBurbujaCorto.play().catch(function(e) { console.log('Error burbuja:', e); });
+            audioBurbujaCorto.play().catch(function(e) {});
         }
 
-        // ============================================= 
-        // FUNCION: Iniciar audio maquina de escribir
-        // ============================================= 
         function iniciarAudioMaquina() {
             audioTypewriter.currentTime = 0;
             audioTypewriter.volume = 0.4;
-            audioTypewriter.play().catch(function(e) { console.log('Error typewriter:', e); });
+            audioTypewriter.play().catch(function(e) {});
         }
 
-        // ============================================= 
-        // FUNCION: Detener audio maquina de escribir
-        // ============================================= 
         function detenerAudioMaquina() {
             audioTypewriter.pause();
             audioTypewriter.currentTime = 0;
         }
 
-        // ============================================= 
-        // BOTON DE INICIO
-        // ============================================= 
         botonInicio.addEventListener('click', function() {
             var btn = this;
             btn.style.transition = 'opacity 0.5s ease';
@@ -854,12 +860,9 @@
             }, 500);
         });
 
-        // ============================================= 
-        // FUNCION PRINCIPAL
-        // ============================================= 
         function iniciarExperiencia() {
-            videoFondo.play().catch(function(e) { console.log('Error video:', e); });
-            audioPrincipal.play().catch(function(e) { console.log('Error audio:', e); });
+            videoFondo.play().catch(function(e) {});
+            audioPrincipal.play().catch(function(e) {});
             setTimeout(function() {
                 iniciarTextoTypewriterFase1();
             }, ESPERA_INICIO_TEXTO);
@@ -870,12 +873,9 @@
             iniciarCorazones();
         }
 
-        // ============================================= 
-        // TYPEWRITER FASE 1
-        // ============================================= 
         function iniciarTextoTypewriterFase1() {
             audioTypewriter.volume = 0.5;
-            audioTypewriter.play().catch(function(e) { console.log('Error typewriter:', e); });
+            audioTypewriter.play().catch(function(e) {});
             intervaloTexto = setInterval(function() {
                 if (indiceLetra < MENSAJE.length) {
                     var letra = MENSAJE[indiceLetra];
@@ -895,9 +895,6 @@
             }, VELOCIDAD_LETRA);
         }
 
-        // ============================================= 
-        // TRANSICION FASE 1 A FASE 2
-        // ============================================= 
         function transicionAFase2() {
             if (transicionEjecutada) return;
             transicionEjecutada = true;
@@ -909,7 +906,7 @@
             setTimeout(function() {
                 faseVideo.style.display = 'none';
                 faseGif.style.display = 'block';
-                videoBorroso.play().catch(function(e) { console.log('Error video borroso:', e); });
+                videoBorroso.play().catch(function(e) {});
                 requestAnimationFrame(function() {
                     faseGif.style.opacity = '1';
                 });
@@ -917,7 +914,7 @@
                     contenedorGif.classList.add('visible');
                     iniciarGifManual();
                     audioBurbuja.volume = 0.5;
-                    audioBurbuja.play().catch(function(e) { console.log('Error burbuja:', e); });
+                    audioBurbuja.play().catch(function(e) {});
                     setTimeout(function() {
                         textoFinal.classList.add('visible');
                     }, 800);
@@ -925,9 +922,6 @@
             }, 1500);
         }
 
-        // ============================================= 
-        // GIF MANUAL
-        // ============================================= 
         function iniciarGifManual() {
             intervaloGif = setInterval(function() {
                 if (imagenActual === 1) {
@@ -940,10 +934,7 @@
             }, VELOCIDAD_GIF);
         }
 
-        // ============================================= 
-        // TOCAR EL GATO: Activa mensajes secretos
-        // ============================================= 
-        gifGato.addEventListener('click', function() {
+        marcoGif.addEventListener('click', function() {
             if (mensajesActivados) return;
             mensajesActivados = true;
             if (intervaloGif) clearInterval(intervaloGif);
@@ -962,14 +953,10 @@
             }, 1000);
         });
 
-        // ============================================= 
-        // MOSTRAR MENSAJE SECRETO
-        // ============================================= 
         function mostrarMensajeSecreto(indice) {
             if (indice >= MENSAJES_SECRETOS.length) return;
             indiceMensaje = indice;
             var mensaje = MENSAJES_SECRETOS[indice];
-
             if (typewriterMensajeIntervalo) {
                 clearInterval(typewriterMensajeIntervalo);
                 typewriterMensajeIntervalo = null;
@@ -981,7 +968,6 @@
                 mensajeSecretoTexto.className = '';
                 mensajeSecretoTexto.innerHTML = '';
 
-                // TIPO NORMAL: aparece de golpe con burbuja
                 if (mensaje.tipo === "normal") {
                     reproducirBurbujaCorta();
                     mensajeSecretoTexto.innerHTML = mensaje.texto;
@@ -992,7 +978,6 @@
                     setTimeout(function() { puedeAvanzar = true; }, 1500);
                 }
 
-                // TIPO TYPEWRITER: se escribe letra por letra
                 else if (mensaje.tipo === "typewriter") {
                     reproducirBurbujaCorta();
                     mensajeSecretoTexto.classList.add('texto-largo');
@@ -1002,11 +987,9 @@
                     indicadorToca.style.opacity = '0';
                     puedeAvanzar = false;
                     iniciarAudioMaquina();
-
                     var textoCompleto = mensaje.texto;
                     var letraActual = 0;
                     mensajeSecretoTexto.innerHTML = '<span id="cursor-mensaje">|</span>';
-
                     typewriterMensajeIntervalo = setInterval(function() {
                         if (letraActual < textoCompleto.length) {
                             var cursorMsg = document.getElementById('cursor-mensaje');
@@ -1030,19 +1013,15 @@
                     }, VELOCIDAD_MENSAJE_TYPEWRITER);
                 }
 
-                // TIPO TEAMO: texto gigante con latido
-                // El emoji 💜 es clickeable para activar el easter egg
                 else if (mensaje.tipo === "teamo") {
                     reproducirBurbujaCorta();
-                    mensajeSecretoTexto.innerHTML = 'TE AMO <span id="corazon-teamo" style="cursor:pointer;">💜</span>';
+                    mensajeSecretoTexto.innerHTML = 'TE AMO <span id="corazon-teamo">\uD83D\uDC9C</span><span id="pista-corazon">toca el \uD83D\uDC9C</span>';
                     mensajeSecretoTexto.classList.add('texto-teamo');
                     requestAnimationFrame(function() {
                         mensajeSecretoTexto.classList.add('visible');
                     });
                     indicadorToca.style.display = 'none';
                     puedeAvanzar = false;
-
-                    // Asignar evento al corazon para activar easter egg
                     setTimeout(function() {
                         var corazonTeamo = document.getElementById('corazon-teamo');
                         if (corazonTeamo) {
@@ -1056,11 +1035,7 @@
             }, 400);
         }
 
-        // ============================================= 
-        // TOCAR PANTALLA PARA AVANZAR MENSAJES SECRETOS
-        // ============================================= 
         faseMensajes.addEventListener('click', function() {
-            // Si el typewriter esta escribiendo, completar de golpe
             if (typewriterMensajeIntervalo && !typewriterMensajeTerminado) {
                 clearInterval(typewriterMensajeIntervalo);
                 typewriterMensajeIntervalo = null;
@@ -1081,79 +1056,44 @@
             }
         });
 
-        // ============================================= 
-        // ACTIVAR EASTER EGG
-        // Se activa al tocar el corazon 💜 en TE AMO
-        // ============================================= 
         function activarEasterEgg() {
             if (easterActivado) return;
             easterActivado = true;
-
-            // Transicion: ocultar fase mensajes
             faseMensajes.style.opacity = '0';
-
             setTimeout(function() {
                 faseMensajes.style.display = 'none';
-
-                // Mostrar fase easter
                 faseEaster.style.display = 'block';
                 requestAnimationFrame(function() {
                     faseEaster.classList.add('visible');
                 });
-
-                // ============================================= 
-                // INICIAR CANCION DE FONDO DEL EASTER EGG
-                // La cancion empieza aqui y suena durante
-                // toda la fase 4 y fase 5
-                // ============================================= 
                 audioEasterFondo.volume = 0.3;
-                audioEasterFondo.play().catch(function(e) { console.log('Error cancion easter:', e); });
-
-                // Mostrar primer mensaje del easter con burbuja
+                audioEasterFondo.play().catch(function(e) {});
                 setTimeout(function() {
                     mostrarEasterMensaje(0);
                 }, 800);
-
             }, 1000);
         }
 
-        // ============================================= 
-        // MOSTRAR MENSAJES DEL EASTER EGG
-        // "Mas?" -> "Aun quieres mas?" -> "Algo mas?"
-        // Luego aparecen las opciones Luz/Sombras
-        // ============================================= 
         function mostrarEasterMensaje(indice) {
             if (indice >= EASTER_MENSAJES.length) {
-                // Ya se mostraron todos, mostrar opciones
                 mostrarOpciones();
                 return;
             }
-
             easterIndice = indice;
             easterTexto.classList.remove('visible');
-
             setTimeout(function() {
                 easterTexto.className = '';
                 easterTexto.innerHTML = '';
-
-                // Reproducir burbuja
                 reproducirBurbujaCorta();
-
-                // Iniciar audio maquina de escribir
                 iniciarAudioMaquina();
-
-                // Typewriter para cada mensaje del easter
                 var textoCompleto = EASTER_MENSAJES[indice];
                 var letraActual = 0;
                 easterTexto.innerHTML = '<span class="cursor-easter">|</span>';
-
                 requestAnimationFrame(function() {
                     easterTexto.classList.add('visible');
                 });
-
                 easterPuedeAvanzar = false;
                 easterTypewriterTerminado = false;
-
                 easterTypewriterIntervalo = setInterval(function() {
                     if (letraActual < textoCompleto.length) {
                         var cursorE = easterTexto.querySelector('.cursor-easter');
@@ -1176,26 +1116,17 @@
                         }, 1000);
                     }
                 }, VELOCIDAD_EASTER_TYPEWRITER);
-
             }, 400);
         }
 
-        // ============================================= 
-        // MOSTRAR OPCIONES LUZ / SOMBRAS
-        // ============================================= 
         function mostrarOpciones() {
             easterFaseActual = "opciones";
-
             easterTexto.classList.remove('visible');
             easterIndicador.style.display = 'none';
-
             setTimeout(function() {
                 easterTexto.innerHTML = '';
                 easterTexto.style.display = 'none';
-
-                // Reproducir burbuja al mostrar opciones
                 reproducirBurbujaCorta();
-
                 easterOpciones.style.display = 'block';
                 requestAnimationFrame(function() {
                     easterOpciones.classList.add('visible');
@@ -1203,17 +1134,9 @@
             }, 600);
         }
 
-        // ============================================= 
-        // TOCAR PANTALLA PARA AVANZAR EN EASTER EGG
-        // ============================================= 
         faseEaster.addEventListener('click', function(e) {
-            // No avanzar si toco una opcion
             if (e.target.classList.contains('opcion-flotante')) return;
-
-            // Si esta en fase de opciones, no hacer nada
             if (easterFaseActual === "opciones" || easterFaseActual === "finalizado") return;
-
-            // Si el typewriter esta escribiendo, completar de golpe
             if (easterTypewriterIntervalo && !easterTypewriterTerminado) {
                 clearInterval(easterTypewriterIntervalo);
                 easterTypewriterIntervalo = null;
@@ -1224,9 +1147,7 @@
                 setTimeout(function() { easterPuedeAvanzar = true; }, 500);
                 return;
             }
-
             if (!easterPuedeAvanzar) return;
-
             var siguiente = easterIndice + 1;
             if (siguiente < EASTER_MENSAJES.length) {
                 mostrarEasterMensaje(siguiente);
@@ -1235,54 +1156,33 @@
             }
         });
 
-        // ============================================= 
-        // OPCION LUZ
-        // Fondo calido + mensaje inspirador
-        // ============================================= 
         opcionLuz.addEventListener('click', function(e) {
             e.stopPropagation();
             easterFaseActual = "finalizado";
-
             reproducirBurbujaCorta();
-
             faseEaster.style.opacity = '0';
-
             setTimeout(function() {
                 faseEaster.style.display = 'none';
-
-                // Configurar fondo calido
                 faseFinal.classList.add('fondo-luz');
                 faseFinal.style.display = 'block';
-
-                // Crear contenido Luz
                 finalContenido.innerHTML = '';
-
                 var textoLuz = document.createElement('div');
                 textoLuz.className = 'final-texto texto-luz-principal';
-                textoLuz.innerHTML = '';
                 finalContenido.appendChild(textoLuz);
-
                 var lineaPequena = document.createElement('div');
                 lineaPequena.className = 'final-linea-pequena';
                 lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
                 finalContenido.appendChild(lineaPequena);
-
                 requestAnimationFrame(function() {
                     faseFinal.classList.add('visible');
                 });
-
-                // Typewriter para el texto de Luz
                 var textoCompletoLuz = "Eres un regalo en la logica de mi existencia.";
                 var letraLuz = 0;
-
                 setTimeout(function() {
-                    // Burbuja al iniciar
                     reproducirBurbujaCorta();
                     iniciarAudioMaquina();
-
                     textoLuz.innerHTML = '<span class="cursor-easter">|</span>';
                     textoLuz.classList.add('visible');
-
                     var intervaloLuz = setInterval(function() {
                         if (letraLuz < textoCompletoLuz.length) {
                             var cursorL = textoLuz.querySelector('.cursor-easter');
@@ -1298,90 +1198,59 @@
                             if (cursorL) {
                                 setTimeout(function() { cursorL.style.display = 'none'; }, 800);
                             }
-                            // Mostrar linea pequena
                             setTimeout(function() {
                                 lineaPequena.classList.add('visible');
                             }, 1500);
                         }
                     }, 60);
                 }, 1000);
-
             }, 1000);
         });
 
-        // ============================================= 
-        // OPCION SOMBRAS
-        // Fondo frio + parrafos secuenciales
-        // ============================================= 
         opcionSombras.addEventListener('click', function(e) {
             e.stopPropagation();
             easterFaseActual = "finalizado";
-
             reproducirBurbujaCorta();
-
             faseEaster.style.opacity = '0';
-
             setTimeout(function() {
                 faseEaster.style.display = 'none';
-
-                // Configurar fondo frio
                 faseFinal.classList.add('fondo-sombras');
                 faseFinal.style.display = 'block';
-
-                // Crear contenido Sombras
                 finalContenido.innerHTML = '';
-
-                // Crear los elementos para cada parte
                 var elementos = [];
                 for (var i = 0; i < SOMBRAS_PARTES.length; i++) {
                     var parrafo = document.createElement('div');
                     parrafo.className = 'final-texto';
-                    parrafo.innerHTML = '';
                     finalContenido.appendChild(parrafo);
                     elementos.push(parrafo);
                 }
-
                 var lineaPequena = document.createElement('div');
                 lineaPequena.className = 'final-linea-pequena';
                 lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
                 finalContenido.appendChild(lineaPequena);
-
                 requestAnimationFrame(function() {
                     faseFinal.classList.add('visible');
                 });
-
-                // Mostrar cada parrafo con typewriter secuencial
                 setTimeout(function() {
                     escribirParrafoSombras(0, elementos, lineaPequena);
                 }, 1000);
-
             }, 1000);
         });
 
-        // ============================================= 
-        // TYPEWRITER SECUENCIAL PARA SOMBRAS
-        // Escribe cada parrafo uno tras otro
-        // ============================================= 
         function escribirParrafoSombras(indice, elementos, lineaPequena) {
             if (indice >= SOMBRAS_PARTES.length) {
-                // Todos los parrafos terminados, mostrar linea final
                 setTimeout(function() {
                     lineaPequena.classList.add('visible');
                 }, 1500);
                 return;
             }
-
             var elemento = elementos[indice];
             var textoCompleto = SOMBRAS_PARTES[indice];
             var letraActual = 0;
-
-            // Burbuja al iniciar cada parrafo
             reproducirBurbujaCorta();
             iniciarAudioMaquina();
-
             elemento.innerHTML = '<span class="cursor-easter">|</span>';
             elemento.classList.add('visible');
-
             var intervaloSombra = setInterval(function() {
                 if (letraActual < textoCompleto.length) {
                     var cursorS = elemento.querySelector('.cursor-easter');
@@ -1393,14 +1262,10 @@
                 } else {
                     clearInterval(intervaloSombra);
                     detenerAudioMaquina();
-
-                    // Ocultar cursor
                     var cursorS = elemento.querySelector('.cursor-easter');
                     if (cursorS) {
                         setTimeout(function() { cursorS.style.display = 'none'; }, 500);
                     }
-
-                    // Esperar y escribir el siguiente parrafo
                     setTimeout(function() {
                         escribirParrafoSombras(indice + 1, elementos, lineaPequena);
                     }, 1200);
@@ -1408,9 +1273,6 @@
             }, VELOCIDAD_EASTER_TYPEWRITER);
         }
 
-        // ============================================= 
-        // CORAZONES FLOTANTES MORADOS
-        // ============================================= 
         function iniciarCorazones() {
             setInterval(function() {
                 crearCorazon();
@@ -1420,7 +1282,7 @@
         function crearCorazon() {
             var corazon = document.createElement('div');
             corazon.classList.add('corazon');
-            var emojis = ['💜', '💜', '💜', '🟣', '💜', '💜'];
+            var emojis = ['\uD83D\uDC9C', '\uD83D\uDC9C', '\uD83D\uDC9C', '\uD83D\uDFE3', '\uD83D\uDC9C', '\uD83D\uDC9C'];
             corazon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
             corazon.style.left = Math.random() * 100 + 'vw';
             corazon.style.top = '100vh';
@@ -1429,9 +1291,6 @@
             setTimeout(function() { corazon.remove(); }, 4000);
         }
 
-        // ============================================= 
-        // PARTICULAS
-        // ============================================= 
         function crearParticulas() {
             setInterval(function() {
                 var particula = document.createElement('div');
@@ -1446,9 +1305,6 @@
 
         crearParticulas();
 
-        // ============================================= 
-        // PRE-CARGAR IMAGENES
-        // ============================================= 
         function precargarImagenes() {
             var img1 = new Image();
             img1.src = IMAGEN_GATO_1;
