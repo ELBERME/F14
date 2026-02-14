@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noris 💝</title>
+    <title>Noris 💜</title>
 
     <!-- ============================================= -->
     <!-- ESTILOS CSS - Diseño responsive y animaciones -->
     <!-- ============================================= -->
     <style>
         /* --- RESET GENERAL --- */
-        /* Elimina márgenes y paddings por defecto del navegador */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +17,6 @@
         }
 
         /* --- CUERPO DE LA PÁGINA --- */
-        /* Ocupa toda la pantalla, fondo negro, sin scroll */
         body {
             width: 100vw;
             height: 100vh;
@@ -30,7 +28,6 @@
         /* ============================================= */
         /* FASE 1: CONTENEDOR DEL VIDEO DE FONDO         */
         /* ============================================= */
-        /* Este contenedor tiene el video y el texto animado */
         #fase-video {
             position: fixed;
             top: 0;
@@ -42,7 +39,6 @@
         }
 
         /* --- VIDEO DE FONDO --- */
-        /* El video cubre toda la pantalla manteniendo proporción */
         #video-fondo {
             position: absolute;
             top: 50%;
@@ -56,7 +52,6 @@
         }
 
         /* --- CAPA OSCURA SOBRE EL VIDEO --- */
-        /* Oscurece un poco el video para que el texto se lea mejor */
         #overlay-oscuro {
             position: absolute;
             top: 0;
@@ -68,8 +63,7 @@
         }
 
         /* ============================================= */
-        /* TEXTO PRINCIPAL "Feliz 14 de Febrero Noris"   */
-        /* Estilo máquina de escribir (typewriter)        */
+        /* TEXTO PRINCIPAL - Estilo máquina de escribir   */
         /* ============================================= */
         #contenedor-texto {
             position: absolute;
@@ -83,13 +77,14 @@
         }
 
         /* ---- Texto con efecto typewriter ---- */
+        /* 🔄 CAMBIO: Sombras cambiadas de ROSA a MORADO */
         #texto-animado {
             color: #fff;
-            font-size: clamp(1.8rem, 5vw, 4rem); /* RESPONSIVE: se adapta al tamaño de pantalla */
+            font-size: clamp(1.8rem, 5vw, 4rem);
             text-shadow: 
-                0 0 10px rgba(255, 105, 180, 0.8),
-                0 0 20px rgba(255, 105, 180, 0.6),
-                0 0 40px rgba(255, 105, 180, 0.4),
+                0 0 10px rgba(155, 89, 182, 0.8),    /* 🔄 CAMBIO: morado */
+                0 0 20px rgba(155, 89, 182, 0.6),    /* 🔄 CAMBIO: morado */
+                0 0 40px rgba(155, 89, 182, 0.4),    /* 🔄 CAMBIO: morado */
                 2px 2px 4px rgba(0, 0, 0, 0.8);
             letter-spacing: 3px;
             line-height: 1.4;
@@ -98,18 +93,18 @@
             min-height: 2em;
         }
 
-        /* ---- Cursor parpadeante de máquina de escribir lol ---- */
+        /* ---- Cursor parpadeante ---- */
+        /* 🔄 CAMBIO: Color del cursor de rosa a morado */
         #cursor {
             display: inline-block;
             width: 3px;
             height: 1em;
-            background-color: #ff69b4;
+            background-color: #9b59b6;    /* 🔄 CAMBIO: morado */
             margin-left: 4px;
             vertical-align: text-bottom;
             animation: parpadeo 0.6s infinite;
         }
 
-        /* Animación del cursor parpadeante */
         @keyframes parpadeo {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -117,7 +112,6 @@
 
         /* ============================================= */
         /* FASE 2: DESPUÉS DEL VIDEO                      */
-        /* Video borroso de fondo + GIF del gato          */
         /* ============================================= */
         #fase-gif {
             position: fixed;
@@ -126,12 +120,12 @@
             width: 100%;
             height: 100%;
             z-index: 10;
-            display: none; /* Oculto al inicio, se muestra con JS */
+            display: none;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
 
-        /* ---- Video de fondo BORROSO (Fase 2) ---- */
+        /* ---- Video de fondo BORROSO ---- */
         #video-borroso {
             position: absolute;
             top: 50%;
@@ -142,7 +136,7 @@
             width: auto;
             height: auto;
             object-fit: cover;
-            filter: blur(15px) brightness(0.5); /* EFECTO BORROSO */
+            filter: blur(15px) brightness(0.5);
         }
 
         /* ---- Contenedor del GIF del gato ---- */
@@ -157,31 +151,32 @@
             transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        /* Cuando el GIF se hace visible */
         #contenedor-gif.visible {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
         }
 
         /* ---- Imagen del GIF (gato) ---- */
+        /* 🔄 CAMBIO: Bordes y sombras de rosa a morado */
         #gif-gato {
-            max-width: 80vw;   /* Se adapta al ancho de la pantalla */
-            max-height: 60vh;  /* Se adapta al alto de la pantalla */
+            max-width: 80vw;
+            max-height: 60vh;
             border-radius: 20px;
             box-shadow: 
-                0 0 30px rgba(255, 105, 180, 0.6),
-                0 0 60px rgba(255, 105, 180, 0.3);
-            border: 3px solid rgba(255, 105, 180, 0.5);
+                0 0 30px rgba(155, 89, 182, 0.6),    /* 🔄 CAMBIO: morado */
+                0 0 60px rgba(155, 89, 182, 0.3);    /* 🔄 CAMBIO: morado */
+            border: 3px solid rgba(155, 89, 182, 0.5); /* 🔄 CAMBIO: morado */
         }
 
         /* ---- Texto debajo del GIF ---- */
+        /* 🔄 CAMBIO: Color de texto y sombras a morado */
         #texto-final {
-            color: #ff69b4;
+            color: #9b59b6;                              /* 🔄 CAMBIO: morado */
             font-size: clamp(1.2rem, 3vw, 2.5rem);
             margin-top: 20px;
             text-shadow: 
-                0 0 10px rgba(255, 105, 180, 0.8),
-                0 0 20px rgba(255, 105, 180, 0.5);
+                0 0 10px rgba(155, 89, 182, 0.8),    /* 🔄 CAMBIO: morado */
+                0 0 20px rgba(155, 89, 182, 0.5);    /* 🔄 CAMBIO: morado */
             opacity: 0;
             transition: opacity 1s ease-in-out 0.5s;
         }
@@ -217,17 +212,16 @@
         }
 
         /* ============================================= */
-        /* BOTÓN DE INICIO (para activar audio)          */
-        /* Los navegadores requieren interacción del      */
-        /* usuario para reproducir audio                  */
-        /* ============================================= */
+        /* BOTÓN DE INICIO                                */
+        /* 🔄 CAMBIO: Colores del botón a morado          */
+        /* ============================================= -->
         #boton-inicio {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 100;
-            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);  /* 🔄 CAMBIO: morado */
             color: white;
             border: none;
             padding: 20px 50px;
@@ -236,8 +230,8 @@
             cursor: pointer;
             font-family: 'Georgia', serif;
             box-shadow: 
-                0 0 20px rgba(255, 105, 180, 0.6),
-                0 0 40px rgba(255, 105, 180, 0.3);
+                0 0 20px rgba(155, 89, 182, 0.6),    /* 🔄 CAMBIO: morado */
+                0 0 40px rgba(155, 89, 182, 0.3);    /* 🔄 CAMBIO: morado */
             transition: all 0.3s ease;
             animation: pulsar-boton 2s ease-in-out infinite;
         }
@@ -245,23 +239,25 @@
         #boton-inicio:hover {
             transform: translate(-50%, -50%) scale(1.1);
             box-shadow: 
-                0 0 30px rgba(255, 105, 180, 0.8),
-                0 0 60px rgba(255, 105, 180, 0.5);
+                0 0 30px rgba(155, 89, 182, 0.8),    /* 🔄 CAMBIO: morado */
+                0 0 60px rgba(155, 89, 182, 0.5);    /* 🔄 CAMBIO: morado */
         }
 
+        /* 🔄 CAMBIO: Animación del botón en morado */
         @keyframes pulsar-boton {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.6); }
-            50% { box-shadow: 0 0 40px rgba(255, 105, 180, 0.9), 0 0 80px rgba(255, 105, 180, 0.4); }
+            0%, 100% { box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(155, 89, 182, 0.9), 0 0 80px rgba(155, 89, 182, 0.4); }
         }
 
         /* ============================================= */
         /* PARTÍCULAS DE BRILLO DECORATIVAS              */
+        /* 🔄 CAMBIO: Color de partículas a morado        */
         /* ============================================= */
         .particula {
             position: fixed;
             width: 4px;
             height: 4px;
-            background: #ff69b4;
+            background: #9b59b6;    /* 🔄 CAMBIO: morado */
             border-radius: 50%;
             pointer-events: none;
             z-index: 15;
@@ -276,11 +272,9 @@
                 max-width: 90vw;
                 max-height: 50vh;
             }
-
             #contenedor-texto {
                 width: 95%;
             }
-
             #boton-inicio {
                 padding: 15px 35px;
             }
@@ -299,34 +293,18 @@
 
     <!-- ============================================= -->
     <!-- BOTÓN DE INICIO                                -->
-    <!-- Necesario porque los navegadores bloquean el   -->
-    <!-- audio automático sin interacción del usuario   -->
+    <!-- 🔄 CAMBIO: Emojis cambiados a corazones morados -->
     <!-- ============================================= -->
-    <button id="boton-inicio">💝 Toca para comenzar 💝</button>
+    <button id="boton-inicio">💜 Toca para comenzar 💜</button>
 
     <!-- ============================================= -->
     <!-- FASE 1: VIDEO + TEXTO ANIMADO                  -->
     <!-- ============================================= -->
     <div id="fase-video">
-
-        <!-- ============================================= -->
-        <!-- 🎬 VIDEO DE FONDO                              -->
-        <!-- AQUÍ COLOCA TU VIDEO: cambia "tu-video.mp4"    -->
-        <!-- por la ruta de tu archivo de video              -->
-        <!-- El video debe estar en la misma carpeta o       -->
-        <!-- indicar la ruta correcta                        -->
-        <!-- ============================================= -->
         <video id="video-fondo" muted playsinline>
-            <!-- 🔽🔽🔽 CAMBIA AQUÍ LA RUTA DEL VIDEO 🔽🔽🔽 -->
             <source src="video.mp4" type="video/mp4">
-            <!-- Si tu video es .webm, agrega esta línea: -->
-            <!-- <source src="tu-video.webm" type="video/webm"> -->
         </video>
-
-        <!-- Capa oscura semitransparente sobre el video -->
         <div id="overlay-oscuro"></div>
-
-        <!-- Contenedor del texto con efecto typewriter -->
         <div id="contenedor-texto">
             <span id="texto-animado"></span>
             <span id="cursor">|</span>
@@ -337,48 +315,13 @@
     <!-- FASE 2: VIDEO BORROSO + GIF DEL GATO           -->
     <!-- ============================================= -->
     <div id="fase-gif">
-
-        <!-- ============================================= -->
-        <!-- 🎬 VIDEO DE FONDO BORROSO                      -->
-        <!-- Usa el MISMO video, se reproducirá borroso      -->
-        <!-- También cambia "tu-video.mp4" aquí              -->
-        <!-- ============================================= -->
         <video id="video-borroso" loop muted playsinline>
-            <!-- 🔽🔽🔽 CAMBIA AQUÍ LA RUTA DEL VIDEO (MISMA QUE ARRIBA) 🔽🔽🔽 -->
             <source src="video.mp4" type="video/mp4">
         </video>
-
-        <!-- Contenedor del GIF animado del gato -->
         <div id="contenedor-gif">
-
-            <!-- ============================================= -->
-            <!-- 🐱 GIF DEL GATO                               -->
-            <!-- AQUÍ COLOCA TU GIF: cambia "gato-animado.gif"  -->
-            <!-- por la ruta de tu archivo GIF                   -->
-            <!--                                                 -->
-            <!-- Para crear el GIF con tus 2 imágenes:           -->
-            <!--   - Imagen 1: gato sin nada                     -->
-            <!--   - Imagen 2: gato con flor                     -->
-            <!-- Usa una herramienta como:                       -->
-            <!--   https://ezgif.com/maker                       -->
-            <!--   https://gifmaker.me/                          -->
-            <!-- Sube las 2 imágenes, pon 500-800ms de delay     -->
-            <!-- y descarga el GIF resultante                    -->
-            <!--                                                 -->
-            <!-- ALTERNATIVA: Si no quieres crear GIF, el código -->
-            <!-- incluye un sistema JS que alterna las 2 imágenes-->
-            <!-- automáticamente (ver sección JavaScript)         -->
-            <!-- ============================================= -->
-
-            <!-- OPCIÓN A: Usa un GIF ya creado -->
-            <!-- <img id="gif-gato" src="gato-animado.gif" alt="Gatito con flor"> -->
-
-            <!-- OPCIÓN B: Usa una imagen que JS alternará (RECOMENDADA si no tienes GIF) -->
-            <!-- 🔽🔽🔽 CAMBIA AQUÍ: pon la ruta de tu PRIMERA imagen (gato sin nada) 🔽🔽🔽 -->
             <img id="gif-gato" src="imagen uno.jpeg" alt="Gatito con flor">
-
-            <!-- Texto que aparece debajo del gato -->
-            <div id="texto-final">💝 Te quiero mucho, Noris 💝</div>
+            <!-- 🔄 CAMBIO: Emojis cambiados a corazones morados -->
+            <div id="texto-final">💜 Te quiero mucho, Noris 💜</div>
         </div>
     </div>
 
@@ -386,33 +329,35 @@
     <!-- 🔊 AUDIOS                                       -->
     <!-- ============================================= -->
 
-    <!-- ============================================= -->
-    <!-- 🎵 AUDIO PRINCIPAL DEL VIDEO                    -->
-    <!-- Este es el audio que acompaña al video          -->
-    <!-- CAMBIA "audio-video.mp3" por tu archivo de audio-->
-    <!-- ============================================= -->
-    <!-- 🔽🔽🔽 CAMBIA AQUÍ LA RUTA DEL AUDIO PRINCIPAL 🔽🔽🔽 -->
+    <!-- 🎵 Audio principal del video -->
     <audio id="audio-principal" preload="auto">
         <source src="video audio.mpeg" type="audio/mpeg">
-        <!-- Si tu audio es .ogg: -->
-        <!-- <source src="audio-video.ogg" type="audio/ogg"> -->
-        <!-- Si tu audio es .wav: -->
-        <!-- <source src="audio-video.wav" type="audio/wav"> -->
+    </audio>
+
+    <!-- ⌨️ Audio de máquina de escribir -->
+    <audio id="audio-typewriter" preload="auto" loop>
+        <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
     </audio>
 
     <!-- ============================================= -->
-    <!-- ⌨️ AUDIO DE MÁQUINA DE ESCRIBIR                 -->
-    <!-- Este audio suena mientras se escribe el texto   -->
-    <!-- Se sincroniza: suena SOLO mientras aparece texto-->
-    <!-- CAMBIA "maquina-escribir.mp3" por tu archivo    -->
+    <!-- 🫧 NUEVO: AUDIO DE BURBUJA EXPLOTANDO           -->
+    <!-- Este sonido se reproduce cada vez que aparece   -->
+    <!-- el segundo gato (gato con flor)                 -->
+    <!-- Duración del audio: ~2 segundos                 -->
     <!--                                                 -->
     <!-- Puedes descargar este sonido gratis de:          -->
-    <!-- https://freesound.org (busca "typewriter")       -->
-    <!-- https://pixabay.com/sound-effects/               -->
+    <!--   https://pixabay.com/sound-effects/             -->
+    <!--     (busca "bubble pop" o "bubble burst")        -->
+    <!--   https://freesound.org                          -->
+    <!--     (busca "bubble pop")                         -->
     <!-- ============================================= -->
-    <!-- 🔽🔽🔽 CAMBIA AQUÍ LA RUTA DEL AUDIO DE MÁQUINA DE ESCRIBIR 🔽🔽🔽 -->
-    <audio id="audio-typewriter" preload="auto" loop>
-        <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
+    <!-- 🔽🔽🔽 CAMBIA AQUÍ LA RUTA DEL AUDIO DE BURBUJA 🔽🔽🔽 -->
+    <audio id="audio-burbuja" preload="auto">
+        <source src="audio de burbuja.mpeg" type="audio/mpeg">
+        <!-- Si tu audio es .wav: -->
+        <!-- <source src="burbuja.wav" type="audio/wav"> -->
+        <!-- Si tu audio es .ogg: -->
+        <!-- <source src="burbuja.ogg" type="audio/ogg"> -->
     </audio>
 
     <!-- ============================================= -->
@@ -421,35 +366,17 @@
     <script>
         // ============================================= 
         // CONFIGURACIÓN PRINCIPAL
-        // Aquí puedes cambiar el mensaje y los tiempos
         // ============================================= 
 
-        // El mensaje que se va a escribir letra por letra
-        const MENSAJE = "Feliz 14 de Febrero\nNoris 💝";
-        // "\n" = salto de línea (Noris aparece en la segunda línea)
-
-        // Duración del video en milisegundos (13 segundos = 13000ms)
+        const MENSAJE = "Feliz 14 de Febrero\nNoris 💜";  // 🔄 CAMBIO: emoji morado
         const DURACION_VIDEO = 13000;
-
-        // Tiempo de espera antes de que empiece a escribir (en ms)
-        const ESPERA_INICIO_TEXTO = 1500; // 1.5 segundos después de que empiece el video
-
-        // Velocidad de escritura: milisegundos entre cada letra
-        // Se calcula automáticamente para que el texto termine antes que el video
-        const TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000; // resta 2s de margen
+        const ESPERA_INICIO_TEXTO = 1500;
+        const TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
         const VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
 
-        // ============================================= 
-        // 🖼️ CONFIGURACIÓN DE LAS IMÁGENES DEL GATO
-        // CAMBIA estas rutas por tus archivos de imagen
-        // ============================================= 
-
-        // 🔽🔽🔽 CAMBIA AQUÍ LAS RUTAS DE TUS 2 IMÁGENES 🔽🔽🔽
-        const IMAGEN_GATO_1 = "imagen uno.jpeg";    // Imagen 1: gato sin nada
-        const IMAGEN_GATO_2 = "iamgen 2.jpeg";    // Imagen 2: gato con flor
-
-        // Velocidad de alternancia entre imágenes (en ms)
-        // 600ms = parece un GIF natural
+        // 🖼️ Imágenes del gato
+        const IMAGEN_GATO_1 = "imagen uno.jpeg";
+        const IMAGEN_GATO_2 = "iamgen 2.jpeg";
         const VELOCIDAD_GIF = 600;
 
         // ============================================= 
@@ -468,25 +395,26 @@
         const audioPrincipal = document.getElementById('audio-principal');
         const audioTypewriter = document.getElementById('audio-typewriter');
 
+        // ============================================= 
+        // 🫧 NUEVO: Referencia al audio de burbuja
+        // ============================================= 
+        const audioBurbuja = document.getElementById('audio-burbuja');
+
         // Variables de control
-        let indiceLetra = 0;          // Qué letra estamos escribiendo
-        let intervaloTexto = null;     // Referencia al intervalo de escritura
-        let intervaloGif = null;       // Referencia al intervalo del GIF
-        let imagenActual = 1;          // Control de qué imagen del gato se muestra
+        let indiceLetra = 0;
+        let intervaloTexto = null;
+        let intervaloGif = null;
+        let imagenActual = 1;
 
         // ============================================= 
         // BOTÓN DE INICIO
-        // Los navegadores modernos no permiten reproducir
-        // audio sin que el usuario interactúe primero
         // ============================================= 
         botonInicio.addEventListener('click', function() {
-            // Ocultar el botón con animación
             this.style.transition = 'opacity 0.5s ease';
             this.style.opacity = '0';
 
             setTimeout(() => {
                 this.style.display = 'none';
-                // Iniciar toda la experiencia
                 iniciarExperiencia();
             }, 500);
         });
@@ -495,62 +423,42 @@
         // FUNCIÓN PRINCIPAL: Inicia todo
         // ============================================= 
         function iniciarExperiencia() {
-            // 1. Reproducir el video de fondo (sin sonido, el sonido va aparte)
             videoFondo.play().catch(e => console.log('Error video:', e));
-
-            // 2. Reproducir el audio principal del video
             audioPrincipal.play().catch(e => console.log('Error audio:', e));
 
-            // 3. Después de la espera, comenzar a escribir el texto
             setTimeout(() => {
                 iniciarTextoTypewriter();
             }, ESPERA_INICIO_TEXTO);
 
-            // 4. Cuando el video termine, hacer la transición a Fase 2
             videoFondo.addEventListener('ended', transicionAFase2);
 
-            // RESPALDO: Si el evento 'ended' no se dispara, usar setTimeout
             setTimeout(() => {
                 transicionAFase2();
-            }, DURACION_VIDEO + 500); // +500ms de margen
+            }, DURACION_VIDEO + 500);
 
-            // 5. Iniciar corazones flotantes decorativos
             iniciarCorazones();
         }
 
         // ============================================= 
         // EFECTO TYPEWRITER (Máquina de escribir)
-        // Escribe el texto letra por letra y sincroniza
-        // el audio de la máquina de escribir
         // ============================================= 
         function iniciarTextoTypewriter() {
-            // Iniciar el audio de máquina de escribir
-            audioTypewriter.volume = 0.5; // Volumen al 50% para que no tape el audio principal
+            audioTypewriter.volume = 0.5;
             audioTypewriter.play().catch(e => console.log('Error typewriter:', e));
 
-            // Intervalo que agrega una letra cada X milisegundos
             intervaloTexto = setInterval(() => {
                 if (indiceLetra < MENSAJE.length) {
-                    // Obtener la letra actual
                     let letra = MENSAJE[indiceLetra];
-
-                    // Si es un salto de línea, agregar <br>
                     if (letra === '\n') {
                         textoAnimado.innerHTML += '<br>';
                     } else {
                         textoAnimado.innerHTML += letra;
                     }
-
                     indiceLetra++;
                 } else {
-                    // Ya se escribió todo el texto
-                    clearInterval(intervaloTexto); // Detener el intervalo
-
-                    // Detener el audio de máquina de escribir
+                    clearInterval(intervaloTexto);
                     audioTypewriter.pause();
                     audioTypewriter.currentTime = 0;
-
-                    // Ocultar el cursor después de 1 segundo
                     setTimeout(() => {
                         cursorElemento.style.display = 'none';
                     }, 1000);
@@ -560,66 +468,44 @@
 
         // ============================================= 
         // TRANSICIÓN DE FASE 1 A FASE 2
-        // Desvanece el video y muestra el GIF del gato
         // ============================================= 
-        let transicionEjecutada = false; // Evita que se ejecute 2 veces
+        let transicionEjecutada = false;
 
         function transicionAFase2() {
-            // Prevenir ejecución doble
             if (transicionEjecutada) return;
             transicionEjecutada = true;
 
-            // Asegurarse de que el texto y typewriter se detengan
             if (intervaloTexto) {
                 clearInterval(intervaloTexto);
                 audioTypewriter.pause();
             }
 
-            // PASO 1: Desvanecer la Fase 1 (video con texto)
             faseVideo.style.opacity = '0';
 
-            // PASO 2: Después de 1.5s (duración del fade), mostrar Fase 2
             setTimeout(() => {
-                // Ocultar completamente la fase 1
                 faseVideo.style.display = 'none';
-
-                // Mostrar la fase 2
                 faseGif.style.display = 'block';
-
-                // Reproducir el video borroso de fondo (en loop)
                 videoBorroso.play().catch(e => console.log('Error video borroso:', e));
 
-                // Nota: El audio principal SIGUE sonando (no se detiene)
-                // Si quieres que se reinicie el audio:
-                // audioPrincipal.currentTime = 0;
-                // audioPrincipal.play();
-
-                // Hacer aparecer la fase 2 con fade in
                 requestAnimationFrame(() => {
                     faseGif.style.opacity = '1';
                 });
 
-                // PASO 3: Después de 0.5s, mostrar el GIF del gato con animación
                 setTimeout(() => {
                     contenedorGif.classList.add('visible');
-
-                    // Iniciar la alternancia de imágenes (efecto GIF manual)
                     iniciarGifManual();
-
-                    // PASO 4: Mostrar el texto final debajo del gato
                     setTimeout(() => {
                         textoFinal.classList.add('visible');
                     }, 800);
-
                 }, 500);
 
-            }, 1500); // Espera a que termine el fade out
+            }, 1500);
         }
 
         // ============================================= 
         // GIF MANUAL: Alterna entre las 2 imágenes
-        // Esto crea la ilusión de un GIF animado
-        // Imagen 1: gato sin nada → Imagen 2: gato con flor
+        // 🫧 NUEVO: Reproduce sonido de burbuja cada vez
+        //    que aparece el segundo gato (gato con flor)
         // ============================================= 
         function iniciarGifManual() {
             intervaloGif = setInterval(() => {
@@ -627,50 +513,85 @@
                     // Cambiar a imagen 2 (gato con flor)
                     gifGato.src = IMAGEN_GATO_2;
                     imagenActual = 2;
+
+                    // ============================================= 
+                    // 🫧 NUEVO: Reproducir sonido de burbuja
+                    // Cada vez que aparece el gato con flor (imagen 2)
+                    // se reproduce el efecto de burbuja explotando.
+                    // Se reinicia el audio desde el inicio para que
+                    // suene completo cada vez aunque la alternancia
+                    // sea más rápida que la duración del audio (2s)
+                    // ============================================= 
+                    reproducirBurbuja();
+
                 } else {
                     // Cambiar a imagen 1 (gato sin nada)
                     gifGato.src = IMAGEN_GATO_1;
                     imagenActual = 1;
+                    // NO se reproduce burbuja cuando aparece el gato sin flor
                 }
             }, VELOCIDAD_GIF);
+        }
 
-            // NOTA: Si ya tienes un GIF creado, comenta la función
-            // iniciarGifManual() arriba y usa directamente:
-            // gifGato.src = "gato-animado.gif";
+        // ============================================= 
+        // 🫧 NUEVA FUNCIÓN: Reproduce el sonido de burbuja
+        // Reinicia el audio desde el segundo 0 cada vez
+        // para que siempre se escuche desde el inicio.
+        // Volumen al 60% para no tapar el audio principal
+        // ============================================= 
+        function reproducirBurbuja() {
+            // Clonar el audio para permitir que suene
+            // aunque la reproducción anterior no haya terminado.
+            // Esto evita que se corte el sonido anterior y
+            // permite que se superpongan si es necesario
+            const burbujaClone = audioBurbuja.cloneNode();
+            burbujaClone.volume = 0.6;  // 60% de volumen
+            burbujaClone.play().catch(e => console.log('Error burbuja:', e));
+
+            // Eliminar el clon del DOM después de 3 segundos
+            // para no llenar la memoria con elementos de audio
+            setTimeout(() => {
+                burbujaClone.remove();
+            }, 3000);
         }
 
         // ============================================= 
         // CORAZONES FLOTANTES DECORATIVOS
-        // Crea corazones que flotan desde abajo
+        // 🔄 CAMBIO: Todos los corazones ahora son MORADOS
         // ============================================= 
         function iniciarCorazones() {
             setInterval(() => {
                 crearCorazon();
-            }, 800); // Un corazón cada 800ms
+            }, 800);
         }
 
         function crearCorazon() {
             const corazon = document.createElement('div');
             corazon.classList.add('corazon');
-            corazon.innerHTML = ['💝', '💖', '💗', '💕', '❤️', '🌹'][Math.floor(Math.random() * 6)];
 
-            // Posición horizontal aleatoria
+            // ============================================= 
+            // 🔄 CAMBIO: Array de emojis ahora solo tiene
+            //    corazones y elementos MORADOS
+            //    💜 = corazón morado
+            //    🟣 = círculo morado
+            //    ☮️ = variedad visual
+            //    💟 = corazón decorativo
+            // ============================================= 
+            corazon.innerHTML = ['💜', '💜', '💜', '🟣', '💜', '💜'][Math.floor(Math.random() * 6)];
+
             corazon.style.left = Math.random() * 100 + 'vw';
-            // Empieza desde abajo
             corazon.style.top = '100vh';
-            // Tamaño aleatorio
             corazon.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
 
             document.body.appendChild(corazon);
 
-            // Eliminar el corazón después de que termine su animación
             setTimeout(() => {
                 corazon.remove();
             }, 4000);
         }
 
         // ============================================= 
-        // PARTÍCULAS DE BRILLO (opcional, decorativo)
+        // PARTÍCULAS DE BRILLO
         // ============================================= 
         function crearParticulas() {
             setInterval(() => {
@@ -679,30 +600,23 @@
                 particula.style.left = Math.random() * 100 + 'vw';
                 particula.style.top = Math.random() * 100 + 'vh';
                 particula.style.animation = `brillar ${Math.random() * 2 + 1}s ease-in-out`;
-
                 document.body.appendChild(particula);
-
                 setTimeout(() => particula.remove(), 3000);
             }, 300);
         }
 
-        // Iniciar partículas
         crearParticulas();
 
         // ============================================= 
         // PRE-CARGAR IMÁGENES
-        // Esto asegura que las imágenes se carguen antes
-        // de que se necesiten, evitando parpadeos
         // ============================================= 
         function precargarImagenes() {
             const img1 = new Image();
             img1.src = IMAGEN_GATO_1;
-
             const img2 = new Image();
             img2.src = IMAGEN_GATO_2;
         }
 
-        // Ejecutar precarga inmediatamente
         precargarImagenes();
     </script>
 
