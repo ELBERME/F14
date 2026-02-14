@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noris 💜</title>
 
-    <!-- ============================================= -->
-    <!-- ESTILOS CSS - Diseño responsive y animaciones -->
-    <!-- ============================================= -->
     <style>
         /* --- RESET GENERAL --- */
         * {
@@ -63,7 +60,7 @@
         }
 
         /* ============================================= */
-        /* TEXTO PRINCIPAL - Estilo máquina de escribir   */
+        /* TEXTO PRINCIPAL - Estilo maquina de escribir   */
         /* ============================================= */
         #contenedor-texto {
             position: absolute;
@@ -76,7 +73,6 @@
             max-width: 800px;
         }
 
-        /* ---- Texto con efecto typewriter ---- */
         #texto-animado {
             color: #fff;
             font-size: clamp(1.8rem, 5vw, 4rem);
@@ -92,7 +88,6 @@
             min-height: 2em;
         }
 
-        /* ---- Cursor parpadeante ---- */
         #cursor {
             display: inline-block;
             width: 3px;
@@ -109,7 +104,7 @@
         }
 
         /* ============================================= */
-        /* FASE 2: DESPUÉS DEL VIDEO                      */
+        /* FASE 2: DESPUES DEL VIDEO                      */
         /* ============================================= */
         #fase-gif {
             position: fixed;
@@ -123,7 +118,6 @@
             transition: opacity 1.5s ease-in-out;
         }
 
-        /* ---- Video de fondo BORROSO ---- */
         #video-borroso {
             position: absolute;
             top: 50%;
@@ -137,7 +131,6 @@
             filter: blur(15px) brightness(0.5);
         }
 
-        /* ---- Contenedor del GIF del gato ---- */
         #contenedor-gif {
             position: absolute;
             top: 50%;
@@ -154,7 +147,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* ---- Imagen del GIF (gato) ---- */
         #gif-gato {
             max-width: 80vw;
             max-height: 60vh;
@@ -165,7 +157,6 @@
             border: 3px solid rgba(155, 89, 182, 0.5);
         }
 
-        /* ---- Texto debajo del GIF ---- */
         #texto-final {
             color: #9b59b6;
             font-size: clamp(1.2rem, 3vw, 2.5rem);
@@ -208,10 +199,8 @@
         }
 
         /* ============================================= */
-        /* BOTÓN DE INICIO                                */
-        /* Colores del botón en morado                    */
+        /* BOTON DE INICIO - Colores morados              */
         /* ============================================= */
-        /* ⬆️⬆️⬆️ AQUÍ ESTABA EL ERROR: se cerraba con --> en vez de con */ */
         #boton-inicio {
             position: fixed;
             top: 50%;
@@ -246,7 +235,7 @@
         }
 
         /* ============================================= */
-        /* PARTÍCULAS DE BRILLO DECORATIVAS              */
+        /* PARTICULAS DE BRILLO DECORATIVAS              */
         /* ============================================= */
         .particula {
             position: fixed;
@@ -260,7 +249,7 @@
         }
 
         /* ============================================= */
-        /* MEDIA QUERIES - Adaptación a móviles          */
+        /* MEDIA QUERIES - Adaptacion a moviles          */
         /* ============================================= */
         @media (max-width: 768px) {
             #gif-gato {
@@ -286,14 +275,10 @@
 </head>
 <body>
 
-    <!-- ============================================= -->
-    <!-- BOTÓN DE INICIO                                -->
-    <!-- ============================================= -->
+    <!-- BOTON DE INICIO -->
     <button id="boton-inicio">💜 Toca para comenzar 💜</button>
 
-    <!-- ============================================= -->
-    <!-- FASE 1: VIDEO + TEXTO ANIMADO                  -->
-    <!-- ============================================= -->
+    <!-- FASE 1: VIDEO + TEXTO ANIMADO -->
     <div id="fase-video">
         <video id="video-fondo" muted playsinline>
             <source src="video.mp4" type="video/mp4">
@@ -305,9 +290,7 @@
         </div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- FASE 2: VIDEO BORROSO + GIF DEL GATO           -->
-    <!-- ============================================= -->
+    <!-- FASE 2: VIDEO BORROSO + GIF DEL GATO -->
     <div id="fase-gif">
         <video id="video-borroso" loop muted playsinline>
             <source src="video.mp4" type="video/mp4">
@@ -318,47 +301,33 @@
         </div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- 🔊 AUDIOS                                       -->
-    <!-- ============================================= -->
-
-    <!-- 🎵 Audio principal del video -->
+    <!-- AUDIOS -->
     <audio id="audio-principal" preload="auto">
         <source src="video audio.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- ⌨️ Audio de máquina de escribir -->
     <audio id="audio-typewriter" preload="auto" loop>
         <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- 🫧 Audio de burbuja explotando -->
     <audio id="audio-burbuja" preload="auto">
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- ============================================= -->
-    <!-- JAVASCRIPT - Toda la lógica y animaciones      -->
-    <!-- ============================================= -->
     <script>
-        // ============================================= 
-        // CONFIGURACIÓN PRINCIPAL
-        // ============================================= 
-
+        // CONFIGURACION PRINCIPAL
         const MENSAJE = "Feliz 14 de Febrero\nNoris 💜";
         const DURACION_VIDEO = 13000;
         const ESPERA_INICIO_TEXTO = 1500;
         const TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
         const VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
 
-        // Imágenes del gato
+        // Imagenes del gato
         const IMAGEN_GATO_1 = "imagen uno.jpeg";
         const IMAGEN_GATO_2 = "iamgen 2.jpeg";
         const VELOCIDAD_GIF = 600;
 
-        // ============================================= 
         // REFERENCIAS A ELEMENTOS DEL HTML
-        // ============================================= 
         const botonInicio = document.getElementById('boton-inicio');
         const faseVideo = document.getElementById('fase-video');
         const faseGif = document.getElementById('fase-gif');
@@ -374,54 +343,50 @@
         const audioBurbuja = document.getElementById('audio-burbuja');
 
         // Variables de control
-        let indiceLetra = 0;
-        let intervaloTexto = null;
-        let intervaloGif = null;
-        let imagenActual = 1;
+        var indiceLetra = 0;
+        var intervaloTexto = null;
+        var intervaloGif = null;
+        var imagenActual = 1;
+        var transicionEjecutada = false;
 
-        // ============================================= 
-        // BOTÓN DE INICIO
-        // ============================================= 
+        // BOTON DE INICIO
         botonInicio.addEventListener('click', function() {
-            this.style.transition = 'opacity 0.5s ease';
-            this.style.opacity = '0';
+            var btn = this;
+            btn.style.transition = 'opacity 0.5s ease';
+            btn.style.opacity = '0';
 
-            setTimeout(() => {
-                this.style.display = 'none';
+            setTimeout(function() {
+                btn.style.display = 'none';
                 iniciarExperiencia();
             }, 500);
         });
 
-        // ============================================= 
-        // FUNCIÓN PRINCIPAL: Inicia todo
-        // ============================================= 
+        // FUNCION PRINCIPAL: Inicia todo
         function iniciarExperiencia() {
-            videoFondo.play().catch(e => console.log('Error video:', e));
-            audioPrincipal.play().catch(e => console.log('Error audio:', e));
+            videoFondo.play().catch(function(e) { console.log('Error video:', e); });
+            audioPrincipal.play().catch(function(e) { console.log('Error audio:', e); });
 
-            setTimeout(() => {
+            setTimeout(function() {
                 iniciarTextoTypewriter();
             }, ESPERA_INICIO_TEXTO);
 
             videoFondo.addEventListener('ended', transicionAFase2);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 transicionAFase2();
             }, DURACION_VIDEO + 500);
 
             iniciarCorazones();
         }
 
-        // ============================================= 
-        // EFECTO TYPEWRITER (Máquina de escribir)
-        // ============================================= 
+        // EFECTO TYPEWRITER
         function iniciarTextoTypewriter() {
             audioTypewriter.volume = 0.5;
-            audioTypewriter.play().catch(e => console.log('Error typewriter:', e));
+            audioTypewriter.play().catch(function(e) { console.log('Error typewriter:', e); });
 
-            intervaloTexto = setInterval(() => {
+            intervaloTexto = setInterval(function() {
                 if (indiceLetra < MENSAJE.length) {
-                    let letra = MENSAJE[indiceLetra];
+                    var letra = MENSAJE[indiceLetra];
                     if (letra === '\n') {
                         textoAnimado.innerHTML += '<br>';
                     } else {
@@ -432,18 +397,14 @@
                     clearInterval(intervaloTexto);
                     audioTypewriter.pause();
                     audioTypewriter.currentTime = 0;
-                    setTimeout(() => {
+                    setTimeout(function() {
                         cursorElemento.style.display = 'none';
                     }, 1000);
                 }
             }, VELOCIDAD_LETRA);
         }
 
-        // ============================================= 
-        // TRANSICIÓN DE FASE 1 A FASE 2
-        // ============================================= 
-        let transicionEjecutada = false;
-
+        // TRANSICION DE FASE 1 A FASE 2
         function transicionAFase2() {
             if (transicionEjecutada) return;
             transicionEjecutada = true;
@@ -455,19 +416,19 @@
 
             faseVideo.style.opacity = '0';
 
-            setTimeout(() => {
+            setTimeout(function() {
                 faseVideo.style.display = 'none';
                 faseGif.style.display = 'block';
-                videoBorroso.play().catch(e => console.log('Error video borroso:', e));
+                videoBorroso.play().catch(function(e) { console.log('Error video borroso:', e); });
 
-                requestAnimationFrame(() => {
+                requestAnimationFrame(function() {
                     faseGif.style.opacity = '1';
                 });
 
-                setTimeout(() => {
+                setTimeout(function() {
                     contenedorGif.classList.add('visible');
                     iniciarGifManual();
-                    setTimeout(() => {
+                    setTimeout(function() {
                         textoFinal.classList.add('visible');
                     }, 800);
                 }, 500);
@@ -475,59 +436,45 @@
             }, 1500);
         }
 
-        // ============================================= 
-        // GIF MANUAL: Alterna entre las 2 imágenes
-        // Reproduce sonido de burbuja cuando aparece
-        // el segundo gato (gato con flor)
-        // ============================================= 
+        // GIF MANUAL: Alterna entre las 2 imagenes
+        // Reproduce sonido de burbuja cuando aparece el gato con flor
         function iniciarGifManual() {
-            intervaloGif = setInterval(() => {
+            intervaloGif = setInterval(function() {
                 if (imagenActual === 1) {
-                    // Cambiar a imagen 2 (gato con flor)
                     gifGato.src = IMAGEN_GATO_2;
                     imagenActual = 2;
-
-                    // Reproducir sonido de burbuja
                     reproducirBurbuja();
-
                 } else {
-                    // Cambiar a imagen 1 (gato sin nada)
                     gifGato.src = IMAGEN_GATO_1;
                     imagenActual = 1;
                 }
             }, VELOCIDAD_GIF);
         }
 
-        // ============================================= 
         // Reproduce el sonido de burbuja
-        // Clona el audio para permitir superposición
-        // ============================================= 
         function reproducirBurbuja() {
-            const burbujaClone = audioBurbuja.cloneNode();
+            var burbujaClone = audioBurbuja.cloneNode();
             burbujaClone.volume = 0.6;
-            burbujaClone.play().catch(e => console.log('Error burbuja:', e));
+            burbujaClone.play().catch(function(e) { console.log('Error burbuja:', e); });
 
-            // Eliminar el clon después de 3 segundos
-            setTimeout(() => {
+            setTimeout(function() {
                 burbujaClone.remove();
             }, 3000);
         }
 
-        // ============================================= 
-        // CORAZONES FLOTANTES - Todos MORADOS 💜
-        // ============================================= 
+        // CORAZONES FLOTANTES - Todos MORADOS
         function iniciarCorazones() {
-            setInterval(() => {
+            setInterval(function() {
                 crearCorazon();
             }, 800);
         }
 
         function crearCorazon() {
-            const corazon = document.createElement('div');
+            var corazon = document.createElement('div');
             corazon.classList.add('corazon');
 
-            // Solo corazones y elementos morados
-            corazon.innerHTML = ['💜', '💜', '💜', '🟣', '💜', '💜'][Math.floor(Math.random() * 6)];
+            var emojis = ['💜', '💜', '💜', '🟣', '💜', '💜'];
+            corazon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
             corazon.style.left = Math.random() * 100 + 'vw';
             corazon.style.top = '100vh';
@@ -535,35 +482,31 @@
 
             document.body.appendChild(corazon);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 corazon.remove();
             }, 4000);
         }
 
-        // ============================================= 
-        // PARTÍCULAS DE BRILLO
-        // ============================================= 
+        // PARTICULAS DE BRILLO
         function crearParticulas() {
-            setInterval(() => {
-                const particula = document.createElement('div');
+            setInterval(function() {
+                var particula = document.createElement('div');
                 particula.classList.add('particula');
                 particula.style.left = Math.random() * 100 + 'vw';
                 particula.style.top = Math.random() * 100 + 'vh';
-                particula.style.animation = `brillar ${Math.random() * 2 + 1}s ease-in-out`;
+                particula.style.animation = 'brillar ' + (Math.random() * 2 + 1) + 's ease-in-out';
                 document.body.appendChild(particula);
-                setTimeout(() => particula.remove(), 3000);
+                setTimeout(function() { particula.remove(); }, 3000);
             }, 300);
         }
 
         crearParticulas();
 
-        // ============================================= 
-        // PRE-CARGAR IMÁGENES
-        // ============================================= 
+        // PRE-CARGAR IMAGENES
         function precargarImagenes() {
-            const img1 = new Image();
+            var img1 = new Image();
             img1.src = IMAGEN_GATO_1;
-            const img2 = new Image();
+            var img2 = new Image();
             img2.src = IMAGEN_GATO_2;
         }
 
