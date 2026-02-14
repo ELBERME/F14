@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noris 💜</title>
 
+    <!-- Google Font elegante y minimalista -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
     <style>
         /* --- RESET GENERAL --- */
         * {
@@ -276,7 +279,6 @@
             max-width: 700px;
         }
 
-        /* Texto de los mensajes cortos */
         #mensaje-secreto-texto {
             color: #fff;
             font-size: clamp(1.4rem, 4vw, 2.8rem);
@@ -295,14 +297,12 @@
             opacity: 1;
         }
 
-        /* Clase para el texto largo (parrafo) */
         #mensaje-secreto-texto.texto-largo {
             font-size: clamp(1rem, 2.8vw, 1.6rem);
             line-height: 1.8;
             font-style: italic;
         }
 
-        /* Clase para TE AMO gigante */
         #mensaje-secreto-texto.texto-teamo {
             font-size: clamp(3rem, 12vw, 8rem);
             font-weight: bold;
@@ -313,6 +313,7 @@
                 0 0 80px rgba(155, 89, 182, 0.6),
                 0 0 120px rgba(155, 89, 182, 0.4);
             animation: latido-teamo 1.5s ease-in-out infinite;
+            cursor: pointer;
         }
 
         @keyframes latido-teamo {
@@ -320,7 +321,6 @@
             50% { transform: scale(1.1); }
         }
 
-        /* Cursor para el typewriter de los mensajes */
         #cursor-mensaje {
             display: inline-block;
             width: 3px;
@@ -331,7 +331,6 @@
             animation: parpadeo 0.6s infinite;
         }
 
-        /* Indicador de toca para continuar */
         #indicador-toca {
             position: absolute;
             bottom: 10%;
@@ -345,6 +344,231 @@
         @keyframes parpadeo-suave {
             0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
+        }
+
+        /* ============================================= */
+        /* FASE 4: EASTER EGG - CAPA OCULTA              */
+        /* Tipografia elegante, minimalista, espaciosa    */
+        /* ============================================= */
+        #fase-easter {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 60;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background: #0a0a0a;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            overflow-y: auto;
+        }
+
+        #fase-easter.visible {
+            opacity: 1;
+        }
+
+        /* Contenedor central del easter egg */
+        #easter-contenido {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 85%;
+            max-width: 650px;
+            padding: 40px 20px;
+        }
+
+        /* Texto principal del easter egg */
+        #easter-texto {
+            color: #e0e0e0;
+            font-size: clamp(1.6rem, 4vw, 3rem);
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 2px;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        #easter-texto.visible {
+            opacity: 1;
+        }
+
+        /* Estilo para texto largo en el easter egg */
+        #easter-texto.easter-largo {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            line-height: 2;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        /* Cursor typewriter del easter egg */
+        .cursor-easter {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: rgba(155, 89, 182, 0.6);
+            margin-left: 3px;
+            vertical-align: text-bottom;
+            animation: parpadeo 0.6s infinite;
+        }
+
+        /* Contenedor de opciones Luz / Sombras */
+        #easter-opciones {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            margin-top: 60px;
+        }
+
+        #easter-opciones.visible {
+            opacity: 1;
+        }
+
+        /* Palabras flotantes Luz y Sombras */
+        .opcion-flotante {
+            display: inline-block;
+            color: rgba(224, 224, 224, 0.7);
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin: 0 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: lowercase;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            border: none;
+            background: none;
+            padding: 15px 25px;
+            position: relative;
+        }
+
+        .opcion-flotante::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: rgba(155, 89, 182, 0.5);
+            transition: width 0.4s ease;
+        }
+
+        .opcion-flotante:hover {
+            color: #e0e0e0;
+            transform: scale(1.15);
+            opacity: 1;
+        }
+
+        .opcion-flotante:hover::after {
+            width: 80%;
+        }
+
+        /* Linea separadora entre opciones */
+        .separador-opciones {
+            display: inline-block;
+            color: rgba(155, 89, 182, 0.3);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+
+        /* ============================================= */
+        /* FASE 5: FINAL LUZ O SOMBRAS                   */
+        /* ============================================= */
+        #fase-final {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 70;
+            display: none;
+            opacity: 0;
+            transition: all 1.5s ease-in-out;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            overflow-y: auto;
+        }
+
+        #fase-final.visible {
+            opacity: 1;
+        }
+
+        /* Fondo calido para Luz */
+        #fase-final.fondo-luz {
+            background: linear-gradient(160deg, #1a1008 0%, #2a1a0a 30%, #1f150a 60%, #0f0a05 100%);
+        }
+
+        /* Fondo frio para Sombras */
+        #fase-final.fondo-sombras {
+            background: linear-gradient(160deg, #080c14 0%, #0a1020 30%, #0c1428 60%, #060a12 100%);
+        }
+
+        #final-contenido {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        /* Texto principal del final */
+        .final-texto {
+            color: #e0e0e0;
+            font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+            font-weight: 300;
+            line-height: 2.2;
+            letter-spacing: 1px;
+            max-width: 600px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            margin-bottom: 35px;
+        }
+
+        .final-texto.visible {
+            opacity: 1;
+        }
+
+        /* Texto para el final Luz (mas grande) */
+        .final-texto.texto-luz-principal {
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Linea pequena final */
+        .final-linea-pequena {
+            color: rgba(155, 89, 182, 0.5);
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            margin-top: 40px;
+        }
+
+        .final-linea-pequena.visible {
+            opacity: 1;
+        }
+
+        /* Indicador de toca para easter egg */
+        #easter-indicador {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(155, 89, 182, 0.4);
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            letter-spacing: 2px;
+            animation: parpadeo-suave 2s ease-in-out infinite;
         }
 
         /* ============================================= */
@@ -364,6 +588,17 @@
             #contenedor-mensaje-secreto {
                 width: 90%;
             }
+            .opcion-flotante {
+                margin: 10px 15px;
+                display: block;
+            }
+            .separador-opciones {
+                display: block;
+                margin: 5px 0;
+            }
+            #easter-contenido {
+                width: 90%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -374,6 +609,10 @@
             }
             #contenedor-mensaje-secreto {
                 width: 93%;
+            }
+            #easter-contenido {
+                width: 93%;
+                padding: 30px 15px;
             }
         }
     </style>
@@ -414,7 +653,32 @@
         <div id="indicador-toca">toca para continuar</div>
     </div>
 
-    <!-- AUDIOS -->
+    <!-- ============================================= -->
+    <!-- FASE 4: EASTER EGG                             -->
+    <!-- Se activa al tocar el TE AMO                   -->
+    <!-- ============================================= -->
+    <div id="fase-easter">
+        <div id="easter-contenido">
+            <div id="easter-texto"></div>
+            <div id="easter-opciones">
+                <span class="opcion-flotante" id="opcion-luz">luz</span>
+                <span class="separador-opciones">|</span>
+                <span class="opcion-flotante" id="opcion-sombras">sombras</span>
+            </div>
+        </div>
+        <div id="easter-indicador">toca para continuar</div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- FASE 5: FINAL (LUZ O SOMBRAS)                  -->
+    <!-- ============================================= -->
+    <div id="fase-final">
+        <div id="final-contenido"></div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- AUDIOS                                         -->
+    <!-- ============================================= -->
     <audio id="audio-principal" preload="auto">
         <source src="video audio.mpeg" type="audio/mpeg">
     </audio>
@@ -427,13 +691,21 @@
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- ============================================= -->
-    <!-- AUDIO DE BURBUJA CORTO (un solo pop)           -->
-    <!-- Se usa para los mensajes secretos              -->
-    <!-- Usa el MISMO archivo de burbuja                -->
-    <!-- ============================================= -->
     <audio id="audio-burbuja-corto" preload="auto">
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
+    </audio>
+
+    <!-- ============================================= -->
+    <!-- AUDIO DE FONDO PARA EL EASTER EGG              -->
+    <!-- AQUI COLOCA TU CANCION DE FONDO                -->
+    <!-- Esta cancion sonara durante toda la fase del    -->
+    <!-- easter egg (fase 4 y fase 5) sin importar      -->
+    <!-- si elige Luz o Sombras                          -->
+    <!-- Cambia "cancion-easter.mp3" por tu archivo      -->
+    <!-- ============================================= -->
+    <audio id="audio-easter-fondo" preload="auto" loop>
+        <!-- CAMBIA AQUI LA RUTA DE TU CANCION -->
+        <source src="cancion-easter.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -450,37 +722,46 @@
         var IMAGEN_GATO_2 = "iamgen 2.jpeg";
         var VELOCIDAD_GIF = 600;
 
+        var VELOCIDAD_MENSAJE_TYPEWRITER = 55;
+
         // ============================================= 
-        // MENSAJES SECRETOS
-        // tipo: "normal" = aparece de golpe con burbuja
-        // tipo: "typewriter" = se escribe letra por letra
-        // tipo: "teamo" = aparece grande con animacion
+        // MENSAJES SECRETOS (Fase 3)
         // ============================================= 
         var MENSAJES_SECRETOS = [
-            {
-                texto: "Ya veo... andas de curiosa 👀",
-                tipo: "normal"
-            },
-            {
-                texto: "Eso me gusta de ti 😏💜",
-                tipo: "normal"
-            },
-            {
-                texto: "Toma esto... 🎁",
-                tipo: "normal"
-            },
+            { texto: "Ya veo... andas de curiosa 👀", tipo: "normal" },
+            { texto: "Eso me gusta de ti 😏💜", tipo: "normal" },
+            { texto: "Toma esto... 🎁", tipo: "normal" },
             {
                 texto: "En algun lugar de estas infinitas palabras organizadas, esta este texto. Texto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable. Texto el cual se escribio con el unico fin de recordarte que...",
                 tipo: "typewriter"
             },
-            {
-                texto: "TE AMO 💜",
-                tipo: "teamo"
-            }
+            { texto: "TE AMO 💜", tipo: "teamo" }
         ];
 
-        // Velocidad del typewriter en los mensajes (ms por letra)
-        var VELOCIDAD_MENSAJE_TYPEWRITER = 55;
+        // ============================================= 
+        // MENSAJES DEL EASTER EGG (Fase 4)
+        // Los textos que aparecen antes de las opciones
+        // ============================================= 
+        var EASTER_MENSAJES = [
+            "¿Mas?",
+            "¿Aun quieres mas?",
+            "¿Algo mas?"
+        ];
+
+        // ============================================= 
+        // TEXTOS FINALES - SOMBRAS (divididos en partes)
+        // Cada parte aparece por separado para no saturar
+        // ============================================= 
+        var SOMBRAS_PARTES = [
+            "Hace un tiempo llegue a la conclusion de que el ser humano es insaciable; nunca esta completamente satisfecho.",
+            "Por eso, a veces fuerza las cosas con la esperanza de llenar ese vacio.",
+            "Sin embargo, ese impulso termina llevando al limite a quienes estan involucrados.",
+            "Y lo que ya era hermoso comienza a marchitarse bajo el peso de la sobre exigencia y las expectativas.",
+            "Es ironico: se puede perder todo por el simple deseo de tener un poco mas."
+        ];
+
+        // Velocidad del typewriter en el easter egg
+        var VELOCIDAD_EASTER_TYPEWRITER = 50;
 
         // ============================================= 
         // REFERENCIAS A ELEMENTOS
@@ -489,6 +770,8 @@
         var faseVideo = document.getElementById('fase-video');
         var faseGif = document.getElementById('fase-gif');
         var faseMensajes = document.getElementById('fase-mensajes');
+        var faseEaster = document.getElementById('fase-easter');
+        var faseFinal = document.getElementById('fase-final');
         var videoFondo = document.getElementById('video-fondo');
         var videoBorroso = document.getElementById('video-borroso');
         var textoAnimado = document.getElementById('texto-animado');
@@ -500,22 +783,63 @@
         var audioTypewriter = document.getElementById('audio-typewriter');
         var audioBurbuja = document.getElementById('audio-burbuja');
         var audioBurbujaCorto = document.getElementById('audio-burbuja-corto');
+        var audioEasterFondo = document.getElementById('audio-easter-fondo');
         var mensajeSecretoTexto = document.getElementById('mensaje-secreto-texto');
         var indicadorToca = document.getElementById('indicador-toca');
+        var easterTexto = document.getElementById('easter-texto');
+        var easterOpciones = document.getElementById('easter-opciones');
+        var easterIndicador = document.getElementById('easter-indicador');
+        var opcionLuz = document.getElementById('opcion-luz');
+        var opcionSombras = document.getElementById('opcion-sombras');
+        var finalContenido = document.getElementById('final-contenido');
 
-        // Variables de control
+        // Variables de control generales
         var indiceLetra = 0;
         var intervaloTexto = null;
         var intervaloGif = null;
         var imagenActual = 1;
         var transicionEjecutada = false;
 
-        // Variables para mensajes secretos
+        // Variables mensajes secretos
         var indiceMensaje = 0;
         var mensajesActivados = false;
         var puedeAvanzar = false;
         var typewriterMensajeIntervalo = null;
         var typewriterMensajeTerminado = false;
+
+        // Variables easter egg
+        var easterActivado = false;
+        var easterIndice = 0;
+        var easterPuedeAvanzar = false;
+        var easterTypewriterIntervalo = null;
+        var easterTypewriterTerminado = false;
+        var easterFaseActual = "mensajes"; // "mensajes", "opciones", "finalizado"
+
+        // ============================================= 
+        // FUNCION: Reproducir burbuja corta
+        // ============================================= 
+        function reproducirBurbujaCorta() {
+            audioBurbujaCorto.currentTime = 0;
+            audioBurbujaCorto.volume = 0.7;
+            audioBurbujaCorto.play().catch(function(e) { console.log('Error burbuja:', e); });
+        }
+
+        // ============================================= 
+        // FUNCION: Iniciar audio maquina de escribir
+        // ============================================= 
+        function iniciarAudioMaquina() {
+            audioTypewriter.currentTime = 0;
+            audioTypewriter.volume = 0.4;
+            audioTypewriter.play().catch(function(e) { console.log('Error typewriter:', e); });
+        }
+
+        // ============================================= 
+        // FUNCION: Detener audio maquina de escribir
+        // ============================================= 
+        function detenerAudioMaquina() {
+            audioTypewriter.pause();
+            audioTypewriter.currentTime = 0;
+        }
 
         // ============================================= 
         // BOTON DE INICIO
@@ -524,7 +848,6 @@
             var btn = this;
             btn.style.transition = 'opacity 0.5s ease';
             btn.style.opacity = '0';
-
             setTimeout(function() {
                 btn.style.display = 'none';
                 iniciarExperiencia();
@@ -537,27 +860,22 @@
         function iniciarExperiencia() {
             videoFondo.play().catch(function(e) { console.log('Error video:', e); });
             audioPrincipal.play().catch(function(e) { console.log('Error audio:', e); });
-
             setTimeout(function() {
-                iniciarTextoTypewriter();
+                iniciarTextoTypewriterFase1();
             }, ESPERA_INICIO_TEXTO);
-
             videoFondo.addEventListener('ended', transicionAFase2);
-
             setTimeout(function() {
                 transicionAFase2();
             }, DURACION_VIDEO + 500);
-
             iniciarCorazones();
         }
 
         // ============================================= 
-        // EFECTO TYPEWRITER FASE 1
+        // TYPEWRITER FASE 1
         // ============================================= 
-        function iniciarTextoTypewriter() {
+        function iniciarTextoTypewriterFase1() {
             audioTypewriter.volume = 0.5;
             audioTypewriter.play().catch(function(e) { console.log('Error typewriter:', e); });
-
             intervaloTexto = setInterval(function() {
                 if (indiceLetra < MENSAJE.length) {
                     var letra = MENSAJE[indiceLetra];
@@ -569,8 +887,7 @@
                     indiceLetra++;
                 } else {
                     clearInterval(intervaloTexto);
-                    audioTypewriter.pause();
-                    audioTypewriter.currentTime = 0;
+                    detenerAudioMaquina();
                     setTimeout(function() {
                         cursorElemento.style.display = 'none';
                     }, 1000);
@@ -584,41 +901,32 @@
         function transicionAFase2() {
             if (transicionEjecutada) return;
             transicionEjecutada = true;
-
             if (intervaloTexto) {
                 clearInterval(intervaloTexto);
-                audioTypewriter.pause();
+                detenerAudioMaquina();
             }
-
             faseVideo.style.opacity = '0';
-
             setTimeout(function() {
                 faseVideo.style.display = 'none';
                 faseGif.style.display = 'block';
                 videoBorroso.play().catch(function(e) { console.log('Error video borroso:', e); });
-
                 requestAnimationFrame(function() {
                     faseGif.style.opacity = '1';
                 });
-
                 setTimeout(function() {
                     contenedorGif.classList.add('visible');
                     iniciarGifManual();
-
-                    // Iniciar audio de burbuja en loop para el gato
                     audioBurbuja.volume = 0.5;
                     audioBurbuja.play().catch(function(e) { console.log('Error burbuja:', e); });
-
                     setTimeout(function() {
                         textoFinal.classList.add('visible');
                     }, 800);
                 }, 500);
-
             }, 1500);
         }
 
         // ============================================= 
-        // GIF MANUAL: Alterna las 2 imagenes del gato
+        // GIF MANUAL
         // ============================================= 
         function iniciarGifManual() {
             intervaloGif = setInterval(function() {
@@ -633,236 +941,472 @@
         }
 
         // ============================================= 
-        // REPRODUCIR BURBUJA CORTA (un solo pop)
-        // Para los mensajes secretos
-        // ============================================= 
-        function reproducirBurbujaCorta() {
-            audioBurbujaCorto.currentTime = 0;
-            audioBurbujaCorto.volume = 0.7;
-            audioBurbujaCorto.play().catch(function(e) { console.log('Error burbuja corta:', e); });
-        }
-
-        // ============================================= 
         // TOCAR EL GATO: Activa mensajes secretos
         // ============================================= 
         gifGato.addEventListener('click', function() {
             if (mensajesActivados) return;
             mensajesActivados = true;
-
-            // Detener GIF y audio de burbuja loop
-            if (intervaloGif) {
-                clearInterval(intervaloGif);
-            }
+            if (intervaloGif) clearInterval(intervaloGif);
             audioBurbuja.pause();
             audioBurbuja.currentTime = 0;
-
-            // Transicion: ocultar fase del gato
             faseGif.style.opacity = '0';
-
             setTimeout(function() {
                 faseGif.style.display = 'none';
-
-                // Mostrar fase de mensajes
                 faseMensajes.style.display = 'block';
                 requestAnimationFrame(function() {
                     faseMensajes.classList.add('visible');
                 });
-
-                // Mostrar primer mensaje con sonido de burbuja
                 setTimeout(function() {
-                    mostrarMensaje(0);
+                    mostrarMensajeSecreto(0);
                 }, 800);
-
             }, 1000);
         });
 
         // ============================================= 
         // MOSTRAR MENSAJE SECRETO
-        // Maneja 3 tipos: normal, typewriter y teamo
         // ============================================= 
-        function mostrarMensaje(indice) {
+        function mostrarMensajeSecreto(indice) {
             if (indice >= MENSAJES_SECRETOS.length) return;
-
             indiceMensaje = indice;
             var mensaje = MENSAJES_SECRETOS[indice];
 
-            // Detener typewriter anterior si habia uno
             if (typewriterMensajeIntervalo) {
                 clearInterval(typewriterMensajeIntervalo);
                 typewriterMensajeIntervalo = null;
             }
             typewriterMensajeTerminado = false;
-
-            // Ocultar texto actual
             mensajeSecretoTexto.classList.remove('visible');
 
             setTimeout(function() {
-                // Limpiar clases y contenido
                 mensajeSecretoTexto.className = '';
                 mensajeSecretoTexto.innerHTML = '';
 
-                // ============================================= 
-                // TIPO "normal": Aparece de golpe con burbuja
-                // Para los mensajes cortos (curiosa, me gusta, toma)
-                // ============================================= 
+                // TIPO NORMAL: aparece de golpe con burbuja
                 if (mensaje.tipo === "normal") {
-                    // Reproducir sonido de burbuja
                     reproducirBurbujaCorta();
-
                     mensajeSecretoTexto.innerHTML = mensaje.texto;
-
                     requestAnimationFrame(function() {
                         mensajeSecretoTexto.classList.add('visible');
                     });
-
-                    // Permitir avanzar despues de 1.5s
                     puedeAvanzar = false;
-                    setTimeout(function() {
-                        puedeAvanzar = true;
-                    }, 1500);
+                    setTimeout(function() { puedeAvanzar = true; }, 1500);
                 }
 
-                // ============================================= 
-                // TIPO "typewriter": Se escribe letra por letra
-                // Para el texto largo del parrafo
-                // Incluye cursor parpadeante y audio maquina
-                // ============================================= 
+                // TIPO TYPEWRITER: se escribe letra por letra
                 else if (mensaje.tipo === "typewriter") {
-                    // Reproducir burbuja al iniciar
                     reproducirBurbujaCorta();
-
-                    // Agregar clase de texto largo
                     mensajeSecretoTexto.classList.add('texto-largo');
-
-                    // Hacer visible el contenedor
                     requestAnimationFrame(function() {
                         mensajeSecretoTexto.classList.add('visible');
                     });
-
-                    // Ocultar el indicador de toca mientras se escribe
                     indicadorToca.style.opacity = '0';
-
-                    // Bloquear avance mientras se escribe
                     puedeAvanzar = false;
+                    iniciarAudioMaquina();
 
-                    // Iniciar audio de maquina de escribir
-                    audioTypewriter.currentTime = 0;
-                    audioTypewriter.volume = 0.4;
-                    audioTypewriter.play().catch(function(e) { console.log('Error typewriter msg:', e); });
-
-                    // Variables para el typewriter del mensaje
                     var textoCompleto = mensaje.texto;
                     var letraActual = 0;
-
-                    // Agregar cursor parpadeante
                     mensajeSecretoTexto.innerHTML = '<span id="cursor-mensaje">|</span>';
 
                     typewriterMensajeIntervalo = setInterval(function() {
                         if (letraActual < textoCompleto.length) {
-                            var letra = textoCompleto[letraActual];
-
-                            // Obtener el cursor
                             var cursorMsg = document.getElementById('cursor-mensaje');
-
-                            // Insertar la letra ANTES del cursor
                             if (cursorMsg) {
-                                var textoNodo = document.createTextNode(letra);
+                                var textoNodo = document.createTextNode(textoCompleto[letraActual]);
                                 cursorMsg.parentNode.insertBefore(textoNodo, cursorMsg);
                             }
-
                             letraActual++;
                         } else {
-                            // Termino de escribir
                             clearInterval(typewriterMensajeIntervalo);
                             typewriterMensajeIntervalo = null;
                             typewriterMensajeTerminado = true;
-
-                            // Detener audio de maquina
-                            audioTypewriter.pause();
-                            audioTypewriter.currentTime = 0;
-
-                            // Ocultar cursor despues de 1s
+                            detenerAudioMaquina();
                             setTimeout(function() {
                                 var cursorMsg = document.getElementById('cursor-mensaje');
-                                if (cursorMsg) {
-                                    cursorMsg.style.display = 'none';
-                                }
+                                if (cursorMsg) cursorMsg.style.display = 'none';
                             }, 1000);
-
-                            // Mostrar indicador y permitir avanzar
                             indicadorToca.style.opacity = '1';
-                            setTimeout(function() {
-                                puedeAvanzar = true;
-                            }, 1500);
+                            setTimeout(function() { puedeAvanzar = true; }, 1500);
                         }
                     }, VELOCIDAD_MENSAJE_TYPEWRITER);
                 }
 
-                // ============================================= 
-                // TIPO "teamo": Texto gigante con animacion
-                // Se queda en pantalla permanentemente
-                // ============================================= 
+                // TIPO TEAMO: texto gigante con latido
+                // El emoji 💜 es clickeable para activar el easter egg
                 else if (mensaje.tipo === "teamo") {
-                    // Reproducir burbuja al aparecer
                     reproducirBurbujaCorta();
-
-                    mensajeSecretoTexto.innerHTML = mensaje.texto;
+                    mensajeSecretoTexto.innerHTML = 'TE AMO <span id="corazon-teamo" style="cursor:pointer;">💜</span>';
                     mensajeSecretoTexto.classList.add('texto-teamo');
-
                     requestAnimationFrame(function() {
                         mensajeSecretoTexto.classList.add('visible');
                     });
-
-                    // Ocultar indicador (ya no hay mas mensajes)
                     indicadorToca.style.display = 'none';
-
-                    // No se puede avanzar mas
                     puedeAvanzar = false;
+
+                    // Asignar evento al corazon para activar easter egg
+                    setTimeout(function() {
+                        var corazonTeamo = document.getElementById('corazon-teamo');
+                        if (corazonTeamo) {
+                            corazonTeamo.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                activarEasterEgg();
+                            });
+                        }
+                    }, 500);
                 }
+            }, 400);
+        }
+
+        // ============================================= 
+        // TOCAR PANTALLA PARA AVANZAR MENSAJES SECRETOS
+        // ============================================= 
+        faseMensajes.addEventListener('click', function() {
+            // Si el typewriter esta escribiendo, completar de golpe
+            if (typewriterMensajeIntervalo && !typewriterMensajeTerminado) {
+                clearInterval(typewriterMensajeIntervalo);
+                typewriterMensajeIntervalo = null;
+                typewriterMensajeTerminado = true;
+                detenerAudioMaquina();
+                var mensaje = MENSAJES_SECRETOS[indiceMensaje];
+                mensajeSecretoTexto.innerHTML = mensaje.texto;
+                mensajeSecretoTexto.classList.add('texto-largo');
+                mensajeSecretoTexto.classList.add('visible');
+                indicadorToca.style.opacity = '1';
+                setTimeout(function() { puedeAvanzar = true; }, 800);
+                return;
+            }
+            if (!puedeAvanzar) return;
+            var siguiente = indiceMensaje + 1;
+            if (siguiente < MENSAJES_SECRETOS.length) {
+                mostrarMensajeSecreto(siguiente);
+            }
+        });
+
+        // ============================================= 
+        // ACTIVAR EASTER EGG
+        // Se activa al tocar el corazon 💜 en TE AMO
+        // ============================================= 
+        function activarEasterEgg() {
+            if (easterActivado) return;
+            easterActivado = true;
+
+            // Transicion: ocultar fase mensajes
+            faseMensajes.style.opacity = '0';
+
+            setTimeout(function() {
+                faseMensajes.style.display = 'none';
+
+                // Mostrar fase easter
+                faseEaster.style.display = 'block';
+                requestAnimationFrame(function() {
+                    faseEaster.classList.add('visible');
+                });
+
+                // ============================================= 
+                // INICIAR CANCION DE FONDO DEL EASTER EGG
+                // La cancion empieza aqui y suena durante
+                // toda la fase 4 y fase 5
+                // ============================================= 
+                audioEasterFondo.volume = 0.3;
+                audioEasterFondo.play().catch(function(e) { console.log('Error cancion easter:', e); });
+
+                // Mostrar primer mensaje del easter con burbuja
+                setTimeout(function() {
+                    mostrarEasterMensaje(0);
+                }, 800);
+
+            }, 1000);
+        }
+
+        // ============================================= 
+        // MOSTRAR MENSAJES DEL EASTER EGG
+        // "Mas?" -> "Aun quieres mas?" -> "Algo mas?"
+        // Luego aparecen las opciones Luz/Sombras
+        // ============================================= 
+        function mostrarEasterMensaje(indice) {
+            if (indice >= EASTER_MENSAJES.length) {
+                // Ya se mostraron todos, mostrar opciones
+                mostrarOpciones();
+                return;
+            }
+
+            easterIndice = indice;
+            easterTexto.classList.remove('visible');
+
+            setTimeout(function() {
+                easterTexto.className = '';
+                easterTexto.innerHTML = '';
+
+                // Reproducir burbuja
+                reproducirBurbujaCorta();
+
+                // Iniciar audio maquina de escribir
+                iniciarAudioMaquina();
+
+                // Typewriter para cada mensaje del easter
+                var textoCompleto = EASTER_MENSAJES[indice];
+                var letraActual = 0;
+                easterTexto.innerHTML = '<span class="cursor-easter">|</span>';
+
+                requestAnimationFrame(function() {
+                    easterTexto.classList.add('visible');
+                });
+
+                easterPuedeAvanzar = false;
+                easterTypewriterTerminado = false;
+
+                easterTypewriterIntervalo = setInterval(function() {
+                    if (letraActual < textoCompleto.length) {
+                        var cursorE = easterTexto.querySelector('.cursor-easter');
+                        if (cursorE) {
+                            var nodo = document.createTextNode(textoCompleto[letraActual]);
+                            cursorE.parentNode.insertBefore(nodo, cursorE);
+                        }
+                        letraActual++;
+                    } else {
+                        clearInterval(easterTypewriterIntervalo);
+                        easterTypewriterIntervalo = null;
+                        easterTypewriterTerminado = true;
+                        detenerAudioMaquina();
+                        setTimeout(function() {
+                            var cursorE = easterTexto.querySelector('.cursor-easter');
+                            if (cursorE) cursorE.style.display = 'none';
+                        }, 800);
+                        setTimeout(function() {
+                            easterPuedeAvanzar = true;
+                        }, 1000);
+                    }
+                }, VELOCIDAD_EASTER_TYPEWRITER);
 
             }, 400);
         }
 
         // ============================================= 
-        // TOCAR PANTALLA PARA AVANZAR MENSAJES
+        // MOSTRAR OPCIONES LUZ / SOMBRAS
         // ============================================= 
-        faseMensajes.addEventListener('click', function() {
-            // Si esta escribiendo el typewriter y tocan la pantalla,
-            // completar el texto de golpe
-            if (typewriterMensajeIntervalo && !typewriterMensajeTerminado) {
-                // Detener el typewriter
-                clearInterval(typewriterMensajeIntervalo);
-                typewriterMensajeIntervalo = null;
-                typewriterMensajeTerminado = true;
+        function mostrarOpciones() {
+            easterFaseActual = "opciones";
 
-                // Detener audio de maquina
-                audioTypewriter.pause();
-                audioTypewriter.currentTime = 0;
+            easterTexto.classList.remove('visible');
+            easterIndicador.style.display = 'none';
 
-                // Mostrar el texto completo de golpe
-                var mensaje = MENSAJES_SECRETOS[indiceMensaje];
-                mensajeSecretoTexto.innerHTML = mensaje.texto;
-                mensajeSecretoTexto.classList.add('texto-largo');
-                mensajeSecretoTexto.classList.add('visible');
+            setTimeout(function() {
+                easterTexto.innerHTML = '';
+                easterTexto.style.display = 'none';
 
-                // Mostrar indicador y permitir avanzar
-                indicadorToca.style.opacity = '1';
-                setTimeout(function() {
-                    puedeAvanzar = true;
-                }, 800);
+                // Reproducir burbuja al mostrar opciones
+                reproducirBurbujaCorta();
 
+                easterOpciones.style.display = 'block';
+                requestAnimationFrame(function() {
+                    easterOpciones.classList.add('visible');
+                });
+            }, 600);
+        }
+
+        // ============================================= 
+        // TOCAR PANTALLA PARA AVANZAR EN EASTER EGG
+        // ============================================= 
+        faseEaster.addEventListener('click', function(e) {
+            // No avanzar si toco una opcion
+            if (e.target.classList.contains('opcion-flotante')) return;
+
+            // Si esta en fase de opciones, no hacer nada
+            if (easterFaseActual === "opciones" || easterFaseActual === "finalizado") return;
+
+            // Si el typewriter esta escribiendo, completar de golpe
+            if (easterTypewriterIntervalo && !easterTypewriterTerminado) {
+                clearInterval(easterTypewriterIntervalo);
+                easterTypewriterIntervalo = null;
+                easterTypewriterTerminado = true;
+                detenerAudioMaquina();
+                easterTexto.innerHTML = EASTER_MENSAJES[easterIndice];
+                easterTexto.classList.add('visible');
+                setTimeout(function() { easterPuedeAvanzar = true; }, 500);
                 return;
             }
 
-            // Si no puede avanzar todavia, no hacer nada
-            if (!puedeAvanzar) return;
+            if (!easterPuedeAvanzar) return;
 
-            var siguienteIndice = indiceMensaje + 1;
-
-            if (siguienteIndice < MENSAJES_SECRETOS.length) {
-                mostrarMensaje(siguienteIndice);
+            var siguiente = easterIndice + 1;
+            if (siguiente < EASTER_MENSAJES.length) {
+                mostrarEasterMensaje(siguiente);
+            } else {
+                mostrarOpciones();
             }
         });
+
+        // ============================================= 
+        // OPCION LUZ
+        // Fondo calido + mensaje inspirador
+        // ============================================= 
+        opcionLuz.addEventListener('click', function(e) {
+            e.stopPropagation();
+            easterFaseActual = "finalizado";
+
+            reproducirBurbujaCorta();
+
+            faseEaster.style.opacity = '0';
+
+            setTimeout(function() {
+                faseEaster.style.display = 'none';
+
+                // Configurar fondo calido
+                faseFinal.classList.add('fondo-luz');
+                faseFinal.style.display = 'block';
+
+                // Crear contenido Luz
+                finalContenido.innerHTML = '';
+
+                var textoLuz = document.createElement('div');
+                textoLuz.className = 'final-texto texto-luz-principal';
+                textoLuz.innerHTML = '';
+                finalContenido.appendChild(textoLuz);
+
+                var lineaPequena = document.createElement('div');
+                lineaPequena.className = 'final-linea-pequena';
+                lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
+                finalContenido.appendChild(lineaPequena);
+
+                requestAnimationFrame(function() {
+                    faseFinal.classList.add('visible');
+                });
+
+                // Typewriter para el texto de Luz
+                var textoCompletoLuz = "Eres un regalo en la logica de mi existencia.";
+                var letraLuz = 0;
+
+                setTimeout(function() {
+                    // Burbuja al iniciar
+                    reproducirBurbujaCorta();
+                    iniciarAudioMaquina();
+
+                    textoLuz.innerHTML = '<span class="cursor-easter">|</span>';
+                    textoLuz.classList.add('visible');
+
+                    var intervaloLuz = setInterval(function() {
+                        if (letraLuz < textoCompletoLuz.length) {
+                            var cursorL = textoLuz.querySelector('.cursor-easter');
+                            if (cursorL) {
+                                var nodo = document.createTextNode(textoCompletoLuz[letraLuz]);
+                                cursorL.parentNode.insertBefore(nodo, cursorL);
+                            }
+                            letraLuz++;
+                        } else {
+                            clearInterval(intervaloLuz);
+                            detenerAudioMaquina();
+                            var cursorL = textoLuz.querySelector('.cursor-easter');
+                            if (cursorL) {
+                                setTimeout(function() { cursorL.style.display = 'none'; }, 800);
+                            }
+                            // Mostrar linea pequena
+                            setTimeout(function() {
+                                lineaPequena.classList.add('visible');
+                            }, 1500);
+                        }
+                    }, 60);
+                }, 1000);
+
+            }, 1000);
+        });
+
+        // ============================================= 
+        // OPCION SOMBRAS
+        // Fondo frio + parrafos secuenciales
+        // ============================================= 
+        opcionSombras.addEventListener('click', function(e) {
+            e.stopPropagation();
+            easterFaseActual = "finalizado";
+
+            reproducirBurbujaCorta();
+
+            faseEaster.style.opacity = '0';
+
+            setTimeout(function() {
+                faseEaster.style.display = 'none';
+
+                // Configurar fondo frio
+                faseFinal.classList.add('fondo-sombras');
+                faseFinal.style.display = 'block';
+
+                // Crear contenido Sombras
+                finalContenido.innerHTML = '';
+
+                // Crear los elementos para cada parte
+                var elementos = [];
+                for (var i = 0; i < SOMBRAS_PARTES.length; i++) {
+                    var parrafo = document.createElement('div');
+                    parrafo.className = 'final-texto';
+                    parrafo.innerHTML = '';
+                    finalContenido.appendChild(parrafo);
+                    elementos.push(parrafo);
+                }
+
+                var lineaPequena = document.createElement('div');
+                lineaPequena.className = 'final-linea-pequena';
+                lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
+                finalContenido.appendChild(lineaPequena);
+
+                requestAnimationFrame(function() {
+                    faseFinal.classList.add('visible');
+                });
+
+                // Mostrar cada parrafo con typewriter secuencial
+                setTimeout(function() {
+                    escribirParrafoSombras(0, elementos, lineaPequena);
+                }, 1000);
+
+            }, 1000);
+        });
+
+        // ============================================= 
+        // TYPEWRITER SECUENCIAL PARA SOMBRAS
+        // Escribe cada parrafo uno tras otro
+        // ============================================= 
+        function escribirParrafoSombras(indice, elementos, lineaPequena) {
+            if (indice >= SOMBRAS_PARTES.length) {
+                // Todos los parrafos terminados, mostrar linea final
+                setTimeout(function() {
+                    lineaPequena.classList.add('visible');
+                }, 1500);
+                return;
+            }
+
+            var elemento = elementos[indice];
+            var textoCompleto = SOMBRAS_PARTES[indice];
+            var letraActual = 0;
+
+            // Burbuja al iniciar cada parrafo
+            reproducirBurbujaCorta();
+            iniciarAudioMaquina();
+
+            elemento.innerHTML = '<span class="cursor-easter">|</span>';
+            elemento.classList.add('visible');
+
+            var intervaloSombra = setInterval(function() {
+                if (letraActual < textoCompleto.length) {
+                    var cursorS = elemento.querySelector('.cursor-easter');
+                    if (cursorS) {
+                        var nodo = document.createTextNode(textoCompleto[letraActual]);
+                        cursorS.parentNode.insertBefore(nodo, cursorS);
+                    }
+                    letraActual++;
+                } else {
+                    clearInterval(intervaloSombra);
+                    detenerAudioMaquina();
+
+                    // Ocultar cursor
+                    var cursorS = elemento.querySelector('.cursor-easter');
+                    if (cursorS) {
+                        setTimeout(function() { cursorS.style.display = 'none'; }, 500);
+                    }
+
+                    // Esperar y escribir el siguiente parrafo
+                    setTimeout(function() {
+                        escribirParrafoSombras(indice + 1, elementos, lineaPequena);
+                    }, 1200);
+                }
+            }, VELOCIDAD_EASTER_TYPEWRITER);
+        }
 
         // ============================================= 
         // CORAZONES FLOTANTES MORADOS
@@ -876,23 +1420,17 @@
         function crearCorazon() {
             var corazon = document.createElement('div');
             corazon.classList.add('corazon');
-
             var emojis = ['💜', '💜', '💜', '🟣', '💜', '💜'];
             corazon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-
             corazon.style.left = Math.random() * 100 + 'vw';
             corazon.style.top = '100vh';
             corazon.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
-
             document.body.appendChild(corazon);
-
-            setTimeout(function() {
-                corazon.remove();
-            }, 4000);
+            setTimeout(function() { corazon.remove(); }, 4000);
         }
 
         // ============================================= 
-        // PARTICULAS DE BRILLO
+        // PARTICULAS
         // ============================================= 
         function crearParticulas() {
             setInterval(function() {
