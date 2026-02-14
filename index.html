@@ -13,7 +13,6 @@
             box-sizing: border-box;
         }
 
-        /* --- CUERPO DE LA PAGINA --- */
         body {
             width: 100vw;
             height: 100vh;
@@ -23,7 +22,7 @@
         }
 
         /* ============================================= */
-        /* FASE 1: CONTENEDOR DEL VIDEO DE FONDO         */
+        /* FASE 1: VIDEO DE FONDO                        */
         /* ============================================= */
         #fase-video {
             position: fixed;
@@ -58,7 +57,7 @@
         }
 
         /* ============================================= */
-        /* TEXTO PRINCIPAL - Estilo maquina de escribir   */
+        /* TEXTO TYPEWRITER FASE 1                       */
         /* ============================================= */
         #contenedor-texto {
             position: absolute;
@@ -102,7 +101,7 @@
         }
 
         /* ============================================= */
-        /* FASE 2: DESPUES DEL VIDEO                      */
+        /* FASE 2: VIDEO BORROSO + GATO                  */
         /* ============================================= */
         #fase-gif {
             position: fixed;
@@ -172,7 +171,7 @@
         }
 
         /* ============================================= */
-        /* CORAZONES FLOTANTES DECORATIVOS               */
+        /* CORAZONES FLOTANTES                           */
         /* ============================================= */
         .corazon {
             position: fixed;
@@ -234,7 +233,7 @@
         }
 
         /* ============================================= */
-        /* PARTICULAS DE BRILLO                          */
+        /* PARTICULAS                                    */
         /* ============================================= */
         .particula {
             position: fixed;
@@ -248,8 +247,7 @@
         }
 
         /* ============================================= */
-        /* FASE 3: MENSAJES SECRETOS AL TOCAR EL GATO    */
-        /* Pantalla completa con mensajes secuenciales    */
+        /* FASE 3: MENSAJES SECRETOS                     */
         /* ============================================= */
         #fase-mensajes {
             position: fixed;
@@ -268,7 +266,6 @@
             opacity: 1;
         }
 
-        /* Contenedor del mensaje actual */
         #contenedor-mensaje-secreto {
             position: absolute;
             top: 50%;
@@ -279,7 +276,7 @@
             max-width: 700px;
         }
 
-        /* Texto del mensaje secreto */
+        /* Texto de los mensajes cortos */
         #mensaje-secreto-texto {
             color: #fff;
             font-size: clamp(1.4rem, 4vw, 2.8rem);
@@ -298,14 +295,14 @@
             opacity: 1;
         }
 
-        /* Texto largo especial (el parrafo) */
+        /* Clase para el texto largo (parrafo) */
         #mensaje-secreto-texto.texto-largo {
             font-size: clamp(1rem, 2.8vw, 1.6rem);
             line-height: 1.8;
             font-style: italic;
         }
 
-        /* Texto grande final TE AMO */
+        /* Clase para TE AMO gigante */
         #mensaje-secreto-texto.texto-teamo {
             font-size: clamp(3rem, 12vw, 8rem);
             font-weight: bold;
@@ -321,6 +318,17 @@
         @keyframes latido-teamo {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
+        }
+
+        /* Cursor para el typewriter de los mensajes */
+        #cursor-mensaje {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #9b59b6;
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: parpadeo 0.6s infinite;
         }
 
         /* Indicador de toca para continuar */
@@ -398,10 +406,7 @@
         </div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- FASE 3: MENSAJES SECRETOS                      -->
-    <!-- Aparece cuando toca el gato                    -->
-    <!-- ============================================= -->
+    <!-- FASE 3: MENSAJES SECRETOS -->
     <div id="fase-mensajes">
         <div id="contenedor-mensaje-secreto">
             <div id="mensaje-secreto-texto"></div>
@@ -418,12 +423,16 @@
         <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- ============================================= -->
-    <!-- AUDIO DE BURBUJA                               -->
-    <!-- Se usa con loop para que suene continuamente   -->
-    <!-- mientras se alternan las imagenes del gato     -->
-    <!-- ============================================= -->
     <audio id="audio-burbuja" preload="auto" loop>
+        <source src="audio de burbuja.mpeg" type="audio/mpeg">
+    </audio>
+
+    <!-- ============================================= -->
+    <!-- AUDIO DE BURBUJA CORTO (un solo pop)           -->
+    <!-- Se usa para los mensajes secretos              -->
+    <!-- Usa el MISMO archivo de burbuja                -->
+    <!-- ============================================= -->
+    <audio id="audio-burbuja-corto" preload="auto">
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
 
@@ -437,40 +446,44 @@
         var TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
         var VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
 
-        // Imagenes del gato
         var IMAGEN_GATO_1 = "imagen uno.jpeg";
         var IMAGEN_GATO_2 = "iamgen 2.jpeg";
         var VELOCIDAD_GIF = 600;
 
         // ============================================= 
-        // MENSAJES SECRETOS - Se muestran al tocar el gato
-        // Cada objeto tiene el texto y una clase CSS opcional
+        // MENSAJES SECRETOS
+        // tipo: "normal" = aparece de golpe con burbuja
+        // tipo: "typewriter" = se escribe letra por letra
+        // tipo: "teamo" = aparece grande con animacion
         // ============================================= 
         var MENSAJES_SECRETOS = [
             {
                 texto: "Ya veo... andas de curiosa 👀",
-                clase: ""
+                tipo: "normal"
             },
             {
                 texto: "Eso me gusta de ti 😏💜",
-                clase: ""
+                tipo: "normal"
             },
             {
                 texto: "Toma esto... 🎁",
-                clase: ""
+                tipo: "normal"
             },
             {
-                texto: "En algun lugar de estas finitas palabras organizadas, esta este texto.\n\nTexto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable.\n\nTexto el cual se escribio con el unico fin de recordarte que...",
-                clase: "texto-largo"
+                texto: "En algun lugar de estas infinitas palabras organizadas, esta este texto. Texto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable. Texto el cual se escribio con el unico fin de recordarte que...",
+                tipo: "typewriter"
             },
             {
                 texto: "TE AMO 💜",
-                clase: "texto-teamo"
+                tipo: "teamo"
             }
         ];
 
+        // Velocidad del typewriter en los mensajes (ms por letra)
+        var VELOCIDAD_MENSAJE_TYPEWRITER = 55;
+
         // ============================================= 
-        // REFERENCIAS A ELEMENTOS DEL HTML
+        // REFERENCIAS A ELEMENTOS
         // ============================================= 
         var botonInicio = document.getElementById('boton-inicio');
         var faseVideo = document.getElementById('fase-video');
@@ -486,6 +499,7 @@
         var audioPrincipal = document.getElementById('audio-principal');
         var audioTypewriter = document.getElementById('audio-typewriter');
         var audioBurbuja = document.getElementById('audio-burbuja');
+        var audioBurbujaCorto = document.getElementById('audio-burbuja-corto');
         var mensajeSecretoTexto = document.getElementById('mensaje-secreto-texto');
         var indicadorToca = document.getElementById('indicador-toca');
 
@@ -496,10 +510,12 @@
         var imagenActual = 1;
         var transicionEjecutada = false;
 
-        // Variables para los mensajes secretos
+        // Variables para mensajes secretos
         var indiceMensaje = 0;
         var mensajesActivados = false;
         var puedeAvanzar = false;
+        var typewriterMensajeIntervalo = null;
+        var typewriterMensajeTerminado = false;
 
         // ============================================= 
         // BOTON DE INICIO
@@ -516,7 +532,7 @@
         });
 
         // ============================================= 
-        // FUNCION PRINCIPAL: Inicia todo
+        // FUNCION PRINCIPAL
         // ============================================= 
         function iniciarExperiencia() {
             videoFondo.play().catch(function(e) { console.log('Error video:', e); });
@@ -536,7 +552,7 @@
         }
 
         // ============================================= 
-        // EFECTO TYPEWRITER
+        // EFECTO TYPEWRITER FASE 1
         // ============================================= 
         function iniciarTextoTypewriter() {
             audioTypewriter.volume = 0.5;
@@ -563,7 +579,7 @@
         }
 
         // ============================================= 
-        // TRANSICION DE FASE 1 A FASE 2
+        // TRANSICION FASE 1 A FASE 2
         // ============================================= 
         function transicionAFase2() {
             if (transicionEjecutada) return;
@@ -589,11 +605,7 @@
                     contenedorGif.classList.add('visible');
                     iniciarGifManual();
 
-                    // ============================================= 
-                    // INICIAR AUDIO DE BURBUJA EN LOOP
-                    // Se reproduce en bucle continuo mientras
-                    // se alternan las imagenes del gato
-                    // ============================================= 
+                    // Iniciar audio de burbuja en loop para el gato
                     audioBurbuja.volume = 0.5;
                     audioBurbuja.play().catch(function(e) { console.log('Error burbuja:', e); });
 
@@ -606,7 +618,7 @@
         }
 
         // ============================================= 
-        // GIF MANUAL: Alterna entre las 2 imagenes
+        // GIF MANUAL: Alterna las 2 imagenes del gato
         // ============================================= 
         function iniciarGifManual() {
             intervaloGif = setInterval(function() {
@@ -621,15 +633,23 @@
         }
 
         // ============================================= 
-        // EVENTO: TOCAR O HACER CLICK EN EL GATO
-        // Activa la fase de mensajes secretos
+        // REPRODUCIR BURBUJA CORTA (un solo pop)
+        // Para los mensajes secretos
+        // ============================================= 
+        function reproducirBurbujaCorta() {
+            audioBurbujaCorto.currentTime = 0;
+            audioBurbujaCorto.volume = 0.7;
+            audioBurbujaCorto.play().catch(function(e) { console.log('Error burbuja corta:', e); });
+        }
+
+        // ============================================= 
+        // TOCAR EL GATO: Activa mensajes secretos
         // ============================================= 
         gifGato.addEventListener('click', function() {
-            // Solo activar una vez
             if (mensajesActivados) return;
             mensajesActivados = true;
 
-            // Detener el GIF y el audio de burbuja
+            // Detener GIF y audio de burbuja loop
             if (intervaloGif) {
                 clearInterval(intervaloGif);
             }
@@ -644,12 +664,11 @@
 
                 // Mostrar fase de mensajes
                 faseMensajes.style.display = 'block';
-
                 requestAnimationFrame(function() {
                     faseMensajes.classList.add('visible');
                 });
 
-                // Mostrar el primer mensaje despues de un momento
+                // Mostrar primer mensaje con sonido de burbuja
                 setTimeout(function() {
                     mostrarMensaje(0);
                 }, 800);
@@ -659,7 +678,7 @@
 
         // ============================================= 
         // MOSTRAR MENSAJE SECRETO
-        // Muestra el mensaje del indice indicado
+        // Maneja 3 tipos: normal, typewriter y teamo
         // ============================================= 
         function mostrarMensaje(indice) {
             if (indice >= MENSAJES_SECRETOS.length) return;
@@ -667,61 +686,186 @@
             indiceMensaje = indice;
             var mensaje = MENSAJES_SECRETOS[indice];
 
+            // Detener typewriter anterior si habia uno
+            if (typewriterMensajeIntervalo) {
+                clearInterval(typewriterMensajeIntervalo);
+                typewriterMensajeIntervalo = null;
+            }
+            typewriterMensajeTerminado = false;
+
             // Ocultar texto actual
             mensajeSecretoTexto.classList.remove('visible');
 
             setTimeout(function() {
-                // Limpiar clases anteriores
+                // Limpiar clases y contenido
                 mensajeSecretoTexto.className = '';
+                mensajeSecretoTexto.innerHTML = '';
 
-                // Poner el texto nuevo
-                // Reemplazar \n por <br> para saltos de linea
-                mensajeSecretoTexto.innerHTML = mensaje.texto.replace(/\n/g, '<br>');
+                // ============================================= 
+                // TIPO "normal": Aparece de golpe con burbuja
+                // Para los mensajes cortos (curiosa, me gusta, toma)
+                // ============================================= 
+                if (mensaje.tipo === "normal") {
+                    // Reproducir sonido de burbuja
+                    reproducirBurbujaCorta();
 
-                // Agregar clase especial si tiene
-                if (mensaje.clase) {
-                    mensajeSecretoTexto.classList.add(mensaje.clase);
+                    mensajeSecretoTexto.innerHTML = mensaje.texto;
+
+                    requestAnimationFrame(function() {
+                        mensajeSecretoTexto.classList.add('visible');
+                    });
+
+                    // Permitir avanzar despues de 1.5s
+                    puedeAvanzar = false;
+                    setTimeout(function() {
+                        puedeAvanzar = true;
+                    }, 1500);
                 }
 
-                // Hacer visible
-                requestAnimationFrame(function() {
-                    mensajeSecretoTexto.classList.add('visible');
-                });
+                // ============================================= 
+                // TIPO "typewriter": Se escribe letra por letra
+                // Para el texto largo del parrafo
+                // Incluye cursor parpadeante y audio maquina
+                // ============================================= 
+                else if (mensaje.tipo === "typewriter") {
+                    // Reproducir burbuja al iniciar
+                    reproducirBurbujaCorta();
 
-                // Si es el ultimo mensaje (TE AMO), ocultar indicador
-                if (indice === MENSAJES_SECRETOS.length - 1) {
+                    // Agregar clase de texto largo
+                    mensajeSecretoTexto.classList.add('texto-largo');
+
+                    // Hacer visible el contenedor
+                    requestAnimationFrame(function() {
+                        mensajeSecretoTexto.classList.add('visible');
+                    });
+
+                    // Ocultar el indicador de toca mientras se escribe
+                    indicadorToca.style.opacity = '0';
+
+                    // Bloquear avance mientras se escribe
+                    puedeAvanzar = false;
+
+                    // Iniciar audio de maquina de escribir
+                    audioTypewriter.currentTime = 0;
+                    audioTypewriter.volume = 0.4;
+                    audioTypewriter.play().catch(function(e) { console.log('Error typewriter msg:', e); });
+
+                    // Variables para el typewriter del mensaje
+                    var textoCompleto = mensaje.texto;
+                    var letraActual = 0;
+
+                    // Agregar cursor parpadeante
+                    mensajeSecretoTexto.innerHTML = '<span id="cursor-mensaje">|</span>';
+
+                    typewriterMensajeIntervalo = setInterval(function() {
+                        if (letraActual < textoCompleto.length) {
+                            var letra = textoCompleto[letraActual];
+
+                            // Obtener el cursor
+                            var cursorMsg = document.getElementById('cursor-mensaje');
+
+                            // Insertar la letra ANTES del cursor
+                            if (cursorMsg) {
+                                var textoNodo = document.createTextNode(letra);
+                                cursorMsg.parentNode.insertBefore(textoNodo, cursorMsg);
+                            }
+
+                            letraActual++;
+                        } else {
+                            // Termino de escribir
+                            clearInterval(typewriterMensajeIntervalo);
+                            typewriterMensajeIntervalo = null;
+                            typewriterMensajeTerminado = true;
+
+                            // Detener audio de maquina
+                            audioTypewriter.pause();
+                            audioTypewriter.currentTime = 0;
+
+                            // Ocultar cursor despues de 1s
+                            setTimeout(function() {
+                                var cursorMsg = document.getElementById('cursor-mensaje');
+                                if (cursorMsg) {
+                                    cursorMsg.style.display = 'none';
+                                }
+                            }, 1000);
+
+                            // Mostrar indicador y permitir avanzar
+                            indicadorToca.style.opacity = '1';
+                            setTimeout(function() {
+                                puedeAvanzar = true;
+                            }, 1500);
+                        }
+                    }, VELOCIDAD_MENSAJE_TYPEWRITER);
+                }
+
+                // ============================================= 
+                // TIPO "teamo": Texto gigante con animacion
+                // Se queda en pantalla permanentemente
+                // ============================================= 
+                else if (mensaje.tipo === "teamo") {
+                    // Reproducir burbuja al aparecer
+                    reproducirBurbujaCorta();
+
+                    mensajeSecretoTexto.innerHTML = mensaje.texto;
+                    mensajeSecretoTexto.classList.add('texto-teamo');
+
+                    requestAnimationFrame(function() {
+                        mensajeSecretoTexto.classList.add('visible');
+                    });
+
+                    // Ocultar indicador (ya no hay mas mensajes)
                     indicadorToca.style.display = 'none';
-                }
 
-                // Permitir avanzar despues de un momento
-                puedeAvanzar = false;
-                setTimeout(function() {
-                    puedeAvanzar = true;
-                }, 1000);
+                    // No se puede avanzar mas
+                    puedeAvanzar = false;
+                }
 
             }, 400);
         }
 
         // ============================================= 
-        // EVENTO: TOCAR PANTALLA PARA AVANZAR MENSAJES
-        // Cada toque avanza al siguiente mensaje
+        // TOCAR PANTALLA PARA AVANZAR MENSAJES
         // ============================================= 
         faseMensajes.addEventListener('click', function() {
-            // No avanzar si no ha pasado tiempo suficiente
+            // Si esta escribiendo el typewriter y tocan la pantalla,
+            // completar el texto de golpe
+            if (typewriterMensajeIntervalo && !typewriterMensajeTerminado) {
+                // Detener el typewriter
+                clearInterval(typewriterMensajeIntervalo);
+                typewriterMensajeIntervalo = null;
+                typewriterMensajeTerminado = true;
+
+                // Detener audio de maquina
+                audioTypewriter.pause();
+                audioTypewriter.currentTime = 0;
+
+                // Mostrar el texto completo de golpe
+                var mensaje = MENSAJES_SECRETOS[indiceMensaje];
+                mensajeSecretoTexto.innerHTML = mensaje.texto;
+                mensajeSecretoTexto.classList.add('texto-largo');
+                mensajeSecretoTexto.classList.add('visible');
+
+                // Mostrar indicador y permitir avanzar
+                indicadorToca.style.opacity = '1';
+                setTimeout(function() {
+                    puedeAvanzar = true;
+                }, 800);
+
+                return;
+            }
+
+            // Si no puede avanzar todavia, no hacer nada
             if (!puedeAvanzar) return;
 
             var siguienteIndice = indiceMensaje + 1;
 
-            // Si hay mas mensajes, mostrar el siguiente
             if (siguienteIndice < MENSAJES_SECRETOS.length) {
                 mostrarMensaje(siguienteIndice);
             }
-            // Si es el ultimo (TE AMO), no hacer nada mas
-            // Se queda en pantalla para siempre
         });
 
         // ============================================= 
-        // CORAZONES FLOTANTES - Todos MORADOS
+        // CORAZONES FLOTANTES MORADOS
         // ============================================= 
         function iniciarCorazones() {
             setInterval(function() {
