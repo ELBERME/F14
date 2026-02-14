@@ -13,7 +13,7 @@
             box-sizing: border-box;
         }
 
-        /* --- CUERPO DE LA PÁGINA --- */
+        /* --- CUERPO DE LA PAGINA --- */
         body {
             width: 100vw;
             height: 100vh;
@@ -35,7 +35,6 @@
             transition: opacity 1.5s ease-in-out;
         }
 
-        /* --- VIDEO DE FONDO --- */
         #video-fondo {
             position: absolute;
             top: 50%;
@@ -48,7 +47,6 @@
             object-fit: cover;
         }
 
-        /* --- CAPA OSCURA SOBRE EL VIDEO --- */
         #overlay-oscuro {
             position: absolute;
             top: 0;
@@ -76,7 +74,7 @@
         #texto-animado {
             color: #fff;
             font-size: clamp(1.8rem, 5vw, 4rem);
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(155, 89, 182, 0.8),
                 0 0 20px rgba(155, 89, 182, 0.6),
                 0 0 40px rgba(155, 89, 182, 0.4),
@@ -151,17 +149,18 @@
             max-width: 80vw;
             max-height: 60vh;
             border-radius: 20px;
-            box-shadow: 
+            box-shadow:
                 0 0 30px rgba(155, 89, 182, 0.6),
                 0 0 60px rgba(155, 89, 182, 0.3);
             border: 3px solid rgba(155, 89, 182, 0.5);
+            cursor: pointer;
         }
 
         #texto-final {
             color: #9b59b6;
             font-size: clamp(1.2rem, 3vw, 2.5rem);
             margin-top: 20px;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(155, 89, 182, 0.8),
                 0 0 20px rgba(155, 89, 182, 0.5);
             opacity: 0;
@@ -199,7 +198,7 @@
         }
 
         /* ============================================= */
-        /* BOTON DE INICIO - Colores morados              */
+        /* BOTON DE INICIO                                */
         /* ============================================= */
         #boton-inicio {
             position: fixed;
@@ -215,7 +214,7 @@
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Georgia', serif;
-            box-shadow: 
+            box-shadow:
                 0 0 20px rgba(155, 89, 182, 0.6),
                 0 0 40px rgba(155, 89, 182, 0.3);
             transition: all 0.3s ease;
@@ -224,7 +223,7 @@
 
         #boton-inicio:hover {
             transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 
+            box-shadow:
                 0 0 30px rgba(155, 89, 182, 0.8),
                 0 0 60px rgba(155, 89, 182, 0.5);
         }
@@ -235,7 +234,7 @@
         }
 
         /* ============================================= */
-        /* PARTICULAS DE BRILLO DECORATIVAS              */
+        /* PARTICULAS DE BRILLO                          */
         /* ============================================= */
         .particula {
             position: fixed;
@@ -249,7 +248,99 @@
         }
 
         /* ============================================= */
-        /* MEDIA QUERIES - Adaptacion a moviles          */
+        /* FASE 3: MENSAJES SECRETOS AL TOCAR EL GATO    */
+        /* Pantalla completa con mensajes secuenciales    */
+        /* ============================================= */
+        #fase-mensajes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 50;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        #fase-mensajes.visible {
+            opacity: 1;
+        }
+
+        /* Contenedor del mensaje actual */
+        #contenedor-mensaje-secreto {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 85%;
+            max-width: 700px;
+        }
+
+        /* Texto del mensaje secreto */
+        #mensaje-secreto-texto {
+            color: #fff;
+            font-size: clamp(1.4rem, 4vw, 2.8rem);
+            text-shadow:
+                0 0 10px rgba(155, 89, 182, 0.8),
+                0 0 20px rgba(155, 89, 182, 0.6),
+                0 0 40px rgba(155, 89, 182, 0.4);
+            line-height: 1.6;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            white-space: pre-wrap;
+        }
+
+        #mensaje-secreto-texto.visible {
+            opacity: 1;
+        }
+
+        /* Texto largo especial (el parrafo) */
+        #mensaje-secreto-texto.texto-largo {
+            font-size: clamp(1rem, 2.8vw, 1.6rem);
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Texto grande final TE AMO */
+        #mensaje-secreto-texto.texto-teamo {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: bold;
+            font-style: normal;
+            text-shadow:
+                0 0 20px rgba(155, 89, 182, 1),
+                0 0 40px rgba(155, 89, 182, 0.8),
+                0 0 80px rgba(155, 89, 182, 0.6),
+                0 0 120px rgba(155, 89, 182, 0.4);
+            animation: latido-teamo 1.5s ease-in-out infinite;
+        }
+
+        @keyframes latido-teamo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Indicador de toca para continuar */
+        #indicador-toca {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(155, 89, 182, 0.6);
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            animation: parpadeo-suave 2s ease-in-out infinite;
+        }
+
+        @keyframes parpadeo-suave {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* ============================================= */
+        /* MEDIA QUERIES                                 */
         /* ============================================= */
         @media (max-width: 768px) {
             #gif-gato {
@@ -262,6 +353,9 @@
             #boton-inicio {
                 padding: 15px 35px;
             }
+            #contenedor-mensaje-secreto {
+                width: 90%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -269,6 +363,9 @@
                 max-width: 95vw;
                 max-height: 45vh;
                 border-radius: 15px;
+            }
+            #contenedor-mensaje-secreto {
+                width: 93%;
             }
         }
     </style>
@@ -301,6 +398,17 @@
         </div>
     </div>
 
+    <!-- ============================================= -->
+    <!-- FASE 3: MENSAJES SECRETOS                      -->
+    <!-- Aparece cuando toca el gato                    -->
+    <!-- ============================================= -->
+    <div id="fase-mensajes">
+        <div id="contenedor-mensaje-secreto">
+            <div id="mensaje-secreto-texto"></div>
+        </div>
+        <div id="indicador-toca">toca para continuar</div>
+    </div>
+
     <!-- AUDIOS -->
     <audio id="audio-principal" preload="auto">
         <source src="video audio.mpeg" type="audio/mpeg">
@@ -310,37 +418,76 @@
         <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
     </audio>
 
-    <audio id="audio-burbuja" preload="auto">
+    <!-- ============================================= -->
+    <!-- AUDIO DE BURBUJA                               -->
+    <!-- Se usa con loop para que suene continuamente   -->
+    <!-- mientras se alternan las imagenes del gato     -->
+    <!-- ============================================= -->
+    <audio id="audio-burbuja" preload="auto" loop>
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
 
     <script>
+        // ============================================= 
         // CONFIGURACION PRINCIPAL
-        const MENSAJE = "Feliz 14 de Febrero\nNoris 💜";
-        const DURACION_VIDEO = 13000;
-        const ESPERA_INICIO_TEXTO = 1500;
-        const TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
-        const VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
+        // ============================================= 
+        var MENSAJE = "Feliz 14 de Febrero\nNoris 💜";
+        var DURACION_VIDEO = 13000;
+        var ESPERA_INICIO_TEXTO = 1500;
+        var TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
+        var VELOCIDAD_LETRA = Math.floor(TIEMPO_DISPONIBLE_TEXTO / MENSAJE.length);
 
         // Imagenes del gato
-        const IMAGEN_GATO_1 = "imagen uno.jpeg";
-        const IMAGEN_GATO_2 = "iamgen 2.jpeg";
-        const VELOCIDAD_GIF = 600;
+        var IMAGEN_GATO_1 = "imagen uno.jpeg";
+        var IMAGEN_GATO_2 = "iamgen 2.jpeg";
+        var VELOCIDAD_GIF = 600;
 
+        // ============================================= 
+        // MENSAJES SECRETOS - Se muestran al tocar el gato
+        // Cada objeto tiene el texto y una clase CSS opcional
+        // ============================================= 
+        var MENSAJES_SECRETOS = [
+            {
+                texto: "Ya veo... andas de curiosa 👀",
+                clase: ""
+            },
+            {
+                texto: "Eso me gusta de ti 😏💜",
+                clase: ""
+            },
+            {
+                texto: "Toma esto... 🎁",
+                clase: ""
+            },
+            {
+                texto: "En algun lugar de estas finitas palabras organizadas, esta este texto.\n\nTexto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable.\n\nTexto el cual se escribio con el unico fin de recordarte que...",
+                clase: "texto-largo"
+            },
+            {
+                texto: "TE AMO 💜",
+                clase: "texto-teamo"
+            }
+        ];
+
+        // ============================================= 
         // REFERENCIAS A ELEMENTOS DEL HTML
-        const botonInicio = document.getElementById('boton-inicio');
-        const faseVideo = document.getElementById('fase-video');
-        const faseGif = document.getElementById('fase-gif');
-        const videoFondo = document.getElementById('video-fondo');
-        const videoBorroso = document.getElementById('video-borroso');
-        const textoAnimado = document.getElementById('texto-animado');
-        const cursorElemento = document.getElementById('cursor');
-        const contenedorGif = document.getElementById('contenedor-gif');
-        const gifGato = document.getElementById('gif-gato');
-        const textoFinal = document.getElementById('texto-final');
-        const audioPrincipal = document.getElementById('audio-principal');
-        const audioTypewriter = document.getElementById('audio-typewriter');
-        const audioBurbuja = document.getElementById('audio-burbuja');
+        // ============================================= 
+        var botonInicio = document.getElementById('boton-inicio');
+        var faseVideo = document.getElementById('fase-video');
+        var faseGif = document.getElementById('fase-gif');
+        var faseMensajes = document.getElementById('fase-mensajes');
+        var videoFondo = document.getElementById('video-fondo');
+        var videoBorroso = document.getElementById('video-borroso');
+        var textoAnimado = document.getElementById('texto-animado');
+        var cursorElemento = document.getElementById('cursor');
+        var contenedorGif = document.getElementById('contenedor-gif');
+        var gifGato = document.getElementById('gif-gato');
+        var textoFinal = document.getElementById('texto-final');
+        var audioPrincipal = document.getElementById('audio-principal');
+        var audioTypewriter = document.getElementById('audio-typewriter');
+        var audioBurbuja = document.getElementById('audio-burbuja');
+        var mensajeSecretoTexto = document.getElementById('mensaje-secreto-texto');
+        var indicadorToca = document.getElementById('indicador-toca');
 
         // Variables de control
         var indiceLetra = 0;
@@ -349,7 +496,14 @@
         var imagenActual = 1;
         var transicionEjecutada = false;
 
+        // Variables para los mensajes secretos
+        var indiceMensaje = 0;
+        var mensajesActivados = false;
+        var puedeAvanzar = false;
+
+        // ============================================= 
         // BOTON DE INICIO
+        // ============================================= 
         botonInicio.addEventListener('click', function() {
             var btn = this;
             btn.style.transition = 'opacity 0.5s ease';
@@ -361,7 +515,9 @@
             }, 500);
         });
 
+        // ============================================= 
         // FUNCION PRINCIPAL: Inicia todo
+        // ============================================= 
         function iniciarExperiencia() {
             videoFondo.play().catch(function(e) { console.log('Error video:', e); });
             audioPrincipal.play().catch(function(e) { console.log('Error audio:', e); });
@@ -379,7 +535,9 @@
             iniciarCorazones();
         }
 
+        // ============================================= 
         // EFECTO TYPEWRITER
+        // ============================================= 
         function iniciarTextoTypewriter() {
             audioTypewriter.volume = 0.5;
             audioTypewriter.play().catch(function(e) { console.log('Error typewriter:', e); });
@@ -404,7 +562,9 @@
             }, VELOCIDAD_LETRA);
         }
 
+        // ============================================= 
         // TRANSICION DE FASE 1 A FASE 2
+        // ============================================= 
         function transicionAFase2() {
             if (transicionEjecutada) return;
             transicionEjecutada = true;
@@ -428,6 +588,15 @@
                 setTimeout(function() {
                     contenedorGif.classList.add('visible');
                     iniciarGifManual();
+
+                    // ============================================= 
+                    // INICIAR AUDIO DE BURBUJA EN LOOP
+                    // Se reproduce en bucle continuo mientras
+                    // se alternan las imagenes del gato
+                    // ============================================= 
+                    audioBurbuja.volume = 0.5;
+                    audioBurbuja.play().catch(function(e) { console.log('Error burbuja:', e); });
+
                     setTimeout(function() {
                         textoFinal.classList.add('visible');
                     }, 800);
@@ -436,14 +605,14 @@
             }, 1500);
         }
 
+        // ============================================= 
         // GIF MANUAL: Alterna entre las 2 imagenes
-        // Reproduce sonido de burbuja cuando aparece el gato con flor
+        // ============================================= 
         function iniciarGifManual() {
             intervaloGif = setInterval(function() {
                 if (imagenActual === 1) {
                     gifGato.src = IMAGEN_GATO_2;
                     imagenActual = 2;
-                    reproducirBurbuja();
                 } else {
                     gifGato.src = IMAGEN_GATO_1;
                     imagenActual = 1;
@@ -451,18 +620,109 @@
             }, VELOCIDAD_GIF);
         }
 
-        // Reproduce el sonido de burbuja
-        function reproducirBurbuja() {
-            var burbujaClone = audioBurbuja.cloneNode();
-            burbujaClone.volume = 0.6;
-            burbujaClone.play().catch(function(e) { console.log('Error burbuja:', e); });
+        // ============================================= 
+        // EVENTO: TOCAR O HACER CLICK EN EL GATO
+        // Activa la fase de mensajes secretos
+        // ============================================= 
+        gifGato.addEventListener('click', function() {
+            // Solo activar una vez
+            if (mensajesActivados) return;
+            mensajesActivados = true;
+
+            // Detener el GIF y el audio de burbuja
+            if (intervaloGif) {
+                clearInterval(intervaloGif);
+            }
+            audioBurbuja.pause();
+            audioBurbuja.currentTime = 0;
+
+            // Transicion: ocultar fase del gato
+            faseGif.style.opacity = '0';
 
             setTimeout(function() {
-                burbujaClone.remove();
-            }, 3000);
+                faseGif.style.display = 'none';
+
+                // Mostrar fase de mensajes
+                faseMensajes.style.display = 'block';
+
+                requestAnimationFrame(function() {
+                    faseMensajes.classList.add('visible');
+                });
+
+                // Mostrar el primer mensaje despues de un momento
+                setTimeout(function() {
+                    mostrarMensaje(0);
+                }, 800);
+
+            }, 1000);
+        });
+
+        // ============================================= 
+        // MOSTRAR MENSAJE SECRETO
+        // Muestra el mensaje del indice indicado
+        // ============================================= 
+        function mostrarMensaje(indice) {
+            if (indice >= MENSAJES_SECRETOS.length) return;
+
+            indiceMensaje = indice;
+            var mensaje = MENSAJES_SECRETOS[indice];
+
+            // Ocultar texto actual
+            mensajeSecretoTexto.classList.remove('visible');
+
+            setTimeout(function() {
+                // Limpiar clases anteriores
+                mensajeSecretoTexto.className = '';
+
+                // Poner el texto nuevo
+                // Reemplazar \n por <br> para saltos de linea
+                mensajeSecretoTexto.innerHTML = mensaje.texto.replace(/\n/g, '<br>');
+
+                // Agregar clase especial si tiene
+                if (mensaje.clase) {
+                    mensajeSecretoTexto.classList.add(mensaje.clase);
+                }
+
+                // Hacer visible
+                requestAnimationFrame(function() {
+                    mensajeSecretoTexto.classList.add('visible');
+                });
+
+                // Si es el ultimo mensaje (TE AMO), ocultar indicador
+                if (indice === MENSAJES_SECRETOS.length - 1) {
+                    indicadorToca.style.display = 'none';
+                }
+
+                // Permitir avanzar despues de un momento
+                puedeAvanzar = false;
+                setTimeout(function() {
+                    puedeAvanzar = true;
+                }, 1000);
+
+            }, 400);
         }
 
+        // ============================================= 
+        // EVENTO: TOCAR PANTALLA PARA AVANZAR MENSAJES
+        // Cada toque avanza al siguiente mensaje
+        // ============================================= 
+        faseMensajes.addEventListener('click', function() {
+            // No avanzar si no ha pasado tiempo suficiente
+            if (!puedeAvanzar) return;
+
+            var siguienteIndice = indiceMensaje + 1;
+
+            // Si hay mas mensajes, mostrar el siguiente
+            if (siguienteIndice < MENSAJES_SECRETOS.length) {
+                mostrarMensaje(siguienteIndice);
+            }
+            // Si es el ultimo (TE AMO), no hacer nada mas
+            // Se queda en pantalla para siempre
+        });
+
+        // ============================================= 
         // CORAZONES FLOTANTES - Todos MORADOS
+        // ============================================= 
         function iniciarCorazones() {
             setInterval(function() {
                 crearCorazon();
@@ -487,7 +747,9 @@
             }, 4000);
         }
 
+        // ============================================= 
         // PARTICULAS DE BRILLO
+        // ============================================= 
         function crearParticulas() {
             setInterval(function() {
                 var particula = document.createElement('div');
@@ -502,7 +764,9 @@
 
         crearParticulas();
 
+        // ============================================= 
         // PRE-CARGAR IMAGENES
+        // ============================================= 
         function precargarImagenes() {
             var img1 = new Image();
             img1.src = IMAGEN_GATO_1;
