@@ -24,40 +24,32 @@
 
         #fase-video {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 1;
             transition: opacity 1.5s ease-in-out;
         }
 
         #video-fondo {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
             object-fit: cover;
         }
 
         #overlay-oscuro {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.35);
             z-index: 2;
         }
 
         #contenedor-texto {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
             text-align: center;
@@ -82,8 +74,7 @@
 
         #cursor {
             display: inline-block;
-            width: 3px;
-            height: 1em;
+            width: 3px; height: 1em;
             background-color: #9b59b6;
             margin-left: 4px;
             vertical-align: text-bottom;
@@ -97,33 +88,26 @@
 
         #fase-gif {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 10;
-            display: none;
-            opacity: 0;
+            display: none; opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
 
         #video-borroso {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
             object-fit: cover;
             filter: blur(15px) brightness(0.5);
         }
 
         #contenedor-gif {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0.5);
             z-index: 11;
             text-align: center;
@@ -136,7 +120,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Marco brillante del gif del gato */
         #marco-gif {
             position: relative;
             display: inline-block;
@@ -150,25 +133,12 @@
             50% { transform: scale(1.06); }
         }
 
-        /* Borde brillante animado pastel morado */
         #marco-gif::before {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
             border-radius: 26px;
-            background: linear-gradient(
-                45deg,
-                #d8b4fe,
-                #c084fc,
-                #a855f7,
-                #e9d5ff,
-                #c4b5fd,
-                #a78bfa,
-                #d8b4fe
-            );
+            background: linear-gradient(45deg, #d8b4fe, #c084fc, #a855f7, #e9d5ff, #c4b5fd, #a78bfa, #d8b4fe);
             background-size: 300% 300%;
             animation: borde-brillo 3s ease-in-out infinite;
             z-index: -1;
@@ -180,21 +150,16 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Resplandor trasero */
         #marco-gif::after {
             content: '';
             position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
+            top: -15px; left: -15px; right: -15px; bottom: -15px;
             border-radius: 30px;
             background: transparent;
             box-shadow:
                 0 0 20px rgba(216, 180, 254, 0.4),
                 0 0 40px rgba(192, 132, 252, 0.3),
-                0 0 60px rgba(168, 85, 247, 0.2),
-                0 0 80px rgba(216, 180, 254, 0.15);
+                0 0 60px rgba(168, 85, 247, 0.2);
             animation: resplandor-trasero 2.5s ease-in-out infinite;
             z-index: -2;
         }
@@ -216,12 +181,10 @@
         }
 
         #gif-gato {
-            max-width: 80vw;
-            max-height: 55vh;
+            max-width: 80vw; max-height: 55vh;
             border-radius: 20px;
             display: block;
-            border: none;
-            box-shadow: none;
+            border: none; box-shadow: none;
         }
 
         #texto-toca-gato {
@@ -243,15 +206,11 @@
             transition: opacity 1s ease-in-out 0.5s;
         }
 
-        #texto-final.visible {
-            opacity: 1;
-        }
+        #texto-final.visible { opacity: 1; }
 
         .corazon {
-            position: fixed;
-            z-index: 20;
-            font-size: 1.5rem;
-            opacity: 0;
+            position: fixed; z-index: 20;
+            font-size: 1.5rem; opacity: 0;
             pointer-events: none;
             animation: flotar-corazon 4s ease-in-out forwards;
         }
@@ -264,17 +223,14 @@
 
         #boton-inicio {
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 100;
             background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            color: white;
-            border: none;
+            color: white; border: none;
             padding: 20px 50px;
             font-size: clamp(1.2rem, 3vw, 2rem);
-            border-radius: 50px;
-            cursor: pointer;
+            border-radius: 50px; cursor: pointer;
             font-family: 'Georgia', serif;
             box-shadow:
                 0 0 20px rgba(155, 89, 182, 0.6),
@@ -297,23 +253,19 @@
 
         .particula {
             position: fixed;
-            width: 4px;
-            height: 4px;
+            width: 4px; height: 4px;
             background: #9b59b6;
             border-radius: 50%;
             pointer-events: none;
-            z-index: 15;
-            opacity: 0;
+            z-index: 15; opacity: 0;
         }
 
-        /* Fase 3: Mensajes secretos */
         #fase-mensajes {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 50;
-            display: none;
-            opacity: 0;
+            display: none; opacity: 0;
             transition: opacity 1s ease-in-out;
             background: rgba(0, 0, 0, 0.9);
         }
@@ -325,8 +277,7 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: 85%;
-            max-width: 700px;
+            width: 85%; max-width: 700px;
         }
 
         #mensaje-secreto-texto {
@@ -367,7 +318,7 @@
             50% { transform: scale(1.05); }
         }
 
-        /* Corazon interactivo que late y brilla */
+        /* Corazon que late y brilla - SIN texto de pista */
         #corazon-teamo {
             display: inline-block;
             cursor: pointer;
@@ -380,69 +331,38 @@
         @keyframes latido-corazon {
             0% {
                 transform: scale(1);
-                filter:
-                    drop-shadow(0 0 5px rgba(216, 180, 254, 0.4))
-                    drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
+                filter: drop-shadow(0 0 5px rgba(216, 180, 254, 0.4)) drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
             }
             15% {
                 transform: scale(1.25);
-                filter:
-                    drop-shadow(0 0 15px rgba(216, 180, 254, 0.9))
-                    drop-shadow(0 0 30px rgba(192, 132, 252, 0.6))
-                    drop-shadow(0 0 50px rgba(168, 85, 247, 0.3));
+                filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.9)) drop-shadow(0 0 30px rgba(192, 132, 252, 0.6)) drop-shadow(0 0 50px rgba(168, 85, 247, 0.3));
             }
             30% {
                 transform: scale(1);
-                filter:
-                    drop-shadow(0 0 5px rgba(216, 180, 254, 0.4))
-                    drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
+                filter: drop-shadow(0 0 5px rgba(216, 180, 254, 0.4)) drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
             }
             45% {
                 transform: scale(1.18);
-                filter:
-                    drop-shadow(0 0 12px rgba(216, 180, 254, 0.8))
-                    drop-shadow(0 0 25px rgba(192, 132, 252, 0.5))
-                    drop-shadow(0 0 40px rgba(233, 213, 255, 0.3));
+                filter: drop-shadow(0 0 12px rgba(216, 180, 254, 0.8)) drop-shadow(0 0 25px rgba(192, 132, 252, 0.5)) drop-shadow(0 0 40px rgba(233, 213, 255, 0.3));
             }
             60%, 100% {
                 transform: scale(1);
-                filter:
-                    drop-shadow(0 0 5px rgba(216, 180, 254, 0.4))
-                    drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
+                filter: drop-shadow(0 0 5px rgba(216, 180, 254, 0.4)) drop-shadow(0 0 10px rgba(192, 132, 252, 0.2));
             }
-        }
-
-        #pista-corazon {
-            display: block;
-            color: rgba(216, 180, 254, 0.5);
-            font-size: clamp(0.7rem, 1.8vw, 0.95rem);
-            font-weight: 300;
-            font-style: italic;
-            margin-top: 25px;
-            animation: parpadeo-pista 2.5s ease-in-out infinite;
-            letter-spacing: 1px;
-        }
-
-        @keyframes parpadeo-pista {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
         }
 
         #cursor-mensaje {
             display: inline-block;
-            width: 3px;
-            height: 1em;
+            width: 3px; height: 1em;
             background-color: #9b59b6;
             margin-left: 4px;
             vertical-align: text-bottom;
             animation: parpadeo 0.6s infinite;
         }
 
-        /* Indicador toca para continuar - MAS EVIDENTE */
         #indicador-toca {
             position: absolute;
-            bottom: 8%;
-            left: 50%;
+            bottom: 8%; left: 50%;
             transform: translateX(-50%);
             color: rgba(216, 180, 254, 0.8);
             font-size: clamp(0.95rem, 2.5vw, 1.2rem);
@@ -478,8 +398,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 60;
-            display: none;
-            opacity: 0;
+            display: none; opacity: 0;
             transition: opacity 1s ease-in-out;
             background: #0a0a0a;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
@@ -493,8 +412,7 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: 85%;
-            max-width: 650px;
+            width: 85%; max-width: 650px;
             padding: 40px 20px;
         }
 
@@ -512,8 +430,7 @@
 
         .cursor-easter {
             display: inline-block;
-            width: 2px;
-            height: 1em;
+            width: 2px; height: 1em;
             background-color: rgba(155, 89, 182, 0.6);
             margin-left: 3px;
             vertical-align: text-bottom;
@@ -521,14 +438,16 @@
         }
 
         #easter-opciones {
-            display: none;
-            opacity: 0;
+            display: none; opacity: 0;
             transition: opacity 0.8s ease-in-out;
             margin-top: 60px;
         }
 
         #easter-opciones.visible { opacity: 1; }
 
+        /* ============================================= */
+        /* OPCIONES LUZ Y SOMBRAS                        */
+        /* ============================================= */
         .opcion-flotante {
             display: inline-block;
             color: rgba(224, 224, 224, 0.7);
@@ -537,11 +456,10 @@
             letter-spacing: 4px;
             margin: 0 30px;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             text-transform: lowercase;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
-            border: none;
-            background: none;
+            border: none; background: none;
             padding: 15px 25px;
             position: relative;
         }
@@ -549,11 +467,9 @@
         .opcion-flotante::after {
             content: '';
             position: absolute;
-            bottom: 10px;
-            left: 50%;
+            bottom: 10px; left: 50%;
             transform: translateX(-50%);
-            width: 0;
-            height: 1px;
+            width: 0; height: 1px;
             background: rgba(155, 89, 182, 0.5);
             transition: width 0.4s ease;
         }
@@ -566,19 +482,42 @@
 
         .opcion-flotante:hover::after { width: 80%; }
 
+        /* Efecto BRILLO al tocar LUZ */
+        .opcion-flotante.efecto-luz {
+            color: #fff;
+            text-shadow:
+                0 0 10px rgba(255, 223, 150, 1),
+                0 0 20px rgba(255, 200, 100, 0.8),
+                0 0 40px rgba(255, 180, 60, 0.6),
+                0 0 60px rgba(255, 160, 30, 0.4),
+                0 0 80px rgba(255, 223, 150, 0.3);
+            transform: scale(1.3);
+            transition: all 0.8s ease;
+        }
+
+        /* Efecto DESVANECIMIENTO al tocar SOMBRAS */
+        /* Las letras se descomponen y desaparecen */
+        .opcion-flotante.efecto-sombras {
+            transition: all 2.5s ease;
+            opacity: 0;
+            letter-spacing: 20px;
+            filter: blur(8px);
+            transform: scale(0.8);
+            color: rgba(100, 100, 140, 0.3);
+        }
+
         .separador-opciones {
             display: inline-block;
             color: rgba(155, 89, 182, 0.3);
             font-size: 1.5rem;
             margin: 0 10px;
             vertical-align: middle;
+            transition: opacity 1s ease;
         }
 
-        /* Indicador easter - MAS EVIDENTE */
         #easter-indicador {
             position: absolute;
-            bottom: 8%;
-            left: 50%;
+            bottom: 8%; left: 50%;
             transform: translateX(-50%);
             color: rgba(216, 180, 254, 0.8);
             font-size: clamp(0.9rem, 2.2vw, 1.1rem);
@@ -597,8 +536,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 70;
-            display: none;
-            opacity: 0;
+            display: none; opacity: 0;
             transition: all 1.5s ease-in-out;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             overflow-y: auto;
@@ -718,7 +656,7 @@
             <div id="easter-texto"></div>
             <div id="easter-opciones">
                 <span class="opcion-flotante" id="opcion-luz">luz</span>
-                <span class="separador-opciones">|</span>
+                <span class="separador-opciones" id="separador-opciones">|</span>
                 <span class="opcion-flotante" id="opcion-sombras">sombras</span>
             </div>
         </div>
@@ -743,16 +681,14 @@
         <source src="audio de burbuja.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- ============================================= -->
-    <!-- CANCION DE FONDO PARA EL EASTER EGG            -->
-    <!-- CAMBIA "cancion-easter.mp3" POR TU ARCHIVO     -->
-    <!-- ============================================= -->
+    <!-- CANCION DE FONDO EASTER EGG -->
+    <!-- CAMBIA "cancion-easter.mp3" POR TU ARCHIVO -->
     <audio id="audio-easter-fondo" preload="auto" loop>
         <source src="cancion-easter.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        var MENSAJE = "Feliz 14 de Febrero\nNoris 💜";
+        var MENSAJE = "Feliz 14 de Febrero\nNoris \uD83D\uDC9C";
         var DURACION_VIDEO = 13000;
         var ESPERA_INICIO_TEXTO = 1500;
         var TIEMPO_DISPONIBLE_TEXTO = DURACION_VIDEO - ESPERA_INICIO_TEXTO - 2000;
@@ -765,7 +701,7 @@
 
         var MENSAJES_SECRETOS = [
             { texto: "Ya veo... \uD83D\uDC40", tipo: "normal" },
-            { texto: "Andas por aqui otra vez  \uD83D\uDE0F\uD83D\uDC9C", tipo: "normal" },
+            { texto: "Andas de curiosa  \uD83D\uDE0F\uD83D\uDC9C", tipo: "normal" },
             { texto: "Toma esto... \uD83C\uDF81", tipo: "normal" },
             {
                 texto: "En algun lugar de estas finitas palabras organizadas, esta este texto. Texto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable. Texto el cual se escribio con el unico fin de recordarte que...",
@@ -814,6 +750,7 @@
         var easterIndicador = document.getElementById('easter-indicador');
         var opcionLuz = document.getElementById('opcion-luz');
         var opcionSombras = document.getElementById('opcion-sombras');
+        var separadorOpciones = document.getElementById('separador-opciones');
         var finalContenido = document.getElementById('final-contenido');
 
         var indiceLetra = 0;
@@ -977,7 +914,6 @@
                     puedeAvanzar = false;
                     setTimeout(function() { puedeAvanzar = true; }, 1500);
                 }
-
                 else if (mensaje.tipo === "typewriter") {
                     reproducirBurbujaCorta();
                     mensajeSecretoTexto.classList.add('texto-largo');
@@ -1012,10 +948,14 @@
                         }
                     }, VELOCIDAD_MENSAJE_TYPEWRITER);
                 }
-
+                /* ============================================= */
+                /* TE AMO - Sin pista de texto                    */
+                /* El corazon solo late y brilla como invitacion  */
+                /* oculta, el usuario decide si lo toca o no      */
+                /* ============================================= */
                 else if (mensaje.tipo === "teamo") {
                     reproducirBurbujaCorta();
-                    mensajeSecretoTexto.innerHTML = 'TE AMO <span id="corazon-teamo">\uD83D\uDC9C</span><span id="pista-corazon">toca el \uD83D\uDC9C</span>';
+                    mensajeSecretoTexto.innerHTML = 'TE AMO <span id="corazon-teamo">\uD83D\uDC9C</span>';
                     mensajeSecretoTexto.classList.add('texto-teamo');
                     requestAnimationFrame(function() {
                         mensajeSecretoTexto.classList.add('visible');
@@ -1156,85 +1096,119 @@
             }
         });
 
+        /* ============================================= */
+        /* OPCION LUZ                                     */
+        /* Al tocar: la palabra "luz" BRILLA intensamente */
+        /* con resplandor calido dorado antes de la       */
+        /* transicion al final                            */
+        /* ============================================= */
         opcionLuz.addEventListener('click', function(e) {
             e.stopPropagation();
             easterFaseActual = "finalizado";
             reproducirBurbujaCorta();
-            faseEaster.style.opacity = '0';
+
+            /* Efecto brillo en la palabra "luz" */
+            opcionLuz.classList.add('efecto-luz');
+            /* Ocultar la otra opcion y el separador */
+            opcionSombras.style.opacity = '0';
+            opcionSombras.style.transition = 'opacity 0.8s ease';
+            separadorOpciones.style.opacity = '0';
+
+            /* Esperar a que se vea el brillo antes de transicionar */
             setTimeout(function() {
-                faseEaster.style.display = 'none';
-                faseFinal.classList.add('fondo-luz');
-                faseFinal.style.display = 'block';
-                finalContenido.innerHTML = '';
-                var textoLuz = document.createElement('div');
-                textoLuz.className = 'final-texto texto-luz-principal';
-                finalContenido.appendChild(textoLuz);
-                var lineaPequena = document.createElement('div');
-                lineaPequena.className = 'final-linea-pequena';
-                lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
-                finalContenido.appendChild(lineaPequena);
-                requestAnimationFrame(function() {
-                    faseFinal.classList.add('visible');
-                });
-                var textoCompletoLuz = "Eres un regalo en la logica de mi existencia.";
-                var letraLuz = 0;
+                faseEaster.style.opacity = '0';
                 setTimeout(function() {
-                    reproducirBurbujaCorta();
-                    iniciarAudioMaquina();
-                    textoLuz.innerHTML = '<span class="cursor-easter">|</span>';
-                    textoLuz.classList.add('visible');
-                    var intervaloLuz = setInterval(function() {
-                        if (letraLuz < textoCompletoLuz.length) {
-                            var cursorL = textoLuz.querySelector('.cursor-easter');
-                            if (cursorL) {
-                                var nodo = document.createTextNode(textoCompletoLuz[letraLuz]);
-                                cursorL.parentNode.insertBefore(nodo, cursorL);
+                    faseEaster.style.display = 'none';
+                    faseFinal.classList.add('fondo-luz');
+                    faseFinal.style.display = 'block';
+                    finalContenido.innerHTML = '';
+                    var textoLuz = document.createElement('div');
+                    textoLuz.className = 'final-texto texto-luz-principal';
+                    finalContenido.appendChild(textoLuz);
+                    var lineaPequena = document.createElement('div');
+                    lineaPequena.className = 'final-linea-pequena';
+                    lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
+                    finalContenido.appendChild(lineaPequena);
+                    requestAnimationFrame(function() {
+                        faseFinal.classList.add('visible');
+                    });
+                    var textoCompletoLuz = "Eres un regalo en la logica de mi existencia.";
+                    var letraLuz = 0;
+                    setTimeout(function() {
+                        reproducirBurbujaCorta();
+                        iniciarAudioMaquina();
+                        textoLuz.innerHTML = '<span class="cursor-easter">|</span>';
+                        textoLuz.classList.add('visible');
+                        var intervaloLuz = setInterval(function() {
+                            if (letraLuz < textoCompletoLuz.length) {
+                                var cursorL = textoLuz.querySelector('.cursor-easter');
+                                if (cursorL) {
+                                    var nodo = document.createTextNode(textoCompletoLuz[letraLuz]);
+                                    cursorL.parentNode.insertBefore(nodo, cursorL);
+                                }
+                                letraLuz++;
+                            } else {
+                                clearInterval(intervaloLuz);
+                                detenerAudioMaquina();
+                                var cursorL = textoLuz.querySelector('.cursor-easter');
+                                if (cursorL) {
+                                    setTimeout(function() { cursorL.style.display = 'none'; }, 800);
+                                }
+                                setTimeout(function() {
+                                    lineaPequena.classList.add('visible');
+                                }, 1500);
                             }
-                            letraLuz++;
-                        } else {
-                            clearInterval(intervaloLuz);
-                            detenerAudioMaquina();
-                            var cursorL = textoLuz.querySelector('.cursor-easter');
-                            if (cursorL) {
-                                setTimeout(function() { cursorL.style.display = 'none'; }, 800);
-                            }
-                            setTimeout(function() {
-                                lineaPequena.classList.add('visible');
-                            }, 1500);
-                        }
-                    }, 60);
-                }, 1000);
-            }, 1000);
+                        }, 60);
+                    }, 1000);
+                }, 1200);
+            }, 1500);
         });
 
+        /* ============================================= */
+        /* OPCION SOMBRAS                                 */
+        /* Al tocar: la palabra "sombras" se descompone,  */
+        /* las letras se separan, se difuminan y           */
+        /* desaparecen lentamente como consumiendose       */
+        /* ============================================= */
         opcionSombras.addEventListener('click', function(e) {
             e.stopPropagation();
             easterFaseActual = "finalizado";
             reproducirBurbujaCorta();
-            faseEaster.style.opacity = '0';
+
+            /* Efecto desvanecimiento en "sombras" */
+            opcionSombras.classList.add('efecto-sombras');
+            /* Ocultar la otra opcion y el separador */
+            opcionLuz.style.opacity = '0';
+            opcionLuz.style.transition = 'opacity 0.8s ease';
+            separadorOpciones.style.opacity = '0';
+
+            /* Esperar a que se vea el efecto antes de transicionar */
             setTimeout(function() {
-                faseEaster.style.display = 'none';
-                faseFinal.classList.add('fondo-sombras');
-                faseFinal.style.display = 'block';
-                finalContenido.innerHTML = '';
-                var elementos = [];
-                for (var i = 0; i < SOMBRAS_PARTES.length; i++) {
-                    var parrafo = document.createElement('div');
-                    parrafo.className = 'final-texto';
-                    finalContenido.appendChild(parrafo);
-                    elementos.push(parrafo);
-                }
-                var lineaPequena = document.createElement('div');
-                lineaPequena.className = 'final-linea-pequena';
-                lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
-                finalContenido.appendChild(lineaPequena);
-                requestAnimationFrame(function() {
-                    faseFinal.classList.add('visible');
-                });
+                faseEaster.style.opacity = '0';
                 setTimeout(function() {
-                    escribirParrafoSombras(0, elementos, lineaPequena);
-                }, 1000);
-            }, 1000);
+                    faseEaster.style.display = 'none';
+                    faseFinal.classList.add('fondo-sombras');
+                    faseFinal.style.display = 'block';
+                    finalContenido.innerHTML = '';
+                    var elementos = [];
+                    for (var i = 0; i < SOMBRAS_PARTES.length; i++) {
+                        var parrafo = document.createElement('div');
+                        parrafo.className = 'final-texto';
+                        finalContenido.appendChild(parrafo);
+                        elementos.push(parrafo);
+                    }
+                    var lineaPequena = document.createElement('div');
+                    lineaPequena.className = 'final-linea-pequena';
+                    lineaPequena.textContent = 'Elegir tambien es una forma de revelar quien eres.';
+                    finalContenido.appendChild(lineaPequena);
+                    requestAnimationFrame(function() {
+                        faseFinal.classList.add('visible');
+                    });
+                    setTimeout(function() {
+                        escribirParrafoSombras(0, elementos, lineaPequena);
+                    }, 1000);
+                }, 1200);
+            }, 2800);
         });
 
         function escribirParrafoSombras(indice, elementos, lineaPequena) {
@@ -1274,9 +1248,7 @@
         }
 
         function iniciarCorazones() {
-            setInterval(function() {
-                crearCorazon();
-            }, 800);
+            setInterval(function() { crearCorazon(); }, 800);
         }
 
         function crearCorazon() {
@@ -1293,13 +1265,13 @@
 
         function crearParticulas() {
             setInterval(function() {
-                var particula = document.createElement('div');
-                particula.classList.add('particula');
-                particula.style.left = Math.random() * 100 + 'vw';
-                particula.style.top = Math.random() * 100 + 'vh';
-                particula.style.animation = 'brillar ' + (Math.random() * 2 + 1) + 's ease-in-out';
-                document.body.appendChild(particula);
-                setTimeout(function() { particula.remove(); }, 3000);
+                var p = document.createElement('div');
+                p.classList.add('particula');
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                p.style.animation = 'brillar ' + (Math.random() * 2 + 1) + 's ease-in-out';
+                document.body.appendChild(p);
+                setTimeout(function() { p.remove(); }, 3000);
             }, 300);
         }
 
