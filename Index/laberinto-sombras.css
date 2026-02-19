@@ -1,0 +1,164 @@
+/* ============================================= */
+/* LABERINTO SOMBRA — Contenedor                   */
+/* ============================================= */
+#fase-lab-sombra {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 80;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    overflow: hidden;
+}
+#fase-lab-sombra.visible { opacity: 1; }
+
+/* Blanco cegador inicial */
+#sombra-blanco {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #fff;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 2s ease;
+    pointer-events: none;
+}
+#sombra-blanco.visible { opacity: 1; }
+
+#canvas-sombra {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+}
+
+/* ============================================= */
+/* HUD SOMBRA                                      */
+/* ============================================= */
+#sombra-hud {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+#sombra-hud.visible { opacity: 1; }
+
+#sombra-frag-info {
+    color: #444;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+
+#sombra-barra-wrap {
+    width: 140px;
+    height: 5px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#sombra-barra {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #9b59b6, #2c3e50);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+#sombra-barra-label {
+    color: rgba(0,0,0,0.25);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+/* Corazón SVG progreso */
+#sombra-corazon-svg-wrap {
+    position: absolute;
+    top: 12px; right: 12px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+#sombra-corazon-svg-wrap.visible { opacity: 1; }
+
+/* ============================================= */
+/* CONTROLES TÁCTILES                              */
+/* ============================================= */
+.lab-controles {
+    position: absolute;
+    bottom: 18px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    text-align: center;
+    display: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.lab-ctrl-btn {
+    width: 52px; height: 52px;
+    border: 1px solid rgba(155,89,182,0.25);
+    border-radius: 12px;
+    background: rgba(0,0,0,0.08);
+    color: rgba(100,80,130,0.7);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 2px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+.lab-ctrl-btn:active {
+    background: rgba(155,89,182,0.2);
+    transform: scale(0.92);
+}
+.lab-ctrl-row {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+/* ============================================= */
+/* PANTALLA COMPLETADO SOMBRA                      */
+/* ============================================= */
+#sombra-fin {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 20;
+    display: none;
+    opacity: 0;
+    transition: opacity 2s ease;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+}
+#sombra-fin.visible { display: flex; opacity: 1; }
+
+#sombra-fin-texto {
+    color: #ddd;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3.2vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.9;
+    letter-spacing: 2px;
+    text-align: center;
+    max-width: 550px;
+    padding: 0 20px;
+}
+
+/* ============================================= */
+/* RESPONSIVE                                      */
+/* ============================================= */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+    #sombra-controles { display: block; }
+}

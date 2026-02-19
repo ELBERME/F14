@@ -1,0 +1,500 @@
+/* ============================================= */
+/* FASE 6: SOL Y NUBES                            */
+/* ============================================= */
+#fase-sol {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 80;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    overflow: hidden;
+    cursor: default;
+}
+
+#fase-sol.visible {
+    opacity: 1;
+}
+
+/* ============================================= */
+/* FONDO - Transiciona de oscuro a atardecer       */
+/* ============================================= */
+#sol-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+        #0a0a12 0%,
+        #12101f 30%,
+        #1a1525 60%,
+        #0d0b15 100%
+    );
+    transition: background 3s ease-in-out;
+    z-index: 1;
+}
+
+#sol-fondo.atardecer {
+    background: linear-gradient(180deg,
+        #1a0a2e 0%,
+        #2d1b4e 15%,
+        #5b2c6f 30%,
+        #c0392b 50%,
+        #e67e22 65%,
+        #f39c12 78%,
+        #f9e547 90%,
+        #ffeaa7 100%
+    );
+}
+
+/* ============================================= */
+/* SOL CENTRO                                      */
+/* ============================================= */
+#sol-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        #fff9c4 0%,
+        #fff176 30%,
+        #ffee58 50%,
+        #fdd835 70%,
+        #f9a825 100%
+    );
+    z-index: 5;
+    cursor: pointer;
+    opacity: 0.3;
+    filter: blur(2px);
+    transition: all 2s ease-in-out;
+    box-shadow:
+        0 0 20px rgba(249, 168, 37, 0.3),
+        0 0 40px rgba(249, 168, 37, 0.2);
+}
+
+#sol-centro.descubierto {
+    opacity: 1;
+    filter: blur(0px);
+    box-shadow:
+        0 0 30px rgba(255, 241, 118, 0.9),
+        0 0 60px rgba(255, 238, 88, 0.7),
+        0 0 100px rgba(253, 216, 53, 0.5),
+        0 0 150px rgba(249, 168, 37, 0.3);
+    animation: sol-pulso 3s ease-in-out infinite;
+}
+
+@keyframes sol-pulso {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow:
+            0 0 30px rgba(255, 241, 118, 0.9),
+            0 0 60px rgba(255, 238, 88, 0.7),
+            0 0 100px rgba(253, 216, 53, 0.5),
+            0 0 150px rgba(249, 168, 37, 0.3);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.08);
+        box-shadow:
+            0 0 40px rgba(255, 241, 118, 1),
+            0 0 80px rgba(255, 238, 88, 0.8),
+            0 0 130px rgba(253, 216, 53, 0.6),
+            0 0 200px rgba(249, 168, 37, 0.4);
+    }
+}
+
+/* Brillo interno del sol */
+#sol-brillo-interno {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+#sol-centro.descubierto #sol-brillo-interno {
+    opacity: 0.8;
+}
+
+/* Aura exterior */
+#sol-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 241, 118, 0.3) 0%,
+        rgba(249, 168, 37, 0.1) 40%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 2.5s ease;
+    pointer-events: none;
+}
+
+#sol-centro.descubierto #sol-aura {
+    opacity: 1;
+    animation: aura-respira 4s ease-in-out infinite;
+}
+
+@keyframes aura-respira {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+/* ============================================= */
+/* ANILLO DE INVITACIÓN (pulsa para tocar sol)     */
+/* ============================================= */
+#sol-invitacion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160%;
+    height: 160%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 241, 118, 0);
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+}
+
+#sol-centro.descubierto #sol-invitacion {
+    opacity: 1;
+    animation: anillo-invita 2s ease-in-out infinite;
+}
+
+@keyframes anillo-invita {
+    0% {
+        width: 140%;
+        height: 140%;
+        border-color: rgba(255, 241, 118, 0.8);
+        opacity: 0.8;
+    }
+    100% {
+        width: 220%;
+        height: 220%;
+        border-color: rgba(255, 241, 118, 0);
+        opacity: 0;
+    }
+}
+
+/* ============================================= */
+/* RAYOS DE LUZ                                    */
+/* ============================================= */
+#sol-rayos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 2.5s ease;
+    pointer-events: none;
+}
+
+#sol-rayos.visible {
+    opacity: 1;
+}
+
+.rayo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 180px;
+    background: linear-gradient(
+        to top,
+        rgba(255, 241, 118, 0.6),
+        rgba(255, 241, 118, 0)
+    );
+    transform-origin: bottom center;
+    animation: rayo-brilla 3s ease-in-out infinite;
+}
+
+.rayo:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); animation-delay: 0s; }
+.rayo:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); animation-delay: 0.3s; }
+.rayo:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); animation-delay: 0.6s; }
+.rayo:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); animation-delay: 0.9s; }
+.rayo:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); animation-delay: 0.2s; }
+.rayo:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); animation-delay: 0.5s; }
+.rayo:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); animation-delay: 0.8s; }
+.rayo:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); animation-delay: 0.4s; }
+
+@keyframes rayo-brilla {
+    0%, 100% { opacity: 0.4; height: 150px; }
+    50% { opacity: 0.9; height: 200px; }
+}
+
+/* ============================================= */
+/* CANVAS DE NUBES                                 */
+/* ============================================= */
+#nubes-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    cursor: grab;
+    touch-action: none;
+}
+
+#nubes-canvas:active {
+    cursor: grabbing;
+}
+
+/* ============================================= */
+/* INSTRUCCIÓN INICIAL                             */
+/* ============================================= */
+#sol-instruccion {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    color: rgba(200, 200, 220, 0.8);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    letter-spacing: 2px;
+    padding: 12px 28px;
+    border: 1px solid rgba(200, 200, 220, 0.2);
+    border-radius: 30px;
+    background: rgba(100, 100, 130, 0.1);
+    animation: indicador-pulso 2s ease-in-out infinite;
+    transition: opacity 1s ease;
+}
+
+#sol-instruccion.oculto {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ============================================= */
+/* MENSAJE DESPUÉS DE TOCAR EL SOL                 */
+/* ============================================= */
+#sol-mensaje-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    text-align: center;
+    width: 85%;
+    max-width: 650px;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+#sol-mensaje-container.visible {
+    opacity: 1;
+}
+
+#sol-mensaje-texto {
+    color: #fff;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.8;
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 10px rgba(249, 168, 37, 0.6),
+        0 0 20px rgba(249, 168, 37, 0.3);
+}
+
+/* ============================================= */
+/* FASE TIEMPO (segunda frase + botón reloj)       */
+/* ============================================= */
+#sol-fase-tiempo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 25;
+    text-align: center;
+    width: 85%;
+    max-width: 650px;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+#sol-fase-tiempo.visible {
+    opacity: 1;
+}
+
+#tiempo-texto {
+    color: #e0e0e0;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(1.1rem, 3vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.8;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    text-shadow:
+        0 0 8px rgba(155, 89, 182, 0.5),
+        0 0 15px rgba(155, 89, 182, 0.3);
+}
+
+#tiempo-boton-container {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#tiempo-boton-container.visible {
+    opacity: 1;
+}
+
+#tiempo-boton {
+    background: none;
+    border: 2px solid rgba(216, 180, 254, 0.4);
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    transition: all 0.5s ease;
+    animation: boton-reloj-pulso 2.5s ease-in-out infinite;
+    position: relative;
+    overflow: visible;
+}
+
+#tiempo-boton::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 1px solid rgba(216, 180, 254, 0);
+    animation: boton-reloj-anillo 2s ease-in-out infinite;
+}
+
+@keyframes boton-reloj-anillo {
+    0% {
+        top: -5px; left: -5px; right: -5px; bottom: -5px;
+        border-color: rgba(216, 180, 254, 0.5);
+        opacity: 1;
+    }
+    100% {
+        top: -25px; left: -25px; right: -25px; bottom: -25px;
+        border-color: rgba(216, 180, 254, 0);
+        opacity: 0;
+    }
+}
+
+@keyframes boton-reloj-pulso {
+    0%, 100% {
+        box-shadow:
+            0 0 15px rgba(216, 180, 254, 0.3),
+            0 0 30px rgba(155, 89, 182, 0.15);
+        border-color: rgba(216, 180, 254, 0.4);
+    }
+    50% {
+        box-shadow:
+            0 0 25px rgba(216, 180, 254, 0.6),
+            0 0 50px rgba(155, 89, 182, 0.3);
+        border-color: rgba(216, 180, 254, 0.7);
+    }
+}
+
+#tiempo-boton:hover {
+    transform: scale(1.1);
+    box-shadow:
+        0 0 30px rgba(216, 180, 254, 0.8),
+        0 0 60px rgba(155, 89, 182, 0.4);
+}
+
+#tiempo-reloj-icono {
+    font-size: 2.5rem;
+    animation: reloj-gira 3s ease-in-out infinite;
+}
+
+@keyframes reloj-gira {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+#tiempo-continuar {
+    color: rgba(216, 180, 254, 0.7);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    letter-spacing: 2px;
+    animation: parpadeo-suave 2s ease-in-out infinite;
+}
+
+/* ============================================= */
+/* RESPONSIVE SOL                                  */
+/* ============================================= */
+@media (max-width: 768px) {
+    #sol-centro {
+        width: 100px;
+        height: 100px;
+    }
+
+    #sol-rayos {
+        width: 300px;
+        height: 300px;
+    }
+
+    .rayo {
+        height: 130px;
+    }
+
+    #sol-mensaje-container {
+        width: 90%;
+    }
+
+    #sol-fase-tiempo {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    #sol-centro {
+        width: 85px;
+        height: 85px;
+    }
+
+    #sol-rayos {
+        width: 250px;
+        height: 250px;
+    }
+
+    .rayo {
+        height: 100px;
+    }
+
+    #tiempo-boton {
+        width: 75px;
+        height: 75px;
+    }
+
+    #tiempo-reloj-icono {
+        font-size: 2rem;
+    }
+}

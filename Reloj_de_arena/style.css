@@ -1,0 +1,425 @@
+/* ============================================
+   VARIABLES Y RESET
+   ============================================ */
+:root {
+    --purple-lightest: #e8d5f5;
+    --purple-light: #c9a0dc;
+    --purple-medium: #9b59b6;
+    --purple-dark: #7d3c98;
+    --purple-darkest: #4a235a;
+    --bg-dark: #0d0015;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0015, #1a0029, #0d0015);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ============================================
+   PARTÍCULAS DE FONDO
+   ============================================ */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--purple-light);
+    border-radius: 50%;
+    opacity: 0;
+    animation: floatParticle 8s infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0);
+    }
+    20% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(1);
+    }
+}
+
+/* ============================================
+   RELOJ DE ARENA CON INTERACCIÓN SECRETA
+   ============================================ */
+#arena-wrapper {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin-top: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#arena {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    z-index: 2;
+}
+
+/* Anillo secreto SVG */
+#secret-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(155, 89, 182, 0.1);
+    stroke-width: 3;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: var(--purple-medium);
+    stroke-width: 3;
+    stroke-dasharray: 691.15;
+    stroke-dashoffset: 691.15;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.3s ease;
+    filter: drop-shadow(0 0 6px var(--purple-medium));
+}
+
+/* Brillo detrás del reloj */
+#arena-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(155, 89, 182, 0) 0%, rgba(155, 89, 182, 0) 100%);
+    transition: background 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#arena-glow.glowing {
+    background: radial-gradient(circle, rgba(155, 89, 182, 0.3) 0%, rgba(155, 89, 182, 0) 70%);
+    animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+/* Hint secreto */
+#secret-hint {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 3;
+    pointer-events: none;
+}
+
+#secret-hint.visible {
+    opacity: 0.5;
+    animation: hintBounce 2s infinite;
+}
+
+@keyframes hintBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ============================================
+   HORA DIGITAL
+   ============================================ */
+#clock {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: linear-gradient(to right, var(--purple-light), var(--purple-medium));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+#greeting {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+/* ============================================
+   CARTA PRINCIPAL
+   ============================================ */
+#card-container {
+    perspective: 1000px;
+    margin-bottom: 40px;
+    z-index: 1;
+}
+
+.carta {
+    width: 300px;
+    height: 180px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+    animation: aparecer 0.8s ease-out;
+}
+
+.carta.abierta {
+    transform: rotateY(180deg);
+}
+
+.carta-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.carta-front,
+.carta-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.carta-front {
+    background: linear-gradient(135deg, var(--purple-medium), var(--purple-dark));
+    border: 2px solid var(--purple-light);
+    box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+}
+
+.sello {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    animation: pulso 2s infinite;
+}
+
+.carta-titulo { font-size: 1.1rem; font-weight: 600; }
+.carta-subtitulo { font-size: 0.8rem; opacity: 0.7; margin-top: 5px; }
+
+.carta-back {
+    background: linear-gradient(135deg, var(--purple-darkest), #2d1045);
+    border: 2px solid var(--purple-medium);
+    transform: rotateY(180deg);
+    box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+}
+
+.carta-mensaje { font-size: 1rem; text-align: center; line-height: 1.6; font-weight: 300; }
+.carta-hora { font-size: 0.75rem; opacity: 0.5; margin-top: 15px; }
+
+.carta-hidden { display: none; }
+
+@keyframes aparecer {
+    0% { opacity: 0; transform: translateY(50px) scale(0.8); }
+    50% { transform: translateY(-10px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pulso {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.carta-nueva {
+    animation: aparecer 0.8s ease-out;
+}
+
+/* ============================================
+   COLECCIÓN DE CARTAS
+   ============================================ */
+#collection {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+.collection-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+#card-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.slot {
+    background: rgba(155, 89, 182, 0.08);
+    border: 2px dashed rgba(155, 89, 182, 0.3);
+    border-radius: 15px;
+    padding: 20px 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.slot-icon { font-size: 1.8rem; margin-bottom: 8px; opacity: 0.3; }
+.slot-label { font-size: 0.9rem; font-weight: 600; opacity: 0.4; }
+.slot-time { font-size: 0.7rem; opacity: 0.3; margin-top: 5px; }
+
+.slot.collected {
+    border-style: solid;
+    cursor: pointer;
+}
+
+.slot.collected .slot-icon { opacity: 1; }
+.slot.collected .slot-label { opacity: 1; }
+.slot.collected .slot-time { opacity: 0.6; }
+
+.slot.collected[data-period="Madrugada"] {
+    background: linear-gradient(135deg, var(--purple-lightest), #d2b4de);
+    border-color: var(--purple-lightest);
+    color: #2c0040;
+}
+
+.slot.collected[data-period="Mañana"] {
+    background: linear-gradient(135deg, var(--purple-light), #af7ac5);
+    border-color: var(--purple-light);
+    color: #1a0029;
+}
+
+.slot.collected[data-period="Tarde"] {
+    background: linear-gradient(135deg, var(--purple-medium), var(--purple-dark));
+    border-color: var(--purple-medium);
+}
+
+.slot.collected[data-period="Noche"] {
+    background: linear-gradient(135deg, var(--purple-dark), var(--purple-darkest));
+    border-color: var(--purple-dark);
+}
+
+.slot.collected:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(155, 89, 182, 0.4);
+}
+
+.slot.collected::after {
+    content: '✓';
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.slot.active {
+    border-color: var(--purple-light);
+    border-style: solid;
+    animation: borderPulse 2s infinite;
+}
+
+@keyframes borderPulse {
+    0%, 100% { border-color: rgba(155, 89, 182, 0.3); }
+    50% { border-color: rgba(155, 89, 182, 0.8); }
+}
+
+/* ============================================
+   MODAL CARTAS
+   ============================================ */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-overlay.show { display: flex; }
+
+.modal-content {
+    background: linear-gradient(135deg, #2d1045, var(--purple-darkest));
+    border: 2px solid var(--purple-medium);
+    border-radius: 20px;
+    padding: 40px 30px;
+    max-width: 350px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    animation: modalAppear 0.4s ease-out;
+}
+
+@keyframes modalAppear {
+    0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.modal-close:hover { opacity: 1; }
+.modal-emoji { font-size: 3rem; margin-bottom: 15px; }
+.modal-message { font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 15px; }
+.modal-time { font-size: 0.8rem; opacity: 0.4; }
+
+/* ============================================
+RESPONSIVE
+   ============================================ */
+@media (max-width: 400px) {
+    #clock { font-size: 2.2rem; }
+    .carta { width: 260px; height: 160px; }
+    #card-slots { gap: 10px; }
+    .slot { padding: 15px 10px; }
+}

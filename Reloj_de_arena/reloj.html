@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj de Arena</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="garden.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================
+         PARTÍCULAS DE FONDO
+         ============================================ -->
+    <div id="particles"></div>
+
+    <!-- ============================================
+         RELOJ DE ARENA CON INTERACCIÓN SECRETA
+         ============================================ -->
+    <div id="arena-wrapper">
+        <!-- Anillo de progreso secreto -->
+        <svg id="secret-ring" width="240" height="240" viewBox="0 0 240 240">
+            <circle class="ring-bg" cx="120" cy="120" r="110"/>
+            <circle class="ring-progress" cx="120" cy="120" r="110" id="ring-progress"/>
+        </svg>
+        <!-- Brillo secreto -->
+        <div id="arena-glow"></div>
+        <!-- Contenedor Lottie -->
+        <div id="arena"></div>
+        <!-- Hint sutil -->
+        <div id="secret-hint">✨</div>
+    </div>
+
+    <!-- HORA DIGITAL -->
+    <h1 id="clock"></h1>
+    <p id="greeting"></p>
+
+    <!-- CARTA ACTUAL -->
+    <div id="card-container">
+        <div id="current-card" class="carta" onclick="abrirCarta()">
+            <div class="carta-inner">
+                <div class="carta-front">
+                    <div class="sello">💜</div>
+                    <p class="carta-titulo">Tienes un mensaje</p>
+                    <p class="carta-subtitulo">Toca para abrir</p>
+                </div>
+                <div class="carta-back">
+                    <p id="card-message" class="carta-mensaje"></p>
+                    <span class="carta-hora" id="card-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLECCIÓN DE CARTAS -->
+    <div id="collection">
+        <h2 class="collection-title">📬 Tu colección de hoy</h2>
+        <div id="card-slots">
+            <div class="slot" id="slot-0" data-period="Madrugada">
+                <div class="slot-icon">🌙</div>
+                <div class="slot-label">Madrugada</div>
+                <div class="slot-time">12AM - 6AM</div>
+            </div>
+            <div class="slot" id="slot-1" data-period="Mañana">
+                <div class="slot-icon">🌅</div>
+                <div class="slot-label">Mañana</div>
+                <div class="slot-time">6AM - 12PM</div>
+            </div>
+            <div class="slot" id="slot-2" data-period="Tarde">
+                <div class="slot-icon">☀️</div>
+                <div class="slot-label">Tarde</div>
+                <div class="slot-time">12PM - 6PM</div>
+            </div>
+            <div class="slot" id="slot-3" data-period="Noche">
+                <div class="slot-icon">🌙</div>
+                <div class="slot-label">Noche</div>
+                <div class="slot-time">6PM - 12AM</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MODAL: JARDÍN SECRETO
+         ============================================ -->
+    <div id="garden-modal" class="garden-overlay">
+        <div class="garden-content">
+            <span class="garden-close" onclick="closeGarden()">&times;</span>
+
+            <!-- FASE 0: Sobre secreto -->
+            <div class="garden-phase" id="phase-0">
+                <h2 class="garden-title">🤫 Has descubierto un secreto</h2>
+                <p class="garden-text">Encontraste algo especial oculto en el reloj de arena...</p>
+                <div id="secret-envelope" class="envelope" onclick="openEnvelope()">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body">
+                        <span class="envelope-heart">💜</span>
+                    </div>
+                </div>
+                <p class="garden-hint">Toca el sobre</p>
+            </div>
+
+            <!-- FASE 1: Semilla revelada -->
+            <div class="garden-phase hidden" id="phase-1">
+                <h2 class="garden-title">🌱 Una semilla mágica</h2>
+                <p class="garden-text">Esta semilla es especial... crece con cariño y atención.</p>
+                <div class="seed-container">
+                    <div id="magic-seed" class="seed" onclick="takeSeed()">
+                        <span>🫘</span>
+                    </div>
+                    <div class="seed-glow"></div>
+                </div>
+                <p class="garden-hint">Toma la semilla</p>
+            </div>
+
+            <!-- FASE 2: Plantar - Escena del jardín -->
+            <div class="garden-phase hidden" id="phase-2">
+                <h2 class="garden-title" id="garden-instruction">🌍 Prepara la tierra</h2>
+
+                <!-- Escena del jardín -->
+                <div class="garden-scene">
+                    <!-- Cielo -->
+                    <div class="sky">
+                        <div class="cloud cloud-1">☁️</div>
+                        <div class="cloud cloud-2">☁️</div>
+                    </div>
+
+                    <!-- Sol/Luna -->
+                    <div class="celestial" id="celestial">🌤️</div>
+
+                    <!-- Zona de tierra -->
+                    <div class="ground">
+                        <div class="dirt" id="dirt">
+                            <!-- Hoyo aparece aquí -->
+                            <div class="hole hidden" id="hole"></div>
+                            <!-- Semilla en tierra -->
+                            <div class="planted-seed hidden" id="planted-seed">🫘</div>
+                            <!-- Montículo de tierra -->
+                            <div class="mound hidden" id="mound"></div>
+                            <!-- Agua -->
+                            <div class="water-drops hidden" id="water-drops">
+                                <span>💧</span><span>💧</span><span>💧</span>
+                            </div>
+                            <!-- Brote -->
+                            <div class="sprout hidden" id="sprout">🌱</div>
+                        </div>
+                        <!-- Hierba decorativa -->
+                        <div class="grass"></div>
+                    </div>
+                </div>
+
+                <!-- Herramientas -->
+                <div class="tools">
+                    <div class="tool" id="tool-shovel" onclick="useTool('shovel')">
+                        <span class="tool-icon">🪏</span>
+                        <span class="tool-name">Cavar</span>
+                    </div>
+                    <div class="tool disabled" id="tool-seed" onclick="useTool('seed')">
+                        <span class="tool-icon">🫘</span>
+                        <span class="tool-name">Plantar</span>
+                    </div>
+                    <div class="tool disabled" id="tool-cover" onclick="useTool('cover')">
+                        <span class="tool-icon">🪏</span>
+                        <span class="tool-name">Tapar</span>
+                    </div>
+                    <div class="tool disabled" id="tool-water" onclick="useTool('water')">
+                        <span class="tool-icon">🚿</span>
+                        <span class="tool-name">Regar</span>
+                    </div>
+                </div>
+
+                <!-- Barra de progreso de plantación -->
+                <div class="plant-progress">
+                    <div class="plant-progress-step done" id="step-1">1</div>
+                    <div class="plant-progress-line"></div>
+                    <div class="plant-progress-step" id="step-2">2</div>
+                    <div class="plant-progress-line"></div>
+                    <div class="plant-progress-step" id="step-3">3</div>
+                    <div class="plant-progress-line"></div>
+                    <div class="plant-progress-step" id="step-4">4</div>
+                </div>
+            </div>
+
+            <!-- FASE 3: Crecimiento diario -->
+            <div class="garden-phase hidden" id="phase-3">
+                <h2 class="garden-title">🌿 Tu jardín secreto</h2>
+                <p class="garden-text" id="plant-status"></p>
+
+                <!-- Planta creciendo -->
+                <div class="plant-display">
+                    <div id="plant-visual" class="plant-visual">
+                        <!-- Se genera dinámicamente -->
+                    </div>
+                    <div class="pot">
+                        <div class="pot-body"></div>
+                        <div class="pot-dirt"></div>
+                    </div>
+                </div>
+
+                <!-- Stats de la planta -->
+                <div class="plant-stats">
+                    <div class="stat">
+                        <span class="stat-icon">💧</span>
+                        <span class="stat-label">Agua</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill" id="water-bar"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">💜</span>
+                        <span class="stat-label">Cariño</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill love-fill" id="love-bar"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">🌟</span>
+                        <span class="stat-label">Crecimiento</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill growth-fill" id="growth-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones diarias -->
+                <div class="daily-actions">
+                    <button class="action-btn" id="btn-water" onclick="dailyAction('water')">
+                        💧 Regar
+                    </button>
+                    <button class="action-btn" id="btn-love" onclick="dailyAction('love')">
+                        💜 Dar cariño
+                    </button>
+                    <button class="action-btn" id="btn-sing" onclick="dailyAction('sing')">
+                        🎵 Cantarle
+                    </button>
+                </div>
+
+                <!-- Diario de la planta -->
+                <div class="plant-diary" id="plant-diary">
+                    <!-- Entradas del diario -->
+                </div>
+
+                <!-- Nombre de la planta -->
+                <div class="name-plant hidden" id="name-plant">
+                    <p>¿Cómo quieres llamar a tu planta?</p>
+                    <input type="text" id="plant-name-input" placeholder="Escribe un nombre..." maxlength="15">
+                    <button onclick="namePlant()">💜 Nombrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MODAL CARTAS GUARDADAS
+         ============================================ -->
+    <div id="modal" class="modal-overlay" onclick="cerrarModal(event)">
+        <div class="modal-content">
+            <span class="modal-close" onclick="cerrarModal(event)">&times;</span>
+            <div class="modal-emoji" id="modal-emoji"></div>
+            <p class="modal-message" id="modal-message"></p>
+            <span class="modal-time" id="modal-time"></span>
+        </div>
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="notification-sound" preload="auto">
+        <source src="notification.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+    <script src="script.js"></script>
+    <script src="garden.js"></script>
+
+</body>
+</html>

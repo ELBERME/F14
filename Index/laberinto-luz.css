@@ -1,0 +1,167 @@
+/* ============================================= */
+/* LABERINTO LUZ                                   */
+/* ============================================= */
+#fase-lab-luz {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 80;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    background: #000;
+    overflow: hidden;
+}
+#fase-lab-luz.visible { opacity: 1; }
+
+#canvas-luz {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+}
+
+/* ============================================= */
+/* HUD LUZ                                         */
+/* ============================================= */
+#luz-hud {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+#luz-hud.visible { opacity: 1; }
+
+#luz-energia-wrap {
+    width: 140px;
+    height: 5px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#luz-energia-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #e74c3c, #9b59b6, #d8b4fe);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+#luz-vida-label {
+    color: rgba(255,255,255,0.25);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+#luz-latidos-info {
+    color: rgba(216,180,254,0.6);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin-top: 6px;
+    letter-spacing: 1px;
+}
+
+/* ============================================= */
+/* BOTÓN DE LATIDO                                 */
+/* ============================================= */
+#luz-latido-wrap {
+    position: absolute;
+    bottom: 90px; right: 18px;
+    z-index: 15;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+#luz-latido-wrap.visible { opacity: 1; }
+
+#luz-btn-latido {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(216,180,254,0.35);
+    background: rgba(155,89,182,0.08);
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: latido-btn 2s ease-in-out infinite;
+}
+@keyframes latido-btn {
+    0%,100% { box-shadow: 0 0 8px rgba(155,89,182,0.25); }
+    50%     { box-shadow: 0 0 22px rgba(155,89,182,0.55); }
+}
+#luz-btn-latido:active {
+    transform: scale(0.8);
+    box-shadow: 0 0 35px rgba(155,89,182,0.9);
+}
+#luz-btn-latido:disabled {
+    opacity: 0.25;
+    animation: none;
+    cursor: not-allowed;
+}
+#luz-latido-label {
+    color: rgba(216,180,254,0.4);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+/* ============================================= */
+/* PANTALLA COMPLETADO LUZ                         */
+/* ============================================= */
+#luz-fin {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 20;
+    display: none;
+    opacity: 0;
+    transition: opacity 2s ease;
+    background: rgba(0,0,0,0.96);
+    justify-content: center;
+    align-items: center;
+}
+#luz-fin.visible { display: flex; opacity: 1; }
+
+#luz-fin-texto {
+    color: #ddd;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3.2vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.9;
+    letter-spacing: 2px;
+    text-align: center;
+    max-width: 550px;
+    padding: 0 20px;
+}
+
+/* ============================================= */
+/* ANIMACIÓN CORAZÓN EXTRAÍDO                      */
+/* ============================================= */
+#luz-corazon-flotante {
+    position: absolute;
+    z-index: 6;
+    font-size: 1.8rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+#luz-corazon-flotante.animando {
+    opacity: 1;
+}
+
+/* ============================================= */
+/* RESPONSIVE                                      */
+/* ============================================= */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+    #luz-controles { display: block; }
+    #luz-latido-wrap { bottom: 140px; }
+}

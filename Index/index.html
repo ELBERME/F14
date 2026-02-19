@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noris 💜</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="laberinto-sombras.css">
+    <link rel="stylesheet" href="laberinto-luz.css">
+    <link rel="stylesheet" href="navegacion.css">
+</head>
+<body>
+
+    <!-- BOTÓN DE INICIO -->
+    <button id="boton-inicio">💜 Toca para comenzar 💜</button>
+
+    <!-- FASE 1: VIDEO -->
+    <div id="fase-video">
+        <video id="video-fondo" muted playsinline>
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <div id="overlay-oscuro"></div>
+        <div id="contenedor-texto">
+            <span id="texto-animado"></span>
+            <span id="cursor">|</span>
+        </div>
+    </div>
+
+    <!-- FASE 2: GIF/IMAGEN -->
+    <div id="fase-gif">
+        <video id="video-borroso" loop muted playsinline>
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <div id="contenedor-gif">
+            <div id="marco-gif">
+                <img id="gif-gato" src="imagen uno.jpeg" alt="Gatito con flor">
+            </div>
+            <div id="texto-toca-gato">&#10024; toca al gatito &#10024;</div>
+            <div id="texto-final">💜 Te quiero mucho, Noris 💜</div>
+        </div>
+    </div>
+
+    <!-- FASE 3: MENSAJES SECRETOS -->
+    <div id="fase-mensajes">
+        <div id="contenedor-mensaje-secreto">
+            <div id="mensaje-secreto-texto"></div>
+        </div>
+        <div id="indicador-toca">&#10024; toca para continuar &#10024;</div>
+    </div>
+
+    <!-- FASE 4: EASTER EGG -->
+    <div id="fase-easter">
+        <div id="easter-contenido">
+            <div id="easter-texto"></div>
+            <div id="easter-opciones">
+                <span class="opcion-flotante" id="opcion-luz">luz</span>
+                <span class="separador-opciones" id="separador-opciones">|</span>
+                <span class="opcion-flotante" id="opcion-sombras">sombras</span>
+            </div>
+        </div>
+        <div id="easter-indicador">&#10024; toca para continuar &#10024;</div>
+    </div>
+
+    <!-- FASE 5: FINAL (texto antes del laberinto) -->
+    <div id="fase-final">
+        <div id="final-contenido"></div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- FASE LABERINTO SOMBRA                          -->
+    <!-- IDs deben coincidir con laberinto-sombras.js   -->
+    <!-- ============================================= -->
+    <div id="fase-lab-sombra">
+        <!-- Blanco cegador -->
+        <div id="sombra-blanco"></div>
+
+        <canvas id="canvas-sombra"></canvas>
+
+        <!-- HUD -->
+        <div id="sombra-hud">
+            <div id="sombra-frag-info">0/5 🖤</div>
+            <div id="sombra-barra-wrap">
+                <div id="sombra-barra"></div>
+            </div>
+            <div id="sombra-barra-label">contraste</div>
+        </div>
+
+        <!-- Corazón SVG progreso -->
+        <div id="sombra-corazon-svg-wrap">
+            <svg viewBox="0 0 100 100" width="60" height="60">
+                <path id="sombra-corazon-path"
+                    d="M50 88 C25 65, 5 50, 5 30 C5 15, 18 5, 30 5 C38 5, 45 10, 50 20 C55 10, 62 5, 70 5 C82 5, 95 15, 95 30 C95 50, 75 65, 50 88Z"
+                    fill="none"
+                    stroke="rgba(155, 89, 182, 0.3)"
+                    stroke-width="2"
+                    stroke-dasharray="300"
+                    stroke-dashoffset="300"/>
+            </svg>
+        </div>
+
+        <!-- Controles móvil -->
+        <div class="lab-controles" id="sombra-controles">
+            <button class="lab-ctrl-btn" id="sombra-up">▲</button>
+            <div class="lab-ctrl-row">
+                <button class="lab-ctrl-btn" id="sombra-left">◄</button>
+                <button class="lab-ctrl-btn" id="sombra-down">▼</button>
+                <button class="lab-ctrl-btn" id="sombra-right">►</button>
+            </div>
+        </div>
+
+        <!-- Completado -->
+        <div id="sombra-fin">
+            <div id="sombra-fin-texto"></div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- FASE LABERINTO LUZ                             -->
+    <!-- IDs deben coincidir con laberinto-luz.js       -->
+    <!-- ============================================= -->
+    <div id="fase-lab-luz">
+        <canvas id="canvas-luz"></canvas>
+
+        <!-- Corazón flotante (animación extracción) -->
+        <div id="luz-corazon-flotante">💜</div>
+
+        <!-- HUD -->
+        <div id="luz-hud">
+            <div id="luz-energia-wrap">
+                <div id="luz-energia-bar"></div>
+            </div>
+            <div id="luz-vida-label">vida</div>
+            <div id="luz-latidos-info">5 latidos 💜</div>
+        </div>
+
+        <!-- Botón latido -->
+        <div id="luz-latido-wrap">
+            <button id="luz-btn-latido">💜</button>
+            <div id="luz-latido-label">latido</div>
+        </div>
+
+        <!-- Controles móvil -->
+        <div class="lab-controles" id="luz-controles">
+            <button class="lab-ctrl-btn" id="luz-up">▲</button>
+            <div class="lab-ctrl-row">
+                <button class="lab-ctrl-btn" id="luz-left">◄</button>
+                <button class="lab-ctrl-btn" id="luz-down">▼</button>
+                <button class="lab-ctrl-btn" id="luz-right">►</button>
+            </div>
+        </div>
+
+        <!-- Completado -->
+        <div id="luz-fin">
+            <div id="luz-fin-texto"></div>
+        </div>
+    </div>
+
+    <!-- AUDIOS -->
+    <audio id="audio-principal" preload="auto">
+        <source src="video audio.mpeg" type="audio/mpeg">
+    </audio>
+    <audio id="audio-typewriter" preload="auto" loop>
+        <source src="maquina de escribir audio.mpeg" type="audio/mpeg">
+    </audio>
+    <audio id="audio-burbuja" preload="auto" loop>
+        <source src="audio de burbuja.mpeg" type="audio/mpeg">
+    </audio>
+    <audio id="audio-burbuja-corto" preload="auto">
+        <source src="audio de burbuja.mpeg" type="audio/mpeg">
+    </audio>
+    <audio id="audio-easter-fondo" preload="auto" loop>
+        <source src="cancion-easter.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Scripts: ORDEN  -->
+    <script src="frases.js"></script>
+    <script src="laberinto-comun.js"></script>
+    <script src="index.js"></script>
+    <script src="laberinto-sombras.js"></script>
+    <script src="laberinto-luz.js"></script>
+    <script src="navegacion.js"></script>
+</body>
+</html>
