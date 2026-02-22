@@ -73,7 +73,17 @@
     <!-- FASE LABERINTO SOMBRA                          -->
     <!-- IDs deben coincidir con laberinto-sombras.js   -->
     <!-- ============================================= -->
-    <div id="fase-lab-sombra">
+    <div id="fase-lab-sombra">        
+        <!-- Warning de entes (borde rojo) -->
+        <div id="sombra-warning"></div>
+
+        <!-- Pantalla de colapso -->
+        <div id="sombra-colapso">
+            <div id="sombra-colapso-texto"></div>
+        </div>
+
+        <!-- Vidas (colapsos restantes) en HUD -->
+        <div id="sombra-colapso-vidas"></div>
         <!-- Blanco cegador -->
         <div id="sombra-blanco"></div>
 
@@ -173,6 +183,22 @@
     </audio>
     <audio id="audio-easter-fondo" preload="auto" loop>
         <source src="cancion-easter.mp3" type="audio/mpeg">
+    </audio>
+        <!-- AUDIOS SOMBRA -->
+    <audio id="audio-sombra-ambiente" preload="auto" loop>
+        <source src="sombra-ambiente.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-sombra-latido" preload="auto" loop>
+        <source src="sombra-latido.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-sombra-golpe" preload="auto">
+        <source src="sombra-golpe.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-sombra-colapso" preload="auto">
+        <source src="sombra-colapso.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-sombra-alerta" preload="auto" loop>
+        <source src="sombra-alerta.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Scripts: ORDEN  -->
