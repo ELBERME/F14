@@ -549,7 +549,7 @@
 
             var texto;
             if (typeof CorazonDeNoris !== 'undefined' && CorazonDeNoris.tiene()) {
-                texto = "Diste todo para llegar.\nPero el corazon que forjaste\nen la oscuridad te sostuvo.\n\nEl amor no es ausencia de vacio.\nEs llenarlo cada dia.\n\n\uD83D\uDC9C";
+                texto = "Aprendemos a valorar la salud porque en algún momento estuvimos enfermos,\npero cuando estamos bien dejamos de pensar en ella, como si fuera algo garantizado.\nLo mismo pasa con las personas, dejamos de valorar a quienes están cerca porque creemos que siempre estarán ahí…\n\nhasta que un día mueren, \ny después vivimos recordándolos cada día.\n\n\uD83D\uDC9C";
             } else {
                 texto = "Diste todo para llegar.\nCada latido fue un sacrificio.\n\nPero llegaste.\nY eso es lo que importa.\n\n\uD83D\uDC9C";
             }
