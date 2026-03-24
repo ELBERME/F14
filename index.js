@@ -105,24 +105,24 @@ var MENSAJES_SECRETOS = [
     { texto: "Andas de curiosa  \uD83D\uDE0F\uD83D\uDC9C", tipo: "normal" },
     { texto: "Toma esto... \uD83C\uDF81", tipo: "normal" },
     {
-        texto: "En algun lugar de estas finitas palabras organizadas, esta este texto. Texto que se creo pensando en ti, por un impulso que nacio del azar, espontaneo e imparcial, incluso inalterable. Texto el cual se escribio con el unico fin de recordarte que...",
+        texto: "En algún lugar de estas finitas palabras organizadas está este texto. Texto que se creó pensando en ti, por un impulso que nació del azar, espontáneo e imparcial, incluso inalterable. Texto que se escribió con el único fin de recordarte que...",
         tipo: "typewriter"
     },
     { texto: "TE AMO", tipo: "teamo" }
 ];
 
 var EASTER_MENSAJES = [
-    "\u00BFMas?",
-    "\u00BFAun quieres mas?",
-    "\u00BFAlgo mas?"
+    "\u00BFMás?",
+    "\u00BFAún quieres más?",
+    "\u00BFAlgo más?"
 ];
 
 var SOMBRAS_PARTES = [
-    "Hace un tiempo llegue a la conclusion de que el ser humano es insaciable; nunca esta completamente satisfecho.",
-    "Por eso, a veces fuerza las cosas con la esperanza de llenar ese vacio.",
-    "Sin embargo, ese impulso termina llevando al limite a quienes estan involucrados.",
-    "Y lo que ya era hermoso comienza a marchitarse bajo el peso de la sobre exigencia y las expectativas.",
-    "Es ironico: se puede perder todo por el simple deseo de tener un poco mas."
+    "Hace un tiempo llegué a la conclusión de que el ser humano es insaciable; nunca está completamente satisfecho.",
+    "Por eso, a veces fuerza las cosas con la esperanza de llenar ese vacío.",
+    "Sin embargo, ese impulso termina llevando al límite a quienes están involucrados.",
+    "Y lo que ya era hermoso comienza a marchitarse bajo el peso de la sobreexigencia y las expectativas.",
+    "Es irónico: se puede perder todo por el simple deseo de tener un poco más."
 ];
 
 /* ============================================= */
