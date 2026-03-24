@@ -1505,7 +1505,7 @@ if (!enMovimiento && saturacion <= SAT_MIN + 0.01 && !ganado && !enMuerte) {
                 finDiv.style.opacity = '1';
             }, 30);
 
-            var texto = "El vacío ya no está.\nAhora llevas algo dentro.\n\n\uD83D\uDC9C";
+            var texto = "Apreciamos la luz porque alguna vez caminamos en la oscuridad;\npero cuando permanecemos demasiado tiempo en ella,\ndejamos de verla como un regalo y empezamos a verla como algo normal.\n\n\uD83D\uDC9C";
             var idx = 0;
             finTexto.innerHTML = '';
 
